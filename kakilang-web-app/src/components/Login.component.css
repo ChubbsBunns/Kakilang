@@ -5,36 +5,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
     color: #53012C;
     border-radius: 4px;
 }
 
 .Login-window input {
     width: 30vw;
-    height: 56px;
+    height: 13vh;
     position: relative;
-    padding: 0px 16px;
+    padding: 0px 4vw;
     border: none;
     border-radius: 4px;
-    font-size: calc(10px + 2vmin);
+    font-size: calc(2px + 4vmin);
     font-weight: 400;
     line-height: normal;
     color: #53012C;
     outline: none;
     box-shadow: 0px 4px 20px 0px transparent;
-    margin-bottom: 20px;
+    margin-bottom: 4vh;
 }
 
 .Login-window input.submit {
     width: 10vw;
     height: 6vh;
     position: relative;
-    padding: 0px 16px;
+    padding: 0px 0px;
     border: none;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: calc(2px + 2vmin);;
     font-weight: 400;
     line-height: normal;
     color: #53012C;

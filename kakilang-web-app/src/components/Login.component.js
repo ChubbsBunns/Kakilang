@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './Login.component.css';
 
+/**
+ * This component class represents the login screen for user authentication
+ */
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -30,8 +33,8 @@ export default class Login extends Component {
     render() {   
         return (
             <div className='Login-window'>
-                <h1> Kakileng </h1>
                 <form onSubmit={this.handleSubmit}>
+                    <h1> Log In</h1>
                     <input type="email" name="Email"
                         value={this.state.email} onChange={this.emailChange} />
                     <br />
