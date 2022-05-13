@@ -25,7 +25,8 @@
 ## 13 May 2022  
 
 ### Session 1 (William):
->Hours Spent:  2h (11:30am to 1:30pm)  
+>Hours Spent:  3h 30min(11:30am to 1:30pm) (4:00pm to 5:30pm)
 >Work Summary:
 >1. Researched and learned jsdoc writing and style
 >2. Installed and added jsdocs to git branch (minimal_landing_page)
+>3. Added backend support for user login (encrypted in bcrypt)
