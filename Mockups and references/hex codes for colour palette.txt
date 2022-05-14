@@ -1,0 +1,31 @@
+Colour Palette Hex for Orbital:
+Follows this format:
+R
+G
+B
+
+Coral:
+251
+127
+75
+
+Crimson UA:
+153
+28
+46
+
+Apricot:
+249
+194
+164
+
+Tyrian Purple:
+83
+1
+44
+
+Champagne Pink:
+252
+233
+220
+
