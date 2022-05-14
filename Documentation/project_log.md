@@ -30,3 +30,10 @@
 >1. Researched and learned jsdoc writing and style
 >2. Installed and added jsdocs to git branch (minimal_landing_page)
 >3. Added backend support for user login (encrypted in bcrypt)
+
+## 15 May 2022 :
+
+### Session 1 (Dylan)
+>Hours Spent: 3h (11:00pm to :2:00am)
+>Work Summary:
+>1. Worked on the poster and the video for Kakilang.
