@@ -1,0 +1,11 @@
+1) Staying on campus at NUS is amazing! You become a part of so many communities, and get to meet so many friends!
+[Slowly show small groups of people appearing one by one]
+2) But what if you wanted to meet other people within your communities? Or if you wish to reach out to know more seniors or juniors? You cant just text them without any context right?
+[Isolate one person and draw an arrow to a person in another group]
+3) Come to Kakilang! Where the people of different communities come together with the sole purpose of getting to know each other!
+[Show title card and logo for Kakilang]
+4) Here is a mockup for the application that we wish to build. Most NUS Students who stay on campus are automatically sorted into 3 different groups, CCAs or Interest Groups, Houses, and their own floor.
+[Show initial mockup]
+5) Clicking on each group on the left will give you a list of people from your specific group. For example, when I click on Housemates, I will be directed to a list of friends from my own house, the Saren House. Clicking on each person will reveal their details as seen here.
+[Click on “Housemates”, highlighting ‘Housemates’ then click on “Alicia David”, highlighting  her name. Bring up personal info]
+6)s
