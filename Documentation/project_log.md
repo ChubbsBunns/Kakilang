@@ -34,6 +34,7 @@
 ## 15 May 2022 :
 
 ### Session 1 (Dylan)
->Hours Spent: 3h (11:00pm to :2:00am)
+>Hours Spent: 7h (11:00pm to :2:00am) (10:30pm to 2:30am)
 >Work Summary:
 >1. Worked on the poster and the video for Kakilang.
+
