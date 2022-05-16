@@ -38,3 +38,10 @@
 >Work Summary:
 >1. Worked on the poster and the video for Kakilang.
 
+## 16 May 2022 :
+
+### Session 1 (Group Meeting):
+>Hours Spent : 1h 30mins (1:30pm to 3:00pm)
+>Work Summary:
+>1. Finalized and submitted the poster and video for Liftoff
+
