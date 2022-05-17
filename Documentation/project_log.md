@@ -46,3 +46,10 @@
 >1. Finalized and submitted the poster and video for Liftoff
 >2. Viewed the minimal landing page branch
 
+
+## 17 May 2022L
+
+### Session 1 (Dylan):
+>Hours Spent : 7h (8:30am to 12:00pm) (1:00pm to 4:30pm)
+>Work Summary:
+>1. Learnt font, text styles and Icons of CSS, and Box Model
