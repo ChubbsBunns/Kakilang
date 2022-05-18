@@ -55,16 +55,9 @@ class Login extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const user = {email: this.state.email, password:this.state.password};
-        axios.post('http://localhost:2500/login', user).then(res => res.json()).then(data => {
-            localStorage.setItem("token", data.token)
-        });
-        //axios.post('http://localhost:2500/register/add', user).then(res => console.log(res.data));
+        axios.post('http://localhost:2500/login', user).then(res => console.log(res.data.message));
     }
     
-    /**
-     * 
-     * @return {JSX} The login window with email, password input and submission
-     */
     render() {   
         return (
             <div className='Login-window'>
