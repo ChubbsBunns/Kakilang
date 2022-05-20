@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: backend/models/user.model.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,48 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: backend/models/user.model.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
+/**
+ * Schema of the User
+ * For MongoDB get and post requests
+ * @memberof userSchema
+ *
+ * @property {string} _id - Unique Database ID
+ * @property {string} email - Unique User's email
+ * @property {string} password - Encrypted User's password
+ */
+const userSchema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-    <h3> </h3>
+const User = mongoose.model("User", userSchema);
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+module.exports = User;
+</code></pre>
+        </article>
+    </section>
 
 
 
