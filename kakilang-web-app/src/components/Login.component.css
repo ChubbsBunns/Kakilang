@@ -7,6 +7,11 @@
     align-items: center;
     color: #53012C;
     border-radius: 4px;
+    font-size: calc(2px + 4vmin);
+}
+
+.Login-window h1 {
+    font-size: calc(10px + 6vmin);
 }
 
 .Login-window input {
