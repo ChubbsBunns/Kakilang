@@ -19,9 +19,26 @@
 >2. Viewed the minimal landing page branch
 
 
-## 17 May 2022L
+## 17 May 2022 : 
 
 ### Session 1 (Dylan):
 >Hours Spent : 7h (8:30am to 12:00pm) (1:00pm to 4:30pm)
 >Work Summary:
 >1. Learnt font, text styles and Icons of CSS, and Box Model
+
+## 18 May 2022 : 
+
+### Session 1 (William):
+>Hours Spent : 4h (8pm to 12:00am)
+>Work Summary:
+>1. Watched ReactJS workshop and reviewed the extensions
+
+## 20 May 2022 : 
+
+### Session 1 (William):
+>Hours Spent : 7h (4pm to 6pm) (8pm to 1:00am)
+>Work Summary:
+>1. Refactored Class Components to Functional Components
+>2. Researched on json web tokens
+>3. Added Register component and a temporary Home component
+>4. Added JsonWebToken authentication
