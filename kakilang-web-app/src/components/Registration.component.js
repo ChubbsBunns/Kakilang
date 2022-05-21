@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Login.component.css";
+import { useNavigate } from "react-router-dom";
 
 /**
  * User Register component
  *
  */
-function Register() {
+function Registration() {
   /**
    * @memberof Register
    * @property {email} email - The user's email.
@@ -30,6 +31,16 @@ function Register() {
   const passwordChange = (event) => setPassword(event.target.value);
 
   /**
+   * Goes to websubpages.
+   * See react-route-dom useNavigate()
+   *
+   * @example
+   * goTo("/home"); goes to https://website.com/currentSub/home
+   * goTo("https://website.com/", {replace: true}) goes to https://website.com/
+   */
+  const goTo = useNavigate();
+
+  /**
    * Handles when the submit button is pressed
    * Goes to the login page if successful, otherwise alert an error message
    *
@@ -38,9 +49,12 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const user = { email: email, password: password };
-    axios
-      .post("http://localhost:2500/register/add", user)
-      .then((res) => console.log(res.data.message));
+    axios.post("http://localhost:2500/register/add", user).then((res) => {
+      res.data.isSuccessful
+        ? goTo("/", { replace: true })
+        : alert(res.data.message);
+      console.log(res.data.message);
+    });
   };
 
   return (
@@ -62,4 +76,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Registration;

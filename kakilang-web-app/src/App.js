@@ -4,8 +4,8 @@ import { Routes, BrowserRouter, Route } from "react-router-dom";
 
 //component imports
 import Login from "./components/Login.component";
-import Register from "./components/Register.component";
 import Home from "./components/Home.component";
+import Registration from "./components/Registration.component";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<Login />} />
-            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/register" element={<Registration />} />
             <Route path="/home/:handle" element={<Home />} />
           </Routes>
         </BrowserRouter>

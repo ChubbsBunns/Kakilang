@@ -20,16 +20,6 @@ function Login() {
   const [password, setPassword] = useState("password123");
 
   /**
-   * Goes to websubpages.
-   * See react-route-dom useNavigate()
-   *
-   * @example
-   * goTo("/home"); => https://website.com/currentSub/home
-   * goTo("https://website.com/")
-   */
-  const goTo = useNavigate();
-
-  /**
    * Handles when email input box is changed
    * @param {SyntheticBaseEvent} event
    */
@@ -42,6 +32,16 @@ function Login() {
   const passwordChange = (event) => setPassword(event.target.value);
 
   /**
+   * Goes to websubpages.
+   * See react-route-dom useNavigate()
+   *
+   * @example
+   * goTo("/home"); goes to https://website.com/currentSub/home
+   * goTo("https://website.com/", {replace: true}) goes to https://website.com/
+   */
+  const goTo = useNavigate();
+
+  /**
    * Handles when the submit button is pressed
    * Goes to the login page if successfull, otherwise alert an error message
    *
@@ -49,9 +49,12 @@ function Login() {
    */
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const user = { email: email, password: password };
+
     axios.post("http://localhost:2500/login", user).then((res) => {
       localStorage.setItem("token", res.data.token);
+
       const handle = email.split("@")[0];
       res.data.login ? goTo("/home/" + handle) : alert(res.data.message);
     });
