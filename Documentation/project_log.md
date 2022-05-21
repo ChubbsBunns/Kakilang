@@ -42,3 +42,5 @@
 >2. Researched on json web tokens
 >3. Added Register component and a temporary Home component
 >4. Added JsonWebToken authentication
+
+>5. Testing
