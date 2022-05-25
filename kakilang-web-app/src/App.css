@@ -1,3 +1,4 @@
+/*
 .App {
   text-align: center;
 }
@@ -35,4 +36,111 @@
   to {
     transform: rotate(360deg);
   }
+}
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.title {
+  background-color: rgb(251, 127, 75);
+
+  position: sticky;
+
+  padding: 1%;
+  width: 100%;
+}
+
+.banner {
+  background-color: rgb(237, 211, 199);
+  /*
+  position: sticky;
+  */
+  width: 100%;
+  padding: 0%;
+  border: 0px;
+  margin: 0px;
+  border-color: black;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  height: 100%;
+}
+
+#list_of_people {
+  background-color: rgb(252, 233, 220);
+}
+
+#text_interface {
+  background-color: rgb(249, 194, 164);
+}
+
+.header-main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+/*
+#banner-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+*/
+.sidebar {
+  left: 0;
+  height: 100vh;
+  position: sticky;
+  /*
+  width: 250px;
+  position: fixed; 
+  */
+  padding: 0;
+  background-color: rgb(153, 28, 46);
+  
+}
+
+.sidebar header {
+  font-size: 22px;
+  color: white;
+  text-align: left;
+  line-height: 70px;
+  padding-left: 20px;
+  background-color: rgb(153, 28, 47);
+  user-select: none;
+}
+
+.sidebar ul a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 65px;
+  font-size: 20px;
+  color: blanchedalmond;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border-top: 3px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid black;
+  transition: 0.9s;
+}
+
+ul li:hover {
+  background-color: rgb(108, 21, 34);
+}
+
+#check{
+  display: none;
+}
+
+label #btn, label #cancel{
+  position: absolute;
+  cursor: pointer;
+}
+
+label #btn{
+  left: 40px;
+  top: 25px;
+  font-size: 35px;
+  color: white;
 }
