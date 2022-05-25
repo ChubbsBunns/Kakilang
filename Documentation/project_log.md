@@ -43,4 +43,28 @@
 >3. Added Register component and a temporary Home component
 >4. Added JsonWebToken authentication
 
->5. Testing
+## 21 May 2022:
+
+### Session 1 (Dylan):
+>Hours Spent: 7h (9am to 12pm) (8pm to 12am)
+>Work Summary:
+>1. Learnt Lists and Navigation (CSS HTML)
+>2. Studied how to use React
+
+## 23 May 2022:
+
+### Session 1 (Dylan):
+>Hours Spent: 5h (10am to 12pm) (1pm to 4pm)
+>Work Summary:
+>1. Drafted the initial landing page
+>2. Continued studying how to use React
+
+## 25 May 2022:
+
+### Session 1 (Dylan):
+>Hours Spent: 5h (9am to 12pm)(1pm to 3pm)
+>Work Summary:
+>1. Continued studying how to use React
+>2. Pushed and finished drafting an initial landing page onto React (ported a local ccs/html file into react)
+
+
