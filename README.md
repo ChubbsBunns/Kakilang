@@ -135,14 +135,25 @@ telegram as a mode of communication) as shown below.
 
 Which allows users to message to other users individually and in groups.
 
-<img src="Mockups%20and%20references/For%20Video/2nd%20Part/10.png" style="width:6.50746in;height:3.76397in" />.   
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/10.png" style="width:6.50746in;height:3.76397in" />
 
-<img src="Mockups%20and%20references/For%20Video/2nd%20Part/8.png" style="width:6.50746in;height:3.76397in" />.   
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/8.png" style="width:6.50746in;height:3.76397in" /> 
 
-<img src="Mockups%20and%20references/For%20Video/2nd%20Part/12.png" style="width:6.50746in;height:3.76397in" />.   
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/12.png" style="width:6.50746in;height:3.76397in" />   
 
 ### **Integration with Social Media/NUSMODS**
 
 Which allows users to have integrated functionality from other useful website
 
-<img src="Mockups%20and%20references/For%20Video/2nd%20Part/11.png" style="width:6.50746in;height:3.76397in" />.   
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/11.png" style="width:6.50746in;height:3.76397in" />   
+
+The **technical proof** is as shown below:  
+
+Login page  
+<img src="Mockups%20and%20references/LoginPage.png" style="width:6.50746in;height:3.76397in" />
+
+Registration page  
+<img src="Mockups%20and%20references/RegisterPage.png" style="width:6.50746in;height:3.76397in" />
+
+Side Bar example  
+<img src="Mockups%20and%20references/SideBar.png" style="width:1.5in;height:4in" />
