@@ -1,16 +1,16 @@
 # Kakilang Social Website for Orbital
 
-**Proposal for Orbital 2022**
+## **Proposal for Orbital 2022**
 
-**Team Name:** 
+### **Team Name:** 
 
 Ropasalis
 
-**Proposed Level of Achievement:**
+### **Proposed Level of Achievement:**
 
 Project Gemini
 
-**Motivation**
+### **Motivation**
 
 Due to the advent of **Covid**, **community life** (Under the context of
 halls and residential colleges) within NUS has taken an **adverse turn**
@@ -31,98 +31,118 @@ But providing **a platform solely for meeting new people** sets that one
 goal as the expectation, **mitigating the previously said social
 barriers**.
 
-**Aim **
+### **Aim**
 
 We hope to be able to make a social platform that allows people within
 the same community to connect with one another more easily, allowing
 more people to know more people within their own community.
 
-**User Stories**
+### **User Stories**
 
-1.As a Year 1, I wish to meet more people/freshies in my own batch and
+1. As a Year 1, I wish to meet more people/freshies in my own batch and
 in my own hall/residential college as I am new to the community.
 
-2.As a senior, I wish to meet new freshies/juniors who come into my
+2. As a senior, I wish to meet new freshies/juniors who come into my
 residential college/hall.
 
-3.As a community head, I wish to be able to facilitate activities to
+3. As a community head, I wish to be able to facilitate activities to
 help bond my own community.
 
-4.As an administrator who wants to prevent abuse of the system, I want
-to be able to identify abusers, warn them and ban them if they continue
-to cause problems.
+4. As a NUS student, I wish to find other students that enjoy the same hobbies and activities 
+(CCAs) as I do.
 
-**Features and Timeline**
+### **Features, Timeline and Scope of Project**
+The **Web App** is a social platform for students to better find and interact with each other.
 
-\[Please list down the key features of your system with a rough timeline
-for completion.\]
-
-The **Web Landing Page** that provides a list of people for one to
-interact with.
-
-It will display a list of people, which comprises of their name and a
-mode of communication (e.g. email/telehandle as most people in uni use
-telegram as a mode of communication) as shown below.
-
-\<Please note that this is just a very early mockup and might not be
-representative of our final
-product><img src="Documentation/markup.version0.png" style="width:6.50746in;height:3.76397in" />. 
-
-An **Account System** that each user can create and manage their own
-accounts. The details that they put in also determine which lists of
-people are available to them, and who are in those lists. Password
-encryption could also possibly be done.
 
 <u>Features to be completed by the end of May:  
-</u>1. Landing Page and account system
+</u>
 
-1.  Allow users to log into their account and out.
+1. Landing Page and account system
 
-2.  Display basic information (their own information only)
+   1.  Allow users to log into their account and out.
+   
+   2.  Display basic information (their own information only)
 
-2\. Filtering system
+2. Filtering system
 
-1.  Allow users to see other people’s data depending on the information
+3.  Allow users to see other people’s data depending on the information
     that they have provided.
 
 <u>Features to be completed by the End of June: </u>
 
-1\. Messaging system
+1. Messaging system
 
-a\. Allow users to text one another through the application
+    a.  Allow users to text one another through the application
 
-2\. Integration with Social Media
+2. Integration with Social Media
 
-a\. Allows for users to connect to Social Media platforms with ease.
+    a. Allows for users to connect to Social Media platforms with ease.
 
 <u>Features to be completed by the end of July:</u>
 
-2 Integration with Social Media/NUSMODS
+2. Integration with Social Media/NUSMODS
 
-a\. Allow each account to grab their public feed (e.g. show the recent
+    a. Allow each account to grab their public feed (e.g. show the recent
 few posts of Instagram/ show their linkedin profile).
 
-b\. Links with NUSMODS to show each person’s timetable, allowing for
+    b. Links with NUSMODS to show each person’s timetable, allowing for
 ease of setting up group meetings.
 
-3\. “Get to know you” Events.
+3. “Get to know you” Events.
 
-a\. Allow admin users (e.g. people who are “leaders” of a CCA group etc)
+    a. Allow admin users (e.g. people who are “leaders” of a CCA group etc)
 to initiate “Get to know you” Events.
 
-b\. These events groups people together in groups of x, where x is a
+    b. These events groups people together in groups of x, where x is a
 number decided by the admin user. This creates a group for each group of
 people to chat with one another and get to know each other. There could
 be preset tasks (e.g. go for a meal, watch a movie together) that the
 admin leader could implement for them to motivate them to go out
 together with a prize at the end of the event for each group.
 
-**Tech Stack**
 
-1\. HTML/CSS/Javascript
+### **Tech Stack**
 
-2\. ReactJS
+1. HTML/CSS/Javascript
 
-3\. Express + NodeJS
+2. ReactJS (Front-end)
 
-4\. MongoDB/GraphQR
+3. Express + NodeJS
+
+4. MongoDB (Back-end)
+
+---
+
+## **Mockups**
+
+
+(Please note that this are just a early mockup and might not be
+representative of our final
+product)
+
+
+
+### The **Web Landing Page** 
+
+Which provides a list of people for one to interact with. It will display a list of people, which comprises of their name and a
+mode of communication (e.g. email/telehandle as most people in uni use
+telegram as a mode of communication) as shown below.
+
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/9.png" style="width:6.50746in;height:3.76397in" />.   
+
+### A **Message system** 
+
+Which allows users to message to other users individually and in groups.
+
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/10.png" style="width:6.50746in;height:3.76397in" />.   
+
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/8.png" style="width:6.50746in;height:3.76397in" />.   
+
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/12.png" style="width:6.50746in;height:3.76397in" />.   
+
+### **Integration with Social Media/NUSMODS**
+
+Which allows users to have integrated functionality from other useful website
+
+<img src="Mockups%20and%20references/For%20Video/2nd%20Part/11.png" style="width:6.50746in;height:3.76397in" />.   
