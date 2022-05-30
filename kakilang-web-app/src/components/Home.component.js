@@ -1,4 +1,5 @@
 import React from "react";
+import Sidebar from "./Sidebar.component";
 
 /**
  * Homepage of the User
@@ -9,9 +10,21 @@ import React from "react";
  */
 function Home() {
   return (
-    <>
-      <span>This is a home page for now </span>
-    </>
+    <div className="header-main">
+      <Sidebar />
+
+      <div className="title" id="banner-text">
+        Kakilang!
+        <div className="banner">
+          <div className="UI" id="list_of_people">
+            Peoplepeoplepeople
+          </div>
+          <div className="UI" id="text_interface">
+            textingtextingtexting
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

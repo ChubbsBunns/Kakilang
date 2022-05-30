@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Login.component.css";
 import { useNavigate } from "react-router-dom";
+import BigLogo from "./BigLogo.component";
 
 /**
  * User Register component
@@ -58,21 +59,29 @@ function Registration() {
   };
 
   return (
-    <div className="Login-window">
-      <form onSubmit={handleSubmit}>
-        <h1> Register an account </h1>
-        <input type="email" name="Email" value={email} onChange={emailChange} />
-        <br />
-        <input
-          type="password"
-          name="Password"
-          value={password}
-          onChange={passwordChange}
-        />
-        <br />
-        <input className="submit" type="submit" value="Register" />
-      </form>
-    </div>
+    <>
+      <BigLogo />
+      <div className="Login-window">
+        <form onSubmit={handleSubmit}>
+          <h1> Register an account </h1>
+          <input
+            type="email"
+            name="Email"
+            value={email}
+            onChange={emailChange}
+          />
+          <br />
+          <input
+            type="password"
+            name="Password"
+            value={password}
+            onChange={passwordChange}
+          />
+          <br />
+          <input className="submit" type="submit" value="Register" />
+        </form>
+      </div>
+    </>
   );
 }
 

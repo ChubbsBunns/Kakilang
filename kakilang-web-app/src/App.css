@@ -1,4 +1,4 @@
-/* WILLIAM INITIAL STUFF
+
 .App {
   text-align: center;
 }
@@ -29,15 +29,14 @@
   color: #53012C;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-*/
 
 * {
   margin: 0;

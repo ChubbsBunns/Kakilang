@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Login.component.css";
 import { useNavigate } from "react-router-dom";
+import BigLogo from "./BigLogo.component";
 
 /**
  * Login Component
@@ -75,25 +76,33 @@ function Login() {
   }, []);
 
   return (
-    <div className="Login-window">
-      <form onSubmit={handleSubmit}>
-        <h1> Log In </h1>
-        <input type="email" name="Email" value={email} onChange={emailChange} />
-        <br />
-        <input
-          type="password"
-          name="Password"
-          value={password}
-          onChange={passwordChange}
-        />
-        <br />
-        <input className="submit" type="submit" value="Log In" />
-      </form>
-      <i>
-        {" "}
-        Need an account? <a href="/register"> Sign up </a>{" "}
-      </i>
-    </div>
+    <>
+      <BigLogo />
+      <div className="Login-window">
+        <form onSubmit={handleSubmit}>
+          <h1> Log In </h1>
+          <input
+            type="email"
+            name="Email"
+            value={email}
+            onChange={emailChange}
+          />
+          <br />
+          <input
+            type="password"
+            name="Password"
+            value={password}
+            onChange={passwordChange}
+          />
+          <br />
+          <input className="submit" type="submit" value="Log In" />
+        </form>
+        <i>
+          {" "}
+          Need an account? <a href="/register"> Sign up </a>{" "}
+        </i>
+      </div>
+    </>
   );
 }
 
