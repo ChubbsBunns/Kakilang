@@ -67,4 +67,10 @@
 >1. Continued studying how to use React
 >2. Pushed and finished drafting an initial landing page onto React (ported a local ccs/html file into react)
 
+### 26 May (Dylan):
+>Hours Spent: 4h(9am to 12pm)(3pm to 4pm)
+>Work Sumamry:
+>1. Continued studying CSS and HTML
+>2. Refined the landing page slightly
+
 
