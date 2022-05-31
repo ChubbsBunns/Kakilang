@@ -42,6 +42,10 @@ function Login() {
    */
   const goTo = useNavigate();
 
+  /** Load env and get the server name */
+  const server =
+    process.env.SERVER || "https://kakilang-server-app.herokuapp.com";
+
   /**
    * Handles when the submit button is pressed
    * Goes to the login page if successfull, otherwise alert an error message
@@ -53,7 +57,7 @@ function Login() {
 
     const user = { email: email, password: password };
 
-    axios.post("http://localhost:2500/login", user).then((res) => {
+    axios.post(server + "/login", user).then((res) => {
       localStorage.setItem("token", res.data.token);
 
       const handle = email.split("@")[0];
@@ -66,7 +70,7 @@ function Login() {
    */
   useEffect(() => {
     axios
-      .get("http://localhost:2500/getUser", {
+      .get(server + "/getUser", {
         headers: { "x-access-token": localStorage.getItem("token") },
       })
       .then((res) => {

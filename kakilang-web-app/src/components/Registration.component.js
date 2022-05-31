@@ -41,6 +41,10 @@ function Registration() {
    */
   const goTo = useNavigate();
 
+  /** Get the server name */
+  const server =
+    process.env.SERVER || "https://kakilang-server-app.herokuapp.com";
+
   /**
    * Handles when the submit button is pressed
    * Goes to the login page if successful, otherwise alert an error message
@@ -50,7 +54,7 @@ function Registration() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const user = { email: email, password: password };
-    axios.post("http://localhost:2500/register/add", user).then((res) => {
+    axios.post(server + "/register/add", user).then((res) => {
       res.data.isSuccessful
         ? goTo("/", { replace: true })
         : alert(res.data.message);
