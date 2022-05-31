@@ -150,10 +150,10 @@ Which allows users to have integrated functionality from other useful website
 The **technical proof** is as shown below:  
 
 Login page  
-<img src="Mockups%20and%20references/LoginPage.png" style="width:6.50746in;height:3.76397in" />
+<img src="Mockups%20and%20references/LoginPage.PNG" style="width:6.50746in;height:3.76397in" />
 
 Registration page  
-<img src="Mockups%20and%20references/RegisterPage.png" style="width:6.50746in;height:3.76397in" />
+<img src="Mockups%20and%20references/RegisterPage.PNG" style="width:6.50746in;height:3.76397in" />
 
 Side Bar example  
 <img src="Mockups%20and%20references/SideBar.png" style="width:1.5in;height:4in" />
