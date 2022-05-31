@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -28,11 +29,147 @@
   color: #53012C;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  to {
-    transform: rotate(360deg);
-  }
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+.title {
+  background-color: rgb(251, 127, 75);
+
+  position: sticky;
+
+  
+  width: 100%;
+}
+
+.banner {
+  background-color: rgb(237, 211, 199);
+  /*
+  position: sticky;
+  */
+  width: 100%;
+  padding: 0%;
+  border: 0px;
+  margin: 0px;
+  border-color: black;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  height: 100%;
+}
+
+.sidebar-menu .sub-menu>ul>li>a>i{
+  margin-right:10px;
+  margin-left:30px;
+}
+
+.sidebar-menu .sub-menu>ul>li>a:link,
+.sidebar-menu .sub-menu>ul>li>a:visited{
+  background-color: rgb(120, 18, 41);
+  display: inline-block;
+  width:100%;
+  text-decoration: none;
+  color: antiquewhite;
+  line-height: 30px;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.sidebar-menu .sub-menu>ul>li>a:hover{
+  background-color: rgb(60, 9, 21);
+  color:rgb(255, 198, 160);
+  border-left: 5px solid rgb(255, 106, 190);
+}
+
+#list_of_people {
+  background-color: rgb(252, 233, 220);
+}
+
+#text_interface {
+  background-color: rgb(249, 194, 164);
+}
+
+.header-main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+/*
+#banner-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+*/
+.sidebar {
+  left: 0;
+  height: 100vh;
+  position: sticky;
+  /*
+  width: 250px;
+  position: fixed; 
+  */
+  padding: 0;
+  background-color: rgb(153, 28, 46);
+  
+}
+
+.sidebar header {
+  font-size: 22px;
+  color: white;
+  text-align: left;
+  line-height: 70px;
+  padding-left: 20px;
+  background-color: rgb(153, 28, 47);
+  user-select: none;
+}
+
+.sidebar ul a {
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 65px;
+  font-size: 20px;
+  color: blanchedalmond;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border-top: 3px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid black;
+  transition: 0.9s;
+}
+
+.sidebar-menu>ul #Interest_Groups>ul>li>a{
+  background-color: rgb(97, 220, 36);
+  color: antiquewhite;
+  border-left: 5px solid #ff6abe;
+}
+
+.sidebar ul li:hover {
+  background-color: rgb(108, 21, 34);
+  border-left: 7px solid rgb(255, 195, 42);
+}
+
+#check{
+  display: none;
+}
+
+label #btn, label #cancel{
+  position: absolute;
+  cursor: pointer;
+}
+
+label #btn{
+  left: 40px;
+  top: 25px;
+  font-size: 35px;
+  color: white;
 }
