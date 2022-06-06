@@ -41,9 +41,8 @@ function Registration() {
    */
   const goTo = useNavigate();
 
-  /** Get the server name */
-  const server =
-    process.env.SERVER || "https://kakilang-server-app.herokuapp.com";
+  /** Load env and get the server name */
+  const server = process.env.SERVER || "http://localhost:2500";
 
   /**
    * Handles when the submit button is pressed

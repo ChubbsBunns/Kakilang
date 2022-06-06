@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "./Sidebar.component";
+import ChatBox from "./ChatBox.component";
+import PeopleBox from "./PeopleBox.component";
 
 /**
  * Homepage of the User
@@ -9,6 +11,10 @@ import Sidebar from "./Sidebar.component";
  * @component
  */
 function Home() {
+  const group = ["lmao@lmao.com", "example@email.com", "third@email.com"];
+  const [chatTarget, setChatTarget] = useState("example@email.com");
+  const onSelectPerson = (event) => setChatTarget(event.target.value);
+
   return (
     <div className="header-main">
       <Sidebar />
@@ -17,10 +23,11 @@ function Home() {
         Kakilang!
         <div className="banner">
           <div className="UI" id="list_of_people">
-            Peoplepeoplepeople
+            <PeopleBox group={group} onSelectPerson={onSelectPerson} />
           </div>
           <div className="UI" id="text_interface">
-            textingtextingtexting
+            {chatTarget}
+            <ChatBox email={chatTarget} />
           </div>
         </div>
       </div>

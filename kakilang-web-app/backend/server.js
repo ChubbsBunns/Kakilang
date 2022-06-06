@@ -22,8 +22,10 @@ const port = process.env.PORT || 2500;
 //Setup Routers (Post & Get Requests) in specific webpages
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
+const chatboxRouter = require("./routes/chatbox");
 app.use("/register", registerRouter);
 app.use("/", loginRouter);
+app.use("/message", chatboxRouter);
 
 //start the server
 app.listen(port, () => {

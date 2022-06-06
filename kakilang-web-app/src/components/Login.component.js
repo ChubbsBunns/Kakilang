@@ -43,8 +43,7 @@ function Login() {
   const goTo = useNavigate();
 
   /** Load env and get the server name */
-  const server =
-    process.env.SERVER || "https://kakilang-server-app.herokuapp.com";
+  const server = process.env.SERVER || "http://localhost:2500";
 
   /**
    * Handles when the submit button is pressed
@@ -59,7 +58,7 @@ function Login() {
 
     axios.post(server + "/login", user).then((res) => {
       localStorage.setItem("token", res.data.token);
-
+      localStorage.setItem("email", email);
       const handle = email.split("@")[0];
       res.data.login ? goTo("/home/" + handle) : alert(res.data.message);
     });
@@ -74,6 +73,7 @@ function Login() {
         headers: { "x-access-token": localStorage.getItem("token") },
       })
       .then((res) => {
+        localStorage.setItem("email", res.data.email);
         const handle = res.data.email?.split("@")[0];
         res.data.isLoggedIn ? goTo("/home/" + handle) : null;
       });
