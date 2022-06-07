@@ -13,11 +13,11 @@ body {
   
   .sidebar header {
       font-size: 22px;
-      color: white;
+      color: antiquewhite;
       text-align: left;
       line-height: 70px;
-      padding-left: 20px;
-      background-color: rgb(153, 28, 47);
+      padding-left: 30px;
+      background-color: rgb(153, 28, 46);
       user-select: none;
     }
   
@@ -39,7 +39,7 @@ body {
     line-height: 65px;
     font-size: 20px;
     color: rgb(255, 235, 205);  
-    padding-left: 30px;
+    padding-left: 3px;
     box-sizing: border-box;
     border-top: 3px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid black;
@@ -79,7 +79,7 @@ body {
     width: 100%;
     text-decoration: none;
     color: antiquewhite;
-    line-height: 30px;
+    line-height: 20px;
     padding: 10px;
     box-sizing: border-box;
     border-top: 3px solid rgba(255, 255, 255, 0.1);
@@ -89,7 +89,7 @@ body {
   
   .sidebar-menu .sub-menu > ul > li > a > i {
     margin-right: 10px;
-    margin-left: 50px;
+    margin-left: 20px;
   }
   
   .sidebar-menu .sub-menu > ul > li > a:hover {
@@ -103,11 +103,12 @@ body {
   }
   
   .sidebar .sub-menu > ul {
-      background-color: aliceblue;
+      background-color: rgb(72, 14, 23);
       /*
     list-style-type: none;
     display: none;
     */
+    width:100%;
   }
   
   .indicator {

@@ -1,5 +1,6 @@
 import React from "react";
 import Sidebar from "./Sidebar.component";
+import MessageBox from "./MessageBox.component";
 
 /**
  * Homepage of the User
@@ -19,7 +20,7 @@ function Home() {
             Peoplepeoplepeople
           </div>
           <div className="UI" id="text_interface">
-            textingtextingtexting
+            <MessageBox />
           </div>
         </div>
       </div>
