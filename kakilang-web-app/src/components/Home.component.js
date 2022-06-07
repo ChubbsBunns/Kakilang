@@ -13,8 +13,10 @@ function Home() {
   return (
     <div className="header-main">
       <Sidebar />
-      <div className="title" id="banner-text">
-        Kakilang!
+      <div className="main-UI" id="UI">
+        <div className="title" id="banner-text">
+          Kakilang!
+        </div>
         <div className="banner">
           <div className="UI" id="list_of_people">
             Peoplepeoplepeople

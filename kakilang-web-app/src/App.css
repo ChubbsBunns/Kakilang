@@ -47,10 +47,7 @@
 
 .title {
   background-color: rgb(251, 127, 75);
-
   position: sticky;
-
-  
   width: 100%;
 }
 
@@ -77,9 +74,14 @@
   background-color: rgb(249, 194, 164);
 }
 
+#UI{
+  max-height: 100%;
+}
+
 .header-main {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  max-height: 100vh;
 }
 
 /*
