@@ -69,9 +69,29 @@
   height: 100%;
 }
 
+#list_of_people {
+  background-color: rgb(252, 233, 220);
+}
+
+#text_interface {
+  background-color: rgb(249, 194, 164);
+}
+
+.header-main {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+/*
 .sidebar-menu .sub-menu>ul>li>a>i{
   margin-right:10px;
   margin-left:30px;
+}
+
+.sidebar-menu .sub-menu>ul>li>a:hover{
+  background-color: rgb(60, 9, 21);
+  color:rgb(255, 198, 160);
+  border-left: 5px solid rgb(255, 106, 190);
 }
 
 .sidebar-menu .sub-menu>ul>li>a:link,
@@ -86,38 +106,11 @@
   transition: 0.2s;
 }
 
-.sidebar-menu .sub-menu>ul>li>a:hover{
-  background-color: rgb(60, 9, 21);
-  color:rgb(255, 198, 160);
-  border-left: 5px solid rgb(255, 106, 190);
-}
 
-#list_of_people {
-  background-color: rgb(252, 233, 220);
-}
-
-#text_interface {
-  background-color: rgb(249, 194, 164);
-}
-
-.header-main {
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-}
-/*
-#banner-text {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-*/
 .sidebar {
   left: 0;
   height: 100vh;
   position: sticky;
-  /*
-  width: 250px;
-  position: fixed; 
-  */
   padding: 0;
   background-color: rgb(153, 28, 46);
   
@@ -157,19 +150,4 @@
   background-color: rgb(108, 21, 34);
   border-left: 7px solid rgb(255, 195, 42);
 }
-
-#check{
-  display: none;
-}
-
-label #btn, label #cancel{
-  position: absolute;
-  cursor: pointer;
-}
-
-label #btn{
-  left: 40px;
-  top: 25px;
-  font-size: 35px;
-  color: white;
-}
+*/

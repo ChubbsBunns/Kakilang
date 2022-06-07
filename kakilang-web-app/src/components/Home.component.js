@@ -12,7 +12,6 @@ function Home() {
   return (
     <div className="header-main">
       <Sidebar />
-
       <div className="title" id="banner-text">
         Kakilang!
         <div className="banner">
