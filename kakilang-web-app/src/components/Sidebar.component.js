@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./Sidebar.component.css";
 /**
  * Sidebar for navigation
  *
