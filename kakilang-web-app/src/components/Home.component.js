@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar.component";
 import MessageBox from "./MessageBox.component";
+import ListOfPeople from "./ListOfPeople.component";
 
 /**
  * Homepage of the User
@@ -18,13 +19,13 @@ function Home() {
           Kakilang!
         </div>
         <div className="banner">
-          <div className="UI" id="list_of_people">
-            Peoplepeoplepeople
+            <div className="UI" id="list_of_people">
+              <ListOfPeople />
+            </div>
+            <div className="UI" id="text_interface">
+              <MessageBox />
+            </div>
           </div>
-          <div className="UI" id="text_interface">
-            <MessageBox />
-          </div>
-        </div>
       </div>
     </div>
   );
