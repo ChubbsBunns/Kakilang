@@ -1,3 +1,6 @@
+//Setup .env file to be handled
+require("dotenv").config();
+
 const Message = require("../models/message.model");
 const router = require("express").Router();
 const axios = require("axios");
@@ -14,6 +17,7 @@ router.route("/send").post(async (req, res) => {
     if (err) {
       res.sendStatus(500);
     }
+    req.io.emit("message", req.body);
     res.sendStatus(200);
   });
 });
@@ -39,7 +43,7 @@ router.route("/get").get(async (req, res) => {
         },
         (err, messages) => {
           if (err) res.sendStatus(500);
-          console.log(messages);
+          //console.log(messages);
           res.json({ messages: messages });
         }
       );

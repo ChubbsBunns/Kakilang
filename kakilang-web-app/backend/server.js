@@ -1,12 +1,15 @@
-//setup middle ware to connect to database
+//Setup .env file to be handled
+require("dotenv").config();
+
+//Setup Express with cors
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+//Setup mongoose
+const mongoose = require("mongoose");
 
 //setup mongoDB connection
 const uri = process.env.ATLAS_URI;
@@ -19,28 +22,56 @@ connection.once("open", () => {
 //Setup Server Port
 const port = process.env.PORT || 2500;
 
+//Setup Socket.IO
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+const httpServer = createServer(app);
+const server = process.env.SERVER
+  ? "kakilang.vercel.com"
+  : "http://localhost:3000";
+const io = new Server(httpServer, {
+  cors: {
+    origin: server,
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("Connected: ", socket.id);
+});
+io.on("error", (err) => {
+  console.log(err);
+});
+
 //Setup Routers (Post & Get Requests) in specific webpages
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const chatboxRouter = require("./routes/chatbox");
+app.use((req, res, next) => {
+  req.io = io;
+  return next();
+});
+
 app.use("/register", registerRouter);
 app.use("/", loginRouter);
 app.use("/message", chatboxRouter);
-
-//start the server
-app.listen(port, () => {
-  console.log(`Server is running on port : ${port}`);
-});
 
 //@TODO Unsure how to translate this to a file
 app.get("/getUser", verifyJWT, (req, res) => {
   res.json({ isLoggedIn: true, email: req.user.email });
 });
 
+//start the server
+httpServer.listen(port, () => {
+  console.log(`Server is running on port : ${port}`);
+});
+
+//JWT setup
+const jwt = require("jsonwebtoken");
+
 function verifyJWT(req, res, next) {
   const token = req.headers["x-access-token"]?.split("Bearer")[1];
   if (token) {
-    console.log("Verifying");
+    //console.log("Verifying");
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         return res.json({
