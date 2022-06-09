@@ -10,6 +10,11 @@ body{
     text-decoration: none;
 }
 
+.list-of-people > ul > li > a > img{
+    max-width: 20%;
+    padding-right: 3px;
+    margin-right: 5px;
+}
 
 
 .list-of-people > ul{
@@ -24,8 +29,10 @@ body{
 .list-of-people{
     display: block;
     overflow: auto;
-    block-size: 94vh;
+    block-size: 88vh;
 }
+
+
 
 .list-of-people > ul> li > a{
     text-decoration: none;
@@ -39,7 +46,7 @@ body{
     color: rgb(83 1 44);  
     box-sizing: border-box;
     transition: 0.2s;
-    margin: 3px 4px 3px;
+    margin: 5px 12px 5px;
     border-top: 4px solid rgba(255, 255, 255, 0.3);
     border-bottom: 3px solid black;
 }
@@ -50,4 +57,14 @@ body{
 
 .list-of-people > ul> li > a:active{
     background-color: rgb(153 28 46);
+}
+
+.group-name{
+    block-size: 6vh;
+    color:rgb(252 233 220);
+    background-color: rgb(153 28 46);
+    border-radius: 20px;
+    border: rgb(83 1 44) solid 3px;
+    margin: 3px 5px 3px 5px;
+    height: 100%;
 }
