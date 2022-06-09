@@ -79,6 +79,103 @@ function MessageBox() {
                   </div>
                 </div>
               </div>
+
+              <div className="received-chats">
+                <div className="received-chats-img">
+                  <img src={dylan1} className="dylan1-img" />
+                </div>
+                <div className="received-msg">
+                  <div className="received-msg-inbox">
+                    <p>Second message from not me</p>
+                    <span className="time">4:20 AM | October 27</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="outoing-chats">
+                <div className="outgoing-chats-msg">
+                  <p>Second message from me</p>
+                  <span className="time">4:20 AM | October 27</span>
+                </div>
+                <div className="outoing-chats-img">
+                  <div className="outgoing-chats-img">
+                    <img src={dylan2} className="dylan2-img" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="received-chats">
+                <div className="received-chats-img">
+                  <img src={dylan1} className="dylan1-img" />
+                </div>
+                <div className="received-msg">
+                  <div className="received-msg-inbox">
+                    <p>Second message from not me</p>
+                    <span className="time">4:20 AM | October 27</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="outoing-chats">
+                <div className="outgoing-chats-msg">
+                  <p>Second message from me</p>
+                  <span className="time">4:20 AM | October 27</span>
+                </div>
+                <div className="outoing-chats-img">
+                  <div className="outgoing-chats-img">
+                    <img src={dylan2} className="dylan2-img" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="received-chats">
+                <div className="received-chats-img">
+                  <img src={dylan1} className="dylan1-img" />
+                </div>
+                <div className="received-msg">
+                  <div className="received-msg-inbox">
+                    <p>Second message from not me</p>
+                    <span className="time">4:20 AM | October 27</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="outoing-chats">
+                <div className="outgoing-chats-msg">
+                  <p>Second message from me</p>
+                  <span className="time">4:20 AM | October 27</span>
+                </div>
+                <div className="outoing-chats-img">
+                  <div className="outgoing-chats-img">
+                    <img src={dylan2} className="dylan2-img" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="received-chats">
+                <div className="received-chats-img">
+                  <img src={dylan1} className="dylan1-img" />
+                </div>
+                <div className="received-msg">
+                  <div className="received-msg-inbox">
+                    <p>Second message from not me</p>
+                    <span className="time">4:20 AM | October 27</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="outoing-chats">
+                <div className="outgoing-chats-msg">
+                  <p>Second message from me</p>
+                  <span className="time">4:20 AM | October 27</span>
+                </div>
+                <div className="outoing-chats-img">
+                  <div className="outgoing-chats-img">
+                    <img src={dylan2} className="dylan2-img" />
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>

@@ -71,17 +71,18 @@ img{
 .msg-inbox{
     border: 2px solid rgb(153, 28, 46);
     overflow: hidden;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     background-color:rgb(249, 194, 164);
+    height: 75vh;
 }
 
 .chats{
-    padding: 30px 15px 0 25px;
+    padding: 15px 10px 0 15px;
 }
 
 .msg-page{
-    height: 512px;
     overflow-y: auto;
+    height: 70vh;
 }
 
 .received-chats{
