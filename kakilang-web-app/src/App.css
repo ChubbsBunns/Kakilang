@@ -45,47 +45,18 @@
   text-decoration: none;
 }
 
-.title {
-  background-color: rgb(251, 127, 75);
-  position: sticky;
-  width: 100%;
-  height: 6%;
-}
-
-.banner {
-  background-color: rgb(237, 211, 199);
-  /*
-  position: sticky;
-  */
-  width: 100%;
-  padding: 0%;
-  border: 0px;
-  margin: 0px;
-  border-color: black;
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  height: 94%;
-  
-}
-
-#list_of_people {
-  background-color: rgb(252, 233, 220);
-}
-
 #text_interface {
   background-color: rgb(249, 194, 164);
 }
 
-#UI{
-  max-height: 100%;
-}
+
 
 .header-main {
   display: grid;
   grid-template-columns: 1fr 4fr;
-  max-height: 100vh;
+  max-height: 100%;
 }
 
 .main-UI{
-  height: 100%;
+  height: 100vh;
 }

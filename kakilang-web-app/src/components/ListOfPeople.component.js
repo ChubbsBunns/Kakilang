@@ -8,6 +8,7 @@ import stephen_dp from "./images/stephen.jpg";
 import yongjie_dp from "./images/yong jie.jpg";
 import william_dp from "./images/william.jpg";
 /**
+ * List-Of-People
  * Lists down the people inside a selected group from the sidebar
  *
  *

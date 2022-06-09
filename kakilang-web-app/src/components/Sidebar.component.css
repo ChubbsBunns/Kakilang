@@ -24,10 +24,10 @@ body {
 .sidebar {
   background-color: rgb(153, 28, 46);
   color: rgb(255, 235, 205);
-  height: 100vh;
+  height: 100%;
   width: 100%;
   left: 0;
-  position: sticky;
+  position: relative;
 }
 
 .sidebar-menu {
