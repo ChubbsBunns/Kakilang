@@ -12,25 +12,28 @@ body {
 }
 
 .sidebar header {
-    font-size: 22px;
-    color: white;
-    text-align: left;
-    line-height: 70px;
-    padding-left: 20px;
-    background-color: rgb(153, 28, 47);
-    user-select: none;
-  }
+  font-size: 22px;
+  color: antiquewhite;
+  text-align: left;
+  line-height: 70px;
+  padding-left: 30px;
+  background-color: rgb(153, 28, 46);
+  user-select: none;
+}
 
 .sidebar {
   background-color: rgb(153, 28, 46);
   color: rgb(255, 235, 205);
-  height: 100vh;
+  height: 100%;
   width: 100%;
   left: 0;
+  position: relative;
 }
 
 .sidebar-menu {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 .sidebar-menu > li > a {
   display: block;
@@ -38,15 +41,13 @@ body {
   width: 100%;
   line-height: 65px;
   font-size: 20px;
-  color: rgb(255, 235, 205);  
+  color: rgb(255, 235, 205);
   padding-left: 30px;
   box-sizing: border-box;
   border-top: 3px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid black;
   transition: 0.9s;
 }
-
-
 
 .sidebar-menu > li > a:link,
 .sidebar-menu > li > a:visited {
@@ -79,7 +80,7 @@ body {
   width: 100%;
   text-decoration: none;
   color: antiquewhite;
-  line-height: 30px;
+  line-height: 20px;
   padding: 10px;
   box-sizing: border-box;
   border-top: 3px solid rgba(255, 255, 255, 0.1);
@@ -95,19 +96,31 @@ body {
 .sidebar-menu .sub-menu > ul > li > a:hover {
   background-color: rgb(72, 14, 23);
   color: antiquewhite;
-  border-left: 5px solid rgb(252, 113, 54);
+  border-left: 7px solid rgb(252, 113, 54);
   box-sizing: border-box;
   border-top: 3px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid black;
   transition: 0.3s;
 }
 
+/*
+.sidebar .sub-menu > ul {
 
+    list-style-type: none;
+    display: none;
+
+}
+*/
+
+.sidebar .sub-menu ul{
+  padding:0;
+  margin:0;
+}
 
 .indicator {
   float: right;
   font-size: 0.8em;
-  line-height: 30px;
+  line-height: 20px;
   transition: all 0.3s;
 }
 

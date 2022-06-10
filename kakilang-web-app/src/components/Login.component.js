@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Login.component.css";
 import { useNavigate } from "react-router-dom";
 import BigLogo from "./BigLogo.component";
+import dylan1 from "./images/Dylan-img1.png";
 
 /**
  * Login Component
@@ -56,9 +57,12 @@ function Login() {
 
     const user = { email: email, password: password };
 
+    //@TODO setup USER details
     axios.post(server + "/login", user).then((res) => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("email", email);
+      localStorage.setItem("name", "Dylan Ho");
+      localStorage.setItem("img", dylan1);
       const handle = email.split("@")[0];
       res.data.login ? goTo("/home/" + handle) : alert(res.data.message);
     });

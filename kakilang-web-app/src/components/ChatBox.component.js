@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import MessageBox from "./MessageBox.component";
 import io from "socket.io-client";
+import "./MessageBox.component.css";
 
 const server = process.env.SERVER || "http://localhost:2500";
 
@@ -13,7 +14,7 @@ const server = process.env.SERVER || "http://localhost:2500";
  *
  * @component
  */
-function ChatBox({ email }) {
+function ChatBox({ img, name, email }) {
   const [message, setMessage] = useState("");
   const [messageBox, setMessageBox] = useState([]);
 
@@ -81,30 +82,78 @@ function ChatBox({ email }) {
     setMessage("");
   }
 
+  const targetUser = { img: img, name: name, email: email };
+  const currentUSer = {
+    img: localStorage.getItem("img"),
+    name: localStorage.getItem("name"),
+    email: localStorage.getItem("email"),
+  };
+
   return (
-    <div className="ChatBox">
-      <MessageBox messages={messageBox} />
-      <form onSubmit={handleSend}>
-        <input
-          type="string"
-          name="message"
-          value={message}
-          onChange={messageEdit}
-          style={{ display: "inline" }}
+    <div className="container">
+      <div className="msg-header">
+        <div className="msg-header-img">
+          <img src={img} />
+        </div>
+        <div className="active">
+          <h4>{name}</h4>
+          <h6>Last seen 3 hours ago...</h6>
+        </div>
+        <div className="header-icons">
+          <i className="fa fa-info-circle"></i>
+        </div>
+      </div>
+      <div className="chat-page">
+        <MessageBox
+          messages={messageBox}
+          currentUser={currentUSer}
+          targetUser={targetUser}
         />
-        <input
-          className="submit"
-          type="submit"
-          value="Send"
-          style={{ display: "inline" }}
-        />
-      </form>
+        <div className="msg-bottom">
+          <form onSubmit={handleSend} className="input-group">
+            <input
+              type="string"
+              name="message"
+              className="form-control"
+              value={message}
+              onChange={messageEdit}
+              style={{ display: "inline" }}
+            />
+            <input
+              className="input-group-text"
+              type="submit"
+              style={{ display: "inline" }}
+            />
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
 
 ChatBox.propTypes = {
+  img: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
 
 export default ChatBox;
+
+/**
+ * Dylan's sending UI
+ *
+ * <div className="msg-bottom">
+ *      <div className="input-group">
+ *        <input
+ *          type="text"
+ *          className="form-control"
+ *          placeholder="write message..."
+ *        /></input>
+ *        <div className="input-group-append">
+ *          <span className="input-group-text">
+ *            <i className="fa fa-paper-plane"></i>
+ *          </span>
+ *        </div>
+ *      </div>
+ *    </div>
+ */
