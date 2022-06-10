@@ -6,7 +6,10 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(cors());
+app.options("*", cors());
 app.use(express.json());
+
+//Setup CORS
 
 //Setup mongoose
 const mongoose = require("mongoose");
@@ -29,7 +32,13 @@ const httpServer = createServer(app);
 //const server = process.env.WHITELIST;
 const io = new Server(httpServer, {
   cors: {
-    origin: "*",
+    origins: [
+      "https://kakilang-willcwx.vercel.app",
+      "https://kakilang-git-main-willcwx.vercel.app",
+      "https://kakilang.vercel.app",
+      "http://localhost:3000",
+      "https://kakilang-server-app.herokuapp.com/getUser",
+    ],
   },
 });
 
