@@ -27,7 +27,7 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const server = process.env.SERVER
-  ? "kakilang.vercel.com"
+  ? "https://kakilang.vercel.app"
   : "http://localhost:3000";
 const io = new Server(httpServer, {
   cors: {
