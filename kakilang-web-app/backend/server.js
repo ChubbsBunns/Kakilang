@@ -26,9 +26,7 @@ const port = process.env.PORT || 2500;
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const httpServer = createServer(app);
-const server = process.env.SERVER
-  ? "kakilang.vercel.com"
-  : "http://localhost:3000";
+const server = process.env.WHITELIST;
 const io = new Server(httpServer, {
   cors: {
     origin: server,

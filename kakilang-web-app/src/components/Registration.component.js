@@ -42,7 +42,7 @@ function Registration() {
   const goTo = useNavigate();
 
   /** Load env and get the server name */
-  const server = process.env.SERVER || "http://localhost:2500";
+  const server = process.env.REACT_APP_SERVER;
 
   /**
    * Handles when the submit button is pressed
