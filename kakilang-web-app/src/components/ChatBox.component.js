@@ -5,7 +5,7 @@ import MessageBox from "./MessageBox.component";
 import io from "socket.io-client";
 import "./MessageBox.component.css";
 
-const server = process.env.SERVER || "http://localhost:2500";
+const server = process.env.REACT_APP_SERVER;
 
 /**
  * Chat Box
