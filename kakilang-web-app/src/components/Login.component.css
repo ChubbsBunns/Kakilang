@@ -1,7 +1,7 @@
 .Login-window {
     background-color: #F9C2A4;
-    min-height: 60vh;
-    min-width: 80vw;
+    min-height: 100vh;
+    min-width: 90vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,8 +14,16 @@
     font-size: calc(10px + 6vmin);
 }
 
+.Login-window form {
+    width: 90vw;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    margin-bottom: 4vh;
+}
+
+
 .Login-window input {
-    width: 30vw;
     height: 13vh;
     position: relative;
     padding: 0px 4vw;
@@ -44,3 +52,5 @@
     outline: none;
     box-shadow: 0px 4px 20px 0px transparent;
 }
+
+

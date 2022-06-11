@@ -9,6 +9,12 @@ const Schema = mongoose.Schema;
  * @property {string} _id - Unique Database ID
  * @property {string} email - Unique User's email
  * @property {string} password - Encrypted User's password
+ * @property {string} name - Unique Database ID
+ * @property {string} year - Unique User's email
+ * @property {string} house - Encrypted User's password
+ * @property {string} floor - Unique Database ID
+ * @property {string} cca - Unique User's email
+ * @property {string} major - Unique User's email
  */
 const userSchema = new Schema(
   {
@@ -20,6 +26,26 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    major: {
+      type: String,
+      required: false,
+    },
+    house: {
+      type: String,
+      required: false,
+    },
+    floor: {
+      type: String,
+      required: false,
+    },
+    cca: {
+      type: Array,
+      required: false,
     },
   },
   { timestamps: true }

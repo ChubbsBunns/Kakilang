@@ -34,6 +34,7 @@ router.route("/login").post((req, res) => {
         const payload = {
           id: dbUser._id,
           email: dbUser.email,
+          name: dbUser.name,
         };
 
         // Creating the JWT
@@ -47,6 +48,7 @@ router.route("/login").post((req, res) => {
               message: "Success",
               token: "Bearer" + token,
               login: true,
+              name: dbUser.name,
             });
           }
         );

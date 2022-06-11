@@ -64,7 +64,7 @@ app.use("/message", chatboxRouter);
 
 //@TODO Unsure how to translate this to a file
 app.get("/getUser", verifyJWT, (req, res) => {
-  res.json({ isLoggedIn: true, email: req.user.email });
+  res.json({ isLoggedIn: true, email: req.user.email, name: req.user.name });
 });
 
 //start the server
@@ -89,6 +89,7 @@ function verifyJWT(req, res, next) {
       req.user = {};
       req.user.id = decoded.id;
       req.user.email = decoded.email;
+      req.user.name = decoded.name;
       next();
     });
   } else {

@@ -19,6 +19,11 @@ router.route("/add").post(async (req, res) => {
 
     // Construct a user from the model
     const newUser = new User({
+      name: user.name,
+      major: user.major,
+      house: user.house,
+      floor: user.floor,
+      cca: user.cca,
       email: user.email.toLowerCase(),
       password: user.password,
     });
