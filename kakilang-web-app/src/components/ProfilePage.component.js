@@ -22,10 +22,14 @@ function ProfilePage() {
               <a href="#" className="fa-solid fa-message"></a>
             </div>
           </span>
+          {/* This one is the one that works */}
+          {/* 
           <a href="#" className="cancel-button">
             <i className="fa-solid fa-xmark"></i>
           </a>
+          */}
         </div>
+        {/* This one is the one i want to implement */}
         <div className="something">
           {" "}
           <a href="#" className="cancel-button">
