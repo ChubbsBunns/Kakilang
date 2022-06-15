@@ -11,29 +11,28 @@
   justify-content: center;
   align-items: center;
   max-width: 60vw;
-  margin:0%
-  
+  margin:auto;
+  margin-top: 0;
+  overflow: auto;
 }
 
 .profile-box {
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 8fr 1fr;
-  background-color: rgb(144, 51, 0);
-  /*
+  grid-template-columns: 1fr 8fr 1fr;  
   background-color: rgba(249, 194, 164, 0.5);
-  */
   text-align: center;
   padding: 40px 90px;
   color: white;
   position: relative;
   border-radius: 10%;
   max-width: 90%;
-  margin: 0%;
+  margin: auto;
 }
 
 .image-name-box {
   display: grid;
-  grid-template-columns: 5fr 5fr 1fr;
+  grid-template-columns: 1fr 1fr;
   font: normal normal bold 30px sans-serif;
   background-color: rgba(251, 127, 75, 1);
   text-align: center;
@@ -50,18 +49,24 @@
 
 
 .cancel-button {
+  /*
   background-color: rgba(249, 194, 164, 1);
+  */
+  background-color: rgb(65, 53, 46);
   color: rgba(83, 1, 44, 1);
-  width: 30px;
-  height: 30px;
+  border-radius: 30%;
 }
 
+.something{
+  margin:none;
+  padding-left:0%;
+}
 
 .something > a:hover {
   background-color: rgba(249, 194, 164, 1);
   color: black;
   border-radius: 0%;
-  transition: 0.3s;
+  transition: 0.1s;
   border: 2px solid rgba(83, 1, 44, 1);
 }
 
@@ -70,6 +75,15 @@
   color: black;
   border-radius: 30%;
   transition: 0.3s;
+}
+
+.cancel-button > i{
+  background-color: rgb(65, 53, 46);
+  color: rgba(83, 1, 44, 1);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
 }
 
 .major,
