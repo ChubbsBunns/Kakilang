@@ -48,6 +48,43 @@ function Sidebar() {
           </ul>
         </li>
       </ul>
+      <div className="choice-people-or-events">
+        <div className="choice-people-or-events-container">
+          <div>
+            <p className="choice-people-or-events-text">Display:</p>
+          </div>
+          <div className="choice-people-or-events-buttons">
+            <button className="event-button">
+            <i className="fa-solid fa-people-group"></i><br></br>People
+            </button>
+            <button className="event-button">
+              <i className="fa-solid fa-calendar-day"></i> <br></br>Events
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="choice-chat-type">
+        <p className="choice-chat-type-text">Chat Filter:</p>
+        <div className="choice-chat-type-buttons">
+          
+          <button className="chat-type-button">
+          <i className="fa-solid fa-user"></i> <br></br>Events
+          </button>
+          <button className="chat-type-button">
+          <i className="fa-solid fa-user"></i> <br></br>DMs
+          </button>
+          <button className="chat-type-button">
+          <i className="fa-solid fa-user-group"></i> <br></br>Groups
+          </button>
+          
+        </div>
+      </div>
+      <div className="events">
+        <div className="event-tab-text">Events</div>
+      </div>
+      <div className="impromptus">
+        <p>impromptus</p>
+      </div>
     </div>
   );
 }

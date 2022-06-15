@@ -34,6 +34,7 @@ body{
 
 .list-of-people-component{
     height: 100%;
+    overflow: auto;
 }
 
 #list_of_people {
