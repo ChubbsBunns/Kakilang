@@ -23,7 +23,7 @@ body {
 
 .sidebar {
   display: grid;
-  grid-template-rows: 1fr 8fr 4fr 3fr 2fr 6fr;
+  grid-template-rows: 1fr 8fr 3fr 3fr 9fr;
   background-color: rgb(153, 28, 46);
   color: rgb(255, 235, 205);
   height: 100vh;
@@ -134,7 +134,7 @@ body {
 
 .choice-people-or-events-container{
   display: grid;
-  grid-template-rows: 4fr 6fr 1fr;
+  grid-template-rows: 5fr 12fr 2fr;
   background-color: rgba(252, 233, 220, 1);
   margin:10px;
   border-radius: 25%;
@@ -175,11 +175,11 @@ body {
 .choice-people-or-events-buttons > button:hover{
   background-color: rgba(249, 194, 164, 1);
   transform: translatey(-3px);
-  transition:0.3s;
-  border-bottom: 8px solid rgb(121, 61, 35);
-  border-top: 2px solid rgba(190, 96, 56);
+  transition:0.1s;
+
   border-right: 3px solid rgb(157, 79, 46);
   border-left: 3px solid rgb(152, 76, 44);
+  border-bottom: 5px solid rgb(162, 82, 47);
 }
 
 .choice-people-or-events-buttons > button:focus{
@@ -203,6 +203,7 @@ body {
   margin-top:0;
   font: normal normal bold 18px sans-serif;
   padding-top: 8px;
+  
 }
 
 .choice-chat-type-text{
@@ -234,7 +235,7 @@ body {
 .choice-chat-type-buttons > button:hover{
   background-color: rgba(249, 194, 164, 1);
   transform: translatey(-3px);
-  transition:0.3s;
+  transition:0.1s;
   border-bottom: 8px solid rgb(121, 61, 35);
   border-top: 2px solid rgba(190, 96, 56);
   border-right: 3px solid rgb(157, 79, 46);
@@ -249,11 +250,41 @@ body {
   color:rgba(252, 233, 220, 1);
 }
 
-.events{
-  box-sizing: border-box;
-  border: 2px solid green;
+
+.impromptus{
   background-color: rgba(252, 233, 220, 1);
+  margin:10px;
+  color: rgba(83, 1, 44, 1);
+  border-radius:15%;
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+  margin-top: 0;
+  padding-top: 4px;
+  font: normal normal bold 18px sans-serif;
+  overflow: auto;
+}
+
+.impromptus-events{
+  margin:auto;
+
+}
+
+.impromptus > ul{
+  overflow: auto;
   width: 90%;
-  margin: auto;
-  color:black;
+  height: 90%;
+}
+
+.impromptus > ul > li{
+border: 1px solid black;
+margin:auto;
+background-color: rgba(251, 127, 75, 1);
+margin-bottom: 3px;
+border-radius: 35%;
+height: 30%;
+}
+
+.impromptus > ul > li > div{
+  text-align: center;
+  padding: 15px;
 }

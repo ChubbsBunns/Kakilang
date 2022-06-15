@@ -55,7 +55,8 @@ function Sidebar() {
           </div>
           <div className="choice-people-or-events-buttons">
             <button className="event-button">
-            <i className="fa-solid fa-people-group"></i><br></br>People
+              <i className="fa-solid fa-people-group"></i>
+              <br></br>People
             </button>
             <button className="event-button">
               <i className="fa-solid fa-calendar-day"></i> <br></br>Events
@@ -66,24 +67,77 @@ function Sidebar() {
       <div className="choice-chat-type">
         <p className="choice-chat-type-text">Chat Filter:</p>
         <div className="choice-chat-type-buttons">
-          
           <button className="chat-type-button">
-          <i className="fa-solid fa-user"></i> <br></br>Events
+            <i className="fa-solid fa-users"></i> <br></br>All
           </button>
           <button className="chat-type-button">
-          <i className="fa-solid fa-user"></i> <br></br>DMs
+            <i className="fa-solid fa-user"></i> <br></br>DMs
           </button>
           <button className="chat-type-button">
-          <i className="fa-solid fa-user-group"></i> <br></br>Groups
+            <i className="fa-solid fa-user-group"></i> <br></br>Groups
           </button>
-          
         </div>
       </div>
-      <div className="events">
-        <div className="event-tab-text">Events</div>
-      </div>
+
       <div className="impromptus">
-        <p>impromptus</p>
+        <div>
+          <i className="fa-solid fa-clock"></i>
+          <p>Impromptus!</p>
+        </div>
+        <ul className="impromptus-events">
+          <li>
+            <div className="an-event">harlo1</div>
+          </li>
+          <li>
+            <div className="an-event">harlo2</div>
+          </li>
+          <li>
+            <div className="an-event">harlo3</div>
+          </li>
+          <li>
+            <div className="an-event">harlo1</div>
+          </li>
+          <li>
+            <div className="an-event">harlo2</div>
+          </li>
+          <li>
+            <div className="an-event">harlo3</div>
+          </li>
+          <li>
+            <div className="an-event">harlo1</div>
+          </li>
+          <li>
+            <div className="an-event">harlo2</div>
+          </li>
+          <li>
+            <div className="an-event">harlo3</div>
+          </li>
+          <li>
+            <div className="an-event">harlo1</div>
+          </li>
+          <li>
+            <div className="an-event">harlo2</div>
+          </li>
+          <li>
+            <div className="an-event">harlo3</div>
+          </li>
+          <li>
+            <div className="an-event">harlo1</div>
+          </li>
+          <li>
+            <div className="an-event">harlo2</div>
+          </li>
+          <li>
+            <div className="an-event">harlo3</div>
+          </li>
+          <li>
+            <div className="an-event">harlo1</div>
+          </li>
+          
+
+          
+          
+        </ul>
       </div>
     </div>
   );
