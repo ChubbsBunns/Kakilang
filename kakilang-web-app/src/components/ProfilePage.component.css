@@ -1,0 +1,181 @@
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.container-profile-page {
+  width: 100%;
+  height: 90%;
+  justify-content: center;
+  align-items: center;
+  max-width: 60vw;
+  margin:auto;
+  margin-top: 0;
+  overflow: auto;
+}
+
+.profile-box {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 8fr 1fr;  
+  background-color: rgba(249, 194, 164, 0.5);
+  text-align: center;
+  padding: 40px 90px;
+  color: white;
+  position: relative;
+  border-radius: 10%;
+  max-width: 90%;
+  margin: auto;
+}
+
+.image-name-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font: normal normal bold 30px sans-serif;
+  background-color: rgba(251, 127, 75, 1);
+  text-align: center;
+  padding: 70px 60px;
+  color: rgb(83 1 44);
+  position: relative;
+  border-radius: 20%;
+  width: 700px;
+  height: 400px;
+  max-height: 100%;
+  margin: auto;
+  max-width: 90%;
+}
+
+
+.cancel-button {
+  /*
+  background-color: rgba(249, 194, 164, 1);
+  */
+  background-color: rgb(65, 53, 46);
+  color: rgba(83, 1, 44, 1);
+  border-radius: 30%;
+}
+
+.something{
+  margin:none;
+  padding-left:0%;
+}
+
+.something > a:hover {
+  background-color: rgba(249, 194, 164, 1);
+  color: black;
+  border-radius: 0%;
+  transition: 0.1s;
+  border: 2px solid rgba(83, 1, 44, 1);
+}
+
+.image-name-box > a:hover {
+  background-color: rgba(153, 28, 46, 1);
+  color: black;
+  border-radius: 30%;
+  transition: 0.3s;
+}
+
+.cancel-button > i{
+  background-color: rgb(65, 53, 46);
+  color: rgba(83, 1, 44, 1);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+.major,
+.year {
+  font: normal normal normal 25px sans-serif;
+}
+
+.information-box {
+  background-color: rgb(249 194 164);
+  text-align: left;
+  padding: 40px 90px;
+  color: rgb(83 1 44);
+  position: relative;
+  border: 3px solid burlywood;
+  border-radius: 15%;
+  max-width: 90%;
+  margin: auto;
+}
+
+.message-button > a:visited {
+  color: rgba(153, 28, 46, 1);
+  text-decoration: none;
+}
+
+.message-button > a:link {
+  color: rgba(153, 28, 46, 1);
+  text-decoration: none;
+}
+
+.message-button > a:hover {
+  color: rgba(83, 1, 44, 1);
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+.name {
+  padding-top: 10px;
+}
+
+.profile-picture {
+  width: 200px;
+  border-radius: 10%;
+  background: rgba(249, 194, 164, 0.7);
+  box-shadow: 10px 9px 15px black;
+
+  max-width: 90%;
+}
+
+.interests-row,
+.house-row,
+.floor-row {
+  font: normal normal normal 20px sans-serif;
+}
+
+.interests,
+.house,
+.floor {
+  font: normal normal bold 20px sans-serif;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg) scale(1);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-3deg) scale(1.2);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(3deg) scale(1.4);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg) scale(1.6);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(3deg) scale(1.8);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-3deg) scale(2);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg) scale(1.8);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-3deg) scale(1.6);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(3deg) scale(1.4);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg) scale(1.2);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-3deg) scale(1);
+  }
+}

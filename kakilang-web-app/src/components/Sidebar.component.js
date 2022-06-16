@@ -26,7 +26,7 @@ function Sidebar() {
         </li>
         <li className="sub-menu">
           <a href="#">
-            <i className="fa fa-baseball-bat-ball"></i> CCAs/IGs
+          <i className="fa-solid fa-baseball-bat-ball"></i> CCAs/IGs
             <i className="fa fa-chevron-circle-down indicator"></i>
           </a>
           <ul>

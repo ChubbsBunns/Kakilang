@@ -1,7 +1,11 @@
+
 import React, { useState } from "react";
 import Sidebar from "./Sidebar.component";
 import ListOfPeople from "./ListOfPeople.component";
 import Banner from "./Banner.component";
+/*
+import ProfilePage from "./ProfilePage.component";
+*/
 import ChatBox from "./ChatBox.component";
 import dylan1 from "./images/Dylan-img1.png";
 import marcus_dp from "./images/marcus.jpg";
@@ -11,6 +15,8 @@ import stephen_dp from "./images/stephen.jpg";
 import yongjie_dp from "./images/yong jie.jpg";
 import william_dp from "./images/william.jpg";
 
+
+
 /**
  * Homepage of the User
  *
@@ -19,6 +25,7 @@ import william_dp from "./images/william.jpg";
  * @component
  */
 function Home() {
+  
   const group = [
     {
       img: dylan1,
@@ -63,6 +70,7 @@ function Home() {
       _id: 7,
     },
   ];
+  
   const [chatTarget, setChatTarget] = useState({
     email: localStorage.getItem("email"),
     name: localStorage.getItem("name"),
@@ -77,8 +85,13 @@ function Home() {
         <Banner />
         <div className="banner-children">
           <div className="UI" id="list_of_people">
+            
             <ListOfPeople group={group} onSelectPerson={onSelectPerson} />
+  
           </div>
+          {/** 
+          <ProfilePage />
+           */}
           <div className="UI" id="text_interface">
             <ChatBox
               email={chatTarget.email}
@@ -86,6 +99,7 @@ function Home() {
               img={chatTarget.img}
             />
           </div>
+          
         </div>
       </div>
     </div>

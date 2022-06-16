@@ -37,8 +37,12 @@ body{
 }
 
 .list-of-people-component{
+<<<<<<< HEAD
     height: 100%;
 
+=======
+    height: 90%;
+>>>>>>> profile-page-test
 }
 
 #list_of_people {
