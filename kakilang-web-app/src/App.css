@@ -53,10 +53,13 @@
 
 .header-main {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  max-height: 100%;
+  grid-template-columns: 1fr 5fr;
+  max-height: 100vh;
 }
 
 .main-UI{
-  height: 100vh;
+  max-height: 100vh;
 }
+
+
+

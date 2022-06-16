@@ -10,6 +10,10 @@ body{
     text-decoration: none;
 }
 
+.filter-options{
+    background-color: green;
+}
+
 .list-of-people > ul > li > a > img{
     max-width: 20%;
     padding-right: 3px;
@@ -34,7 +38,7 @@ body{
 
 .list-of-people-component{
     height: 100%;
-    overflow: auto;
+
 }
 
 #list_of_people {

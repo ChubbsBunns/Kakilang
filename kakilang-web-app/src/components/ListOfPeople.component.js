@@ -14,23 +14,33 @@ function ListOfPeople({ onSelectPerson, group }) {
   //@TODO Makesure the individual's profile page is on top
 
   return (
-    <div className="list-of-people-component">
-      <div className="list-of-people">
-        <ul>
-          {group.map((person) => {
-            return (
-              <li key={person._id}>
-                <a onClick={onSelectPerson(person)}>
-                  <img src={person.img} />
-                  {person.name}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+    <div className="list-component">
+      <div>
+        {" "}
+        <select className="filter-options">
+          <option value="filter-houses">Houses</option>
+          <option value="filter-floor">Floor</option>
+          <option value="filter-CCA">CCA/IGs</option>
+        </select>
       </div>
-      <div className="group-name">
-        <i>Group Name Placeholder</i>
+      <div className="list-of-people-component">
+        <div className="list-of-people">
+          <ul>
+            {group.map((person) => {
+              return (
+                <li key={person._id}>
+                  <a onClick={onSelectPerson(person)}>
+                    <img src={person.img} />
+                    {person.name}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div className="group-name">
+          <i>Group Name Placeholder</i>
+        </div>
       </div>
     </div>
   );

@@ -82,61 +82,29 @@ function Sidebar() {
       <div className="impromptus">
         <div>
           <i className="fa-solid fa-clock"></i>
-          <p>Impromptus!</p>
+          <p className="impromptus-title">Impromptus!</p>
         </div>
         <ul className="impromptus-events">
           <li>
-            <div className="an-event">harlo1</div>
+            <button className="an-event">
+            <i className="fa-solid fa-chess-king"></i> <br></br>Chess Blitz!
+            </button>
           </li>
           <li>
-            <div className="an-event">harlo2</div>
+            <button className="an-event">
+            <i className="fa-solid fa-gamepad"></i> <br></br>A really long and elaborate title even though we should advise people not to write them this long
+            </button>
           </li>
           <li>
-            <div className="an-event">harlo3</div>
+            <button className="an-event">
+            <i className="fa-solid fa-headset"></i> <br></br>Chill and talk
+            </button>
           </li>
           <li>
-            <div className="an-event">harlo1</div>
+            <button className="an-event">
+            <i className="fa-brands fa-battle-net"></i> <br></br>Overwatch
+            </button>
           </li>
-          <li>
-            <div className="an-event">harlo2</div>
-          </li>
-          <li>
-            <div className="an-event">harlo3</div>
-          </li>
-          <li>
-            <div className="an-event">harlo1</div>
-          </li>
-          <li>
-            <div className="an-event">harlo2</div>
-          </li>
-          <li>
-            <div className="an-event">harlo3</div>
-          </li>
-          <li>
-            <div className="an-event">harlo1</div>
-          </li>
-          <li>
-            <div className="an-event">harlo2</div>
-          </li>
-          <li>
-            <div className="an-event">harlo3</div>
-          </li>
-          <li>
-            <div className="an-event">harlo1</div>
-          </li>
-          <li>
-            <div className="an-event">harlo2</div>
-          </li>
-          <li>
-            <div className="an-event">harlo3</div>
-          </li>
-          <li>
-            <div className="an-event">harlo1</div>
-          </li>
-          
-
-          
-          
         </ul>
       </div>
     </div>
