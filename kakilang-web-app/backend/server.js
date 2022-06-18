@@ -5,11 +5,10 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
+app.set("view engine", "ejs");
 app.use(cors());
 app.options("*", cors());
 app.use(express.json());
-
-//Setup CORS
 
 //Setup mongoose
 const mongoose = require("mongoose");
@@ -53,6 +52,7 @@ io.on("error", (err) => {
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const chatboxRouter = require("./routes/chatbox");
+const imageRouter = require("./routes/image");
 app.use((req, res, next) => {
   req.io = io;
   return next();
@@ -61,6 +61,8 @@ app.use((req, res, next) => {
 app.use("/register", registerRouter);
 app.use("/", loginRouter);
 app.use("/message", chatboxRouter);
+app.use("/images", imageRouter);
+app.use("/uploads", express.static("uploads"));
 
 //@TODO Unsure how to translate this to a file
 app.get("/getUser", verifyJWT, (req, res) => {
