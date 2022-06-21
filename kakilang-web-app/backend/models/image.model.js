@@ -8,7 +8,7 @@ const ImageSchema = new Schema(
       required: true,
     },
     image: {
-      type: Object,
+      type: String,
       required: true,
     },
   },

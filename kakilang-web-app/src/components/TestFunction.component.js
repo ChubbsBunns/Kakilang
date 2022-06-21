@@ -81,7 +81,7 @@ function TestFunction() {
           console.log(image);
           return (
             <>
-              {name} <img src={server + "/" + image.path} />
+              {name} <img src={image} />
               <br />
             </>
           );

@@ -1,12 +1,32 @@
+//Setup .env file to be handled
+require("dotenv").config();
+
+//Setup Route and dependencies
 const Image = require("../models/image.model");
 const router = require("express").Router();
+
+//Setup Multer with Cloudinary
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
+});
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "DEV",
+  },
+});
+
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ storage: storage });
 
 router.route("/upload").post(upload.single("myImage"), (req, res) => {
-  const file = req.file;
+  const file = req.file.path;
   const texts = req.body;
-  console.log("file: ", file);
+  console.log("filepath: ", file);
   console.log("texts: ", texts);
 
   const newImage = new Image({
