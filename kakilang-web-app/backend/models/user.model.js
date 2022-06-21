@@ -4,17 +4,7 @@ const Schema = mongoose.Schema;
 /**
  * Schema of the User
  * For MongoDB get and post requests
- * @memberof userSchema
- *
- * @property {string} _id - Unique Database ID
- * @property {string} email - Unique User's email
- * @property {string} password - Encrypted User's password
- * @property {string} name - Unique Database ID
- * @property {string} year - Unique User's email
- * @property {string} house - Encrypted User's password
- * @property {string} floor - Unique Database ID
- * @property {string} cca - Unique User's email
- * @property {string} major - Unique User's email
+ * 
  */
 const userSchema = new Schema(
   {
@@ -47,6 +37,10 @@ const userSchema = new Schema(
       type: Array,
       required: false,
     },
+    profileIMG: {
+      type: String,
+      required: false
+    }
   },
   { timestamps: true }
 );
