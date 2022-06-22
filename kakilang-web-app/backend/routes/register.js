@@ -53,7 +53,7 @@ router.route("/add").post(upload.single("myImage"), async (req, res) => {
 
     // Construct a user from the model
     const newUser = new User({
-      name: user.PersonName,
+      name: user.name,
       major: user.major,
       house: user.house,
       floor: user.floor,
