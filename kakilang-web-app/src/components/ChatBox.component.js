@@ -18,11 +18,10 @@ function ChatBox({ img, name, email }) {
   const [message, setMessage] = useState("");
   const [messageBox, setMessageBox] = useState([]);
 
+  /** Handle message input changes */
   const messageEdit = (event) => setMessage(event.target.value);
 
-  /**
-   * Get different Messages from different people
-   */
+  /** Get different Messages from different people */
   const getMessageAsync = async () => {
     const response = await axios
       .get(server + "/message/get", {
@@ -46,10 +45,6 @@ function ChatBox({ img, name, email }) {
   };
 
   useEffect(() => {
-    getMessageAsync();
-  }, [email]);
-
-  useEffect(() => {
     const newSocket = io(server);
     newSocket.on("connect", () => {
       console.log(newSocket.id);
@@ -61,9 +56,11 @@ function ChatBox({ img, name, email }) {
       console.log(message);
       getMessageAsync();
     });
+    
+    getMessageAsync();
 
     return () => newSocket.close();
-  }, []);
+  }, [email]);
 
   /**
    * Handles when the message is sent.

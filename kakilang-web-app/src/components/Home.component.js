@@ -1,11 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar.component";
 import ListOfPeople from "./ListOfPeople.component";
 import Banner from "./Banner.component";
-/*
-import ProfilePage from "./ProfilePage.component";
-*/
+import axios from "axios";
+
+/** Static Group import */
 import ChatBox from "./ChatBox.component";
 import dylan1 from "./images/Dylan-img1.png";
 import marcus_dp from "./images/marcus.jpg";
@@ -16,19 +16,40 @@ import yongjie_dp from "./images/yong jie.jpg";
 import william_dp from "./images/william.jpg";
 
 
-
 /**
  * Homepage of the User
  *
  *
  */
 function Home() {
+  const server = process.env.REACT_APP_SERVER;
+  
   const [chatTarget, setChatTarget] = useState({
     email: localStorage.getItem("email"),
     name: localStorage.getItem("name"),
-    img: localStorage.getItem("img"),
+    profileIMG: localStorage.getItem("img"),
   });
+  const [group, setGroup] = useState(staticGroup);
   const onSelectPerson = (targetUser) => () => setChatTarget(targetUser);
+
+  const getGroupAsync = async () => {
+    const response = await axios
+      .get(server + "/users/getBasic")
+      .then((res) => {
+        return res.data.users
+      })
+      .catch((err) => {
+        console.log(err);
+        return [];
+      })
+    setGroup(response);
+  }
+
+  useEffect(() => {
+   getGroupAsync(); 
+   console.log("this is running");
+  }, []);
+
 
   return (
     <div className="header-main">
@@ -48,7 +69,7 @@ function Home() {
             <ChatBox
               email={chatTarget.email}
               name={chatTarget.name}
-              img={chatTarget.img}
+              img={chatTarget.profileIMG}
             />
           </div>
           
@@ -58,7 +79,9 @@ function Home() {
   );
 }
 
-const group = [
+export default Home;
+
+const staticGroup = [
   {
     img: dylan1,
     name: "Dylan Ho",
@@ -102,5 +125,3 @@ const group = [
     _id: 7,
   },
 ];
-
-export default Home;

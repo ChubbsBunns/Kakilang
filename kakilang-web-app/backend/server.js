@@ -42,7 +42,10 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-  console.log("Connected: ", socket.id);
+  console.log("Connected:", socket.id);
+  socket.on("disconnect", (reason) => {
+    console.log("Socket:", socket.id, " disconnected:", reason);
+  })
 });
 io.on("error", (err) => {
   console.log(err);
@@ -52,7 +55,7 @@ io.on("error", (err) => {
 const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const chatboxRouter = require("./routes/chatbox");
-const imageRouter = require("./routes/image");
+const usersRouter = require("./routes/users");
 app.use((req, res, next) => {
   req.io = io;
   return next();
@@ -61,7 +64,7 @@ app.use((req, res, next) => {
 app.use("/register", registerRouter);
 app.use("/", loginRouter);
 app.use("/message", chatboxRouter);
-app.use("/images", imageRouter);
+app.use("/users", usersRouter);
 app.use("/uploads", express.static("uploads"));
 
 //@TODO Unsure how to translate this to a file
@@ -92,6 +95,7 @@ function verifyJWT(req, res, next) {
       req.user.id = decoded.id;
       req.user.email = decoded.email;
       req.user.name = decoded.name;
+      req.user.img = decoded.img;
       next();
     });
   } else {

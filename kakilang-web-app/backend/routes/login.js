@@ -1,7 +1,10 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const User = require("../models/user.model");
+
+/** Import router and dependencies */
 const router = require("express").Router();
+const User = require("../models/user.model");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 
 /**
  * Creates an error message for bad login
@@ -35,6 +38,7 @@ router.route("/login").post((req, res) => {
           id: dbUser._id,
           email: dbUser.email,
           name: dbUser.name,
+          img: dbUser.profileIMG,
         };
 
         // Creating the JWT
@@ -49,6 +53,7 @@ router.route("/login").post((req, res) => {
               token: "Bearer" + token,
               login: true,
               name: dbUser.name,
+              img: dbUser.profileIMG,
             });
           }
         );

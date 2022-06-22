@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./ListOfPeople.component.css";
+const defaultProfile = "/defaultProfile.png"
 
 /**
  * List-Of-People
@@ -27,10 +28,11 @@ function ListOfPeople({ onSelectPerson, group }) {
         <div className="list-of-people">
           <ul>
             {group.map((person) => {
+              person.profileIMG = person.profileIMG || defaultProfile
               return (
                 <li key={person._id}>
                   <a onClick={onSelectPerson(person)}>
-                    <img src={person.img} />
+                    <img src={person.profileIMG} />
                     {person.name}
                   </a>
                 </li>
@@ -52,3 +54,4 @@ ListOfPeople.propTypes = {
 };
 
 export default ListOfPeople;
+

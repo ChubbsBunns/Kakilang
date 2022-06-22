@@ -57,7 +57,6 @@ function MessageBox({ messages, currentUser, targetUser }) {
   }
 
   function RenderMessage() {
-    console.log("Rendering Messages from: ", targetUser.email);
     return messages.map(({ fromEmail, message, createdAt, _id }) => {
       if (fromEmail === currentUser.email) {
         const prop = {

@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Login.component.css";
 import { useNavigate } from "react-router-dom";
 import BigLogo from "./BigLogo.component";
-import dylan1 from "./images/Dylan-img1.png";
+const defaultProfile = "/defaultProfile.png"
 
 /**
  * Login Component
@@ -22,18 +22,6 @@ function Login() {
   const [password, setPassword] = useState("password123");
 
   /**
-   * Handles when email input box is changed
-   * @param {SyntheticBaseEvent} event
-   */
-  const emailChange = (event) => setEmail(event.target.value);
-
-  /**
-   * Handles when password input box is changed
-   * @param {SyntheticBaseEvent} event
-   */
-  const passwordChange = (event) => setPassword(event.target.value);
-
-  /**
    * Goes to websubpages.
    * See react-route-dom useNavigate()
    *
@@ -46,6 +34,9 @@ function Login() {
   /** Load env and get the server name */
   const server = process.env.REACT_APP_SERVER;
 
+  /** Handle input changes*/
+  const emailChange = (event) => setEmail(event.target.value);
+  const passwordChange = (event) => setPassword(event.target.value);
   /**
    * Handles when the submit button is pressed
    * Goes to the login page if successfull, otherwise alert an error message
@@ -62,7 +53,7 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("email", email);
       localStorage.setItem("name", res.data.name);
-      localStorage.setItem("img", dylan1);
+      localStorage.setItem("img", res.data.img || defaultProfile);
       const handle = email.split("@")[0];
       res.data.login ? goTo("/home/" + handle) : alert(res.data.message);
     });
@@ -79,6 +70,7 @@ function Login() {
       .then((res) => {
         localStorage.setItem("email", res.data.email);
         localStorage.setItem("name", res.data.name);
+        localStorage.setItem("img", res.data.img || defaultProfile);
         const handle = res.data.email?.split("@")[0];
         res.data.isLoggedIn ? goTo("/home/" + handle) : null;
       });
@@ -114,5 +106,7 @@ function Login() {
     </>
   );
 }
+
+
 
 export default Login;
