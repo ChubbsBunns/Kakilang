@@ -9,10 +9,10 @@ router.route("/getBasic").get((req, res) => {
       // remove password has for security
       user.password = "";
       return user;
-    })
-    
+    });
+
     res.json({ users: basic });
-  })
-})
+  });
+});
 
 module.exports = router;

@@ -1,10 +1,8 @@
-
 /** Import router and dependencies */
 const router = require("express").Router();
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 
 /**
  * Creates an error message for bad login

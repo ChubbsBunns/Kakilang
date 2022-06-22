@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Login.component.css";
 import { useNavigate } from "react-router-dom";
 import BigLogo from "./BigLogo.component";
-const defaultProfile = "/defaultProfile.png"
+const defaultProfile = "/defaultProfile.png";
 
 /**
  * Login Component
@@ -106,7 +106,5 @@ function Login() {
     </>
   );
 }
-
-
 
 export default Login;

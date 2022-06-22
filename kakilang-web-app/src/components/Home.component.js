@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar.component";
 import ListOfPeople from "./ListOfPeople.component";
@@ -15,7 +14,6 @@ import stephen_dp from "./images/stephen.jpg";
 import yongjie_dp from "./images/yong jie.jpg";
 import william_dp from "./images/william.jpg";
 
-
 /**
  * Homepage of the User
  *
@@ -23,7 +21,7 @@ import william_dp from "./images/william.jpg";
  */
 function Home() {
   const server = process.env.REACT_APP_SERVER;
-  
+
   const [chatTarget, setChatTarget] = useState({
     email: localStorage.getItem("email"),
     name: localStorage.getItem("name"),
@@ -36,20 +34,19 @@ function Home() {
     const response = await axios
       .get(server + "/users/getBasic")
       .then((res) => {
-        return res.data.users
+        return res.data.users;
       })
       .catch((err) => {
         console.log(err);
         return [];
-      })
+      });
     setGroup(response);
-  }
+  };
 
   useEffect(() => {
-   getGroupAsync(); 
-   console.log("this is running");
+    getGroupAsync();
+    console.log("this is running");
   }, []);
-
 
   return (
     <div className="header-main">
@@ -58,21 +55,17 @@ function Home() {
         <Banner />
         <div className="banner-children">
           <div className="UI" id="list_of_people">
-            
             <ListOfPeople group={group} onSelectPerson={onSelectPerson} />
-  
           </div>
           {/** 
           <ProfilePage />
            */}
-          <div className="UI" id="text_interface">
-            <ChatBox
-              email={chatTarget.email}
-              name={chatTarget.name}
-              img={chatTarget.profileIMG}
-            />
-          </div>
-          
+
+          <ChatBox
+            email={chatTarget.email}
+            name={chatTarget.name}
+            img={chatTarget.profileIMG}
+          />
         </div>
       </div>
     </div>

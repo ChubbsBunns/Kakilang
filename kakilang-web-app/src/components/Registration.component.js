@@ -8,13 +8,12 @@ import Dropdown from "./Dropdown.component";
 /**
  * User Register component
  * It is a Form with 8 inputs:
- * email, password, name, major, 
+ * email, password, name, major,
  * cca, floor,  house, profileImage
  *
- * 
+ *
  */
 function Registration() {
-  
   /** Login Information */
   const [email, setEmail] = useState("example@email.com");
   const [password, setPassword] = useState("password123");
@@ -54,7 +53,7 @@ function Registration() {
   const server = process.env.REACT_APP_SERVER;
   /** Define page navigation method  */
   const goTo = useNavigate();
- 
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // FormData format for multer
@@ -70,21 +69,22 @@ function Registration() {
     registrationData.append("myImage", img);
 
     // Axios post with headers for Multer to work
-    axios.post(server + "/register/add", registrationData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      }
-    })
-    .then((res) => {
-      res.data.isSuccessful
-        ? goTo("/", { replace: true })
-        : alert(res.data.message);
-      console.log(res.data.message);
-    }).catch((err) => {
-      console.log(err);
-      alert(err);
-    });
-
+    axios
+      .post(server + "/register/add", registrationData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        res.data.isSuccessful
+          ? goTo("/", { replace: true })
+          : alert(res.data.message);
+        console.log(res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   };
 
   return (
@@ -137,11 +137,7 @@ function Registration() {
             onChange={ccaSetting}
           />
           <br />
-          <input 
-            type="file" 
-            name="myImage" 
-            onChange={imgSetting} 
-          />
+          <input type="file" name="myImage" onChange={imgSetting} />
           <br />
           <img src={preview} alt="Unable to display image" />
           <br />
@@ -180,6 +176,5 @@ const majors = [
   { value: "Business Analytics", label: "Business Analytics" },
   { value: "Information Security", label: "Information Security" },
 ];
-
 
 export default Registration;

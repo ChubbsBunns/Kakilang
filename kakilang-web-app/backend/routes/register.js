@@ -40,10 +40,9 @@ router.route("/add").post(upload.single("myImage"), async (req, res) => {
     /** Delete uploaded file */
     if (file) {
       console.log(file);
-      cloudinary.uploader.destroy(file.filename, 
-        (res) => {
-          console.log("deleted", res) 
-        })
+      cloudinary.uploader.destroy(file.filename, (res) => {
+        console.log("deleted", res);
+      });
     }
     /** Send Failure */
     res.json({ message: "Invalid Email or Password", isSuccessful: false });

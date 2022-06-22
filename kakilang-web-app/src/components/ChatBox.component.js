@@ -56,7 +56,7 @@ function ChatBox({ img, name, email }) {
       console.log(message);
       getMessageAsync();
     });
-    
+
     getMessageAsync();
 
     return () => newSocket.close();
@@ -87,41 +87,43 @@ function ChatBox({ img, name, email }) {
   };
 
   return (
-    <div className="container">
-      <div className="msg-header">
-        <div className="msg-header-img">
-          <img src={img} />
+    <div className="UI" id="text_interface">
+      <div className="container">
+        <div className="msg-header">
+          <div className="msg-header-img">
+            <img src={img} />
+          </div>
+          <div className="active">
+            <h4>{name}</h4>
+            <h6>Last seen 3 hours ago...</h6>
+          </div>
+          <div className="header-icons">
+            <i className="fa fa-info-circle"></i>
+          </div>
         </div>
-        <div className="active">
-          <h4>{name}</h4>
-          <h6>Last seen 3 hours ago...</h6>
-        </div>
-        <div className="header-icons">
-          <i className="fa fa-info-circle"></i>
-        </div>
-      </div>
-      <div className="chat-page">
-        <MessageBox
-          messages={messageBox}
-          currentUser={currentUSer}
-          targetUser={targetUser}
-        />
-        <div className="msg-bottom">
-          <form onSubmit={handleSend} className="input-group">
-            <input
-              type="string"
-              name="message"
-              className="form-control"
-              value={message}
-              onChange={messageEdit}
-              style={{ display: "inline" }}
-            />
-            <input
-              className="input-group-text"
-              type="submit"
-              style={{ display: "inline" }}
-            />
-          </form>
+        <div className="chat-page">
+          <MessageBox
+            messages={messageBox}
+            currentUser={currentUSer}
+            targetUser={targetUser}
+          />
+          <div className="msg-bottom">
+            <form onSubmit={handleSend} className="input-group">
+              <input
+                type="string"
+                name="message"
+                className="form-control"
+                value={message}
+                onChange={messageEdit}
+                style={{ display: "inline" }}
+              />
+              <input
+                className="input-group-text"
+                type="submit"
+                style={{ display: "inline" }}
+              />
+            </form>
+          </div>
         </div>
       </div>
     </div>

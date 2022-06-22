@@ -26,7 +26,7 @@ function Sidebar() {
         </li>
         <li className="sub-menu">
           <a href="#">
-          <i className="fa-solid fa-baseball-bat-ball"></i> CCAs/IGs
+            <i className="fa-solid fa-baseball-bat-ball"></i> CCAs/IGs
             <i className="fa fa-chevron-circle-down indicator"></i>
           </a>
           <ul>
@@ -87,22 +87,24 @@ function Sidebar() {
         <ul className="impromptus-events">
           <li>
             <button className="an-event">
-            <i className="fa-solid fa-chess-king"></i> <br></br>Chess Blitz!
+              <i className="fa-solid fa-chess-king"></i> <br></br>Chess Blitz!
             </button>
           </li>
           <li>
             <button className="an-event">
-            <i className="fa-solid fa-gamepad"></i> <br></br>A really long and elaborate title even though we should advise people not to write them this long
+              <i className="fa-solid fa-gamepad"></i> <br></br>A really long and
+              elaborate title even though we should advise people not to write
+              them this long
             </button>
           </li>
           <li>
             <button className="an-event">
-            <i className="fa-solid fa-headset"></i> <br></br>Chill and talk
+              <i className="fa-solid fa-headset"></i> <br></br>Chill and talk
             </button>
           </li>
           <li>
             <button className="an-event">
-            <i className="fa-brands fa-battle-net"></i> <br></br>Overwatch
+              <i className="fa-brands fa-battle-net"></i> <br></br>Overwatch
             </button>
           </li>
         </ul>
