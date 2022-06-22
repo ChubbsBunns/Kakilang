@@ -4,11 +4,7 @@ const Schema = mongoose.Schema;
 /**
  * Schema of the User
  * For MongoDB get and post requests
- * @memberof userSchema
- *
- * @property {string} _id - Unique Database ID
- * @property {string} email - Unique User's email
- * @property {string} password - Encrypted User's password
+ * 
  */
 const userSchema = new Schema(
   {
@@ -21,6 +17,30 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
+    major: {
+      type: String,
+      required: false,
+    },
+    house: {
+      type: String,
+      required: false,
+    },
+    floor: {
+      type: String,
+      required: false,
+    },
+    cca: {
+      type: Array,
+      required: false,
+    },
+    profileIMG: {
+      type: String,
+      required: false
+    }
   },
   { timestamps: true }
 );

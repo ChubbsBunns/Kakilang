@@ -61,7 +61,7 @@ function Login() {
     axios.post(server + "/login", user).then((res) => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("email", email);
-      localStorage.setItem("name", "Dylan Ho");
+      localStorage.setItem("name", res.data.name);
       localStorage.setItem("img", dylan1);
       const handle = email.split("@")[0];
       res.data.login ? goTo("/home/" + handle) : alert(res.data.message);
@@ -78,6 +78,7 @@ function Login() {
       })
       .then((res) => {
         localStorage.setItem("email", res.data.email);
+        localStorage.setItem("name", res.data.name);
         const handle = res.data.email?.split("@")[0];
         res.data.isLoggedIn ? goTo("/home/" + handle) : null;
       });

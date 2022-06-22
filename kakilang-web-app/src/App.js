@@ -5,6 +5,7 @@ import { Routes, BrowserRouter, Route } from "react-router-dom";
 import Login from "./components/Login.component";
 import Home from "./components/Home.component";
 import Registration from "./components/Registration.component";
+import TestFunction from "./components/TestFunction.component";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route exact path="/" element={<Login />} />
             <Route exact path="/register" element={<Registration />} />
             <Route path="/home/:handle" element={<Home />} />
+            <Route exact path="/SecretTesting" element={<TestFunction />} />
           </Routes>
         </BrowserRouter>
       </div>
