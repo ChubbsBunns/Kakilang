@@ -3,6 +3,7 @@ import axios from "axios";
 import "./Login.component.css";
 import { useNavigate } from "react-router-dom";
 import BigLogo from "./BigLogo.component";
+import PropTypes from "prop-types";
 const defaultProfile = "/defaultProfile.png";
 
 /**
@@ -10,7 +11,7 @@ const defaultProfile = "/defaultProfile.png";
  *
  * @component
  */
-function Login() {
+function Login({ setAuth }) {
   /**
    * @memberof Login
    * @property {email} email - The user's email.
@@ -37,12 +38,7 @@ function Login() {
   /** Handle input changes*/
   const emailChange = (event) => setEmail(event.target.value);
   const passwordChange = (event) => setPassword(event.target.value);
-  /**
-   * Handles when the submit button is pressed
-   * Goes to the login page if successfull, otherwise alert an error message
-   *
-   * @param {SyntheticBaseEvent} event
-   */
+  // Goes to the login page if successfull, otherwise alert an error message
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -55,7 +51,13 @@ function Login() {
       localStorage.setItem("name", res.data.name);
       localStorage.setItem("img", res.data.img || defaultProfile);
       const handle = email.split("@")[0];
-      res.data.login ? goTo("/home/" + handle) : alert(res.data.message);
+      if (res.data.login) {
+        setAuth(true);
+        goTo("/home/" + handle);
+      } else {
+        setAuth(false);
+        alert(res.data.message);
+      }
     });
   };
 
@@ -72,7 +74,12 @@ function Login() {
         localStorage.setItem("name", res.data.name);
         localStorage.setItem("img", res.data.img || defaultProfile);
         const handle = res.data.email?.split("@")[0];
-        res.data.isLoggedIn ? goTo("/home/" + handle) : null;
+        if (res.data.isLoggedIn) {
+          setAuth(true);
+          goTo("/home/" + handle);
+        } else {
+          setAuth(false);
+        }
       });
   }, []);
 
@@ -106,5 +113,9 @@ function Login() {
     </>
   );
 }
+
+Login.propTypes = {
+  setAuth: PropTypes.func.isRequired,
+};
 
 export default Login;
