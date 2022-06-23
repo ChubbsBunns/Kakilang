@@ -1,0 +1,9 @@
+.Logout {
+  font-size: 22px;
+  color: antiquewhite;
+  text-align: left;
+  line-height: 70px;
+  padding-left: 30px;
+  background-color: rgb(153, 28, 46);
+  user-select: none;
+}

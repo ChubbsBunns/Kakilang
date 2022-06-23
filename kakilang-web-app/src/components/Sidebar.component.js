@@ -1,4 +1,5 @@
 import React from "react";
+import Logout from "./Logout.component";
 import "./Sidebar.component.css";
 /**
  * Sidebar for navigation
@@ -10,7 +11,10 @@ import "./Sidebar.component.css";
 function Sidebar() {
   return (
     <div className="sidebar">
-      <header>My Kakis!</header>
+      <header>
+        My Kakis! <Logout />
+      </header>
+
       <ul className="sidebar-menu">
         <li>
           <a href="#">
