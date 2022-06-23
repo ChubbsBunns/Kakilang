@@ -14,7 +14,7 @@ const server = process.env.REACT_APP_SERVER;
  *
  * @component
  */
-function ChatBox({ img, name, email }) {
+function ChatBox({ img, name, email, onChat }) {
   const [message, setMessage] = useState("");
   const [messageBox, setMessageBox] = useState([]);
 
@@ -98,7 +98,9 @@ function ChatBox({ img, name, email }) {
             <h6>Last seen 3 hours ago...</h6>
           </div>
           <div className="header-icons">
-            <i className="fa fa-info-circle"></i>
+            <a onClick={onChat}>
+              <i className="fa fa-info-circle"></i>
+            </a>
           </div>
         </div>
         <div className="chat-page">
@@ -134,6 +136,7 @@ ChatBox.propTypes = {
   img: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
+  onChat: PropTypes.func.isRequired,
 };
 
 export default ChatBox;

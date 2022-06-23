@@ -60,12 +60,13 @@ function Registration() {
     const registrationData = new FormData();
 
     // FormData format requires appending with name
-    registrationData.append("major", major);
-    registrationData.append("house", house);
-    registrationData.append("cca", cca);
     registrationData.append("name", name);
     registrationData.append("email", email);
     registrationData.append("password", password);
+    registrationData.append("major", major);
+    registrationData.append("house", house);
+    registrationData.append("floor", floor);
+    registrationData.append("cca", cca);
     registrationData.append("myImage", img);
 
     // Axios post with headers for Multer to work

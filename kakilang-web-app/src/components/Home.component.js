@@ -3,9 +3,10 @@ import Sidebar from "./Sidebar.component";
 import ListOfPeople from "./ListOfPeople.component";
 import Banner from "./Banner.component";
 import axios from "axios";
+import ChatBox from "./ChatBox.component";
+import ProfilePage from "./ProfilePage.component";
 
 /** Static Group import */
-import ChatBox from "./ChatBox.component";
 import dylan1 from "./images/Dylan-img1.png";
 import marcus_dp from "./images/marcus.jpg";
 import sherwin_dp from "./images/sherwin.jpg";
@@ -21,14 +22,18 @@ import william_dp from "./images/william.jpg";
  */
 function Home() {
   const server = process.env.REACT_APP_SERVER;
-
-  const [chatTarget, setChatTarget] = useState({
+  const currentUser = {
     email: localStorage.getItem("email"),
     name: localStorage.getItem("name"),
     profileIMG: localStorage.getItem("img"),
-  });
+  };
+  const [chatTarget, setChatTarget] = useState(currentUser);
   const [group, setGroup] = useState(staticGroup);
-  const onSelectPerson = (targetUser) => () => setChatTarget(targetUser);
+  const onSelectPerson = (targetUser) => () => {
+    console.log(targetUser);
+    setChatTarget(targetUser);
+    setChat(false);
+  };
 
   const getGroupAsync = async () => {
     const response = await axios
@@ -45,8 +50,10 @@ function Home() {
 
   useEffect(() => {
     getGroupAsync();
-    console.log("this is running");
   }, []);
+
+  const [chat, setChat] = useState(false);
+  const onChat = () => setChat(!chat);
 
   return (
     <div className="header-main">
@@ -57,15 +64,16 @@ function Home() {
           <div className="UI" id="list_of_people">
             <ListOfPeople group={group} onSelectPerson={onSelectPerson} />
           </div>
-          {/** 
-          <ProfilePage />
-           */}
-
-          <ChatBox
-            email={chatTarget.email}
-            name={chatTarget.name}
-            img={chatTarget.profileIMG}
-          />
+          {chat ? (
+            <ChatBox
+              img={chatTarget.profileIMG}
+              name={chatTarget.name}
+              email={chatTarget.email}
+              onChat={onChat}
+            />
+          ) : (
+            <ProfilePage target={chatTarget} onChat={onChat} />
+          )}
         </div>
       </div>
     </div>

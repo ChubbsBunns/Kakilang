@@ -69,7 +69,12 @@ app.use("/uploads", express.static("uploads"));
 
 //@TODO Unsure how to translate this to a file
 app.get("/getUser", verifyJWT, (req, res) => {
-  res.json({ isLoggedIn: true, email: req.user.email, name: req.user.name });
+  res.json({
+    isLoggedIn: true,
+    email: req.user.email,
+    name: req.user.name,
+    img: req.user.img,
+  });
 });
 
 //start the server
