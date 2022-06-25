@@ -15,7 +15,7 @@ function ListOfPeople({ onSelectPerson, group }) {
 
   return (
     <div className="list-component">
-      <div>
+      <div className="filter-component">
         {" "}
         <select className="filter-options">
           <option value="filter-houses">Houses</option>

@@ -53,12 +53,26 @@
 
 .header-main {
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 1fr 4fr;
   max-height: 100vh;
 }
 
 .main-UI{
   max-height: 100vh;
+}
+
+.UI{
+  max-height: 100vh;
+}
+
+#sidebar-component
+
+#list_of_people{
+  max-width: 16vw;
+}
+
+#text_interface{
+  max-width: 68vw;
 }
 
 

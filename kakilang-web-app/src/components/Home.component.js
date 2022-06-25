@@ -1,12 +1,19 @@
-
 import React, { useState } from "react";
+
 import Sidebar from "./Sidebar.component";
+
 import ListOfPeople from "./ListOfPeople.component";
-import Banner from "./Banner.component";
+
 /*
+import EventsPage from "./EventsPage.component";
+import Banner from "./Banner.component";
 import ProfilePage from "./ProfilePage.component";
 */
+
+
 import ChatBox from "./ChatBox.component";
+
+
 import dylan1 from "./images/Dylan-img1.png";
 import marcus_dp from "./images/marcus.jpg";
 import sherwin_dp from "./images/sherwin.jpg";
@@ -14,8 +21,6 @@ import xuanyi_dp from "./images/xy.jpg";
 import stephen_dp from "./images/stephen.jpg";
 import yongjie_dp from "./images/yong jie.jpg";
 import william_dp from "./images/william.jpg";
-
-
 
 /**
  * Homepage of the User
@@ -71,27 +76,46 @@ function Home() {
     },
   ];
   
+
+  
   const [chatTarget, setChatTarget] = useState({
     email: localStorage.getItem("email"),
     name: localStorage.getItem("name"),
     img: localStorage.getItem("img"),
   });
+
+
   const onSelectPerson = (targetUser) => () => setChatTarget(targetUser);
 
   return (
     <div className="header-main">
-      <Sidebar />
+      <div>
+        <Sidebar />
+      </div>
+      <div className="UI" id="list_of_people">
+        <ListOfPeople group={group} onSelectPerson={onSelectPerson} />
+      </div>
+
+      <div className="UI" id="text_interface">
+        <ChatBox
+          email={chatTarget.email}
+          name={chatTarget.name}
+          img={chatTarget.img}
+        />
+      </div>
+    
+
+      {/** This is from the previous UI with the banner
       <div className="main-UI" id="UI">
         <Banner />
+
         <div className="banner-children">
           <div className="UI" id="list_of_people">
-            
             <ListOfPeople group={group} onSelectPerson={onSelectPerson} />
-  
           </div>
-          {/** 
+          
           <ProfilePage />
-           */}
+           
           <div className="UI" id="text_interface">
             <ChatBox
               email={chatTarget.email}
@@ -99,9 +123,9 @@ function Home() {
               img={chatTarget.img}
             />
           </div>
-          
         </div>
       </div>
+    */}
     </div>
   );
 }

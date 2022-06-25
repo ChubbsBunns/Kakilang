@@ -1,71 +1,90 @@
 .container{
-    max-width: 500 !important;
+
     margin: auto;
     margin-top: 0%;
     font-family: sans-serif;
     letter-spacing: 0.5px; 
-    height:90%;
+    height:100vh;
 }
 
 img{
     max-width: 100%;
     border-radius:50%;
+    max-height: 14vh;
 
 }
 
 .msg-header{
+    display: grid;
+    grid-template-rows: 1fr 8fr 1fr;
     border: 2px solid rgb(83, 14, 24);
     width: 100%;
-    height: 10%;
+    max-height: 10vh;
     border-bottom: none;
-    display: inline-block;
+    
     background-color: rgb(153, 28, 46);
+
 }
 
-.msg-header-img{
+.msg-header-components{
+    display: grid;
+    grid-template-columns:1fr 1fr 7fr 2fr 1fr;
+    max-height: 100%;
+}
+
+.msg-header-img > img{
+    /*
     border-radius: 50%;
-    width: 40px;
-    margin-left: 5%;
-    margin-top: 12px;
+    */
     float: left;
-    margin-bottom: 10px;
+    height: 8vh;
+    max-height: 10vh;
+    margin: auto;
+    max-width: 10vh;
+    
+}
+
+.msg-header-padding{
+    max-height: 1vh;
 }
  
 .active{
     width: 200px;
     float: left;
-    margin-top: 10px;
 }
 
-.active h4{
+.active-padding{
+    height: 1vh;
+}
+
+.active > h4{
     font-size: 20px;
-    margin-left: 10px;
     color:rgb(255, 255, 255);
+    margin: none; 
+    max-width: 100%;   
 }
 
 .active h6{
     font-size: 10px;
-    margin-left: 10px;
     color:rgb(255, 255, 255);
     line-height: 2px;
 
 }
 
-.header-icons{
-    width: 120px;
+.header-icons > i{
     float: right;
-    margin-top: 12px;
-    margin-right: 10px;
+    margin:auto;
+    max-height: 5vh;
 }
 
 .header-icons .fa{
     color:rgb(255, 255, 255);
     cursor: pointer;
-    margin: 10px;
+    margin: auto; 
 }
 
 .chat-page{
-    padding: 0 0 50px 0;
+    padding: 0 0 0px 0;
     
 }
 
@@ -86,10 +105,6 @@ img{
     height: 70vh;
 }
 
-.received-chats{
-    float:left;
-}
-
 .received-chats-img{
     width: 20px;
     float: left;
@@ -101,10 +116,13 @@ img{
     padding: 0 0 0 10px;
     vertical-align: top;
     width: 92%;
+    
 }
 
+
 .received-msg-inbox{
-    width: 57%;
+    width: fit-content;
+    max-width: 56%;
 }
 
 .received-msg-inbox p{
@@ -117,32 +135,28 @@ img{
     width: 100%;
 }
 
-.time{
+.outgoing-chats-msg > .time{
     color:rgb(83, 1, 44);
     display: block;
     font-size: 12px;
     margin: 8px 0 0;
+    text-align: end;
 }
 
-.outgoing-chats{
-    overflow: hidden;
-    margin: 26px 20px;
-}
-
-.outgoing-chats-msg p{
-    background:rgb(252 233 220) none repeat scroll 0 0;
-    color: rgb(83, 1, 44);
-    border-radius: 10px;
-    font-size: 14px;
-    margin: 0;
-    padding: 5px 10px 5px 12px;
-    width: 100%;
+.received-msg-inbox > .time{
+    color:rgb(83, 1, 44);
+    display: block;
+    font-size: 12px;
+    margin: 8px 0 0;
+    text-align: start;
 }
 
 .outgoing-chats-msg{
     float: left;
     width: 46%;
     margin-left: 45%;
+    margin-top: 10px;
+
 }
 
 .outgoing-chats-img{
@@ -150,30 +164,57 @@ img{
     float: right;
 }
 
+.next-line{
+    clear:left;
+}
+
+.outgoing-chats-msg p{
+    background:rgb(252 233 220) none repeat scroll 0 0;
+    color: rgb(83, 1, 44);
+    border: solid 2px rgba(153, 28, 46, 1);
+    border-radius: 10px;
+    font-size: 14px;
+    
+    padding: 10px 5px 10px 5px;
+    margin-left: auto;
+    margin-right: 0;
+    width: fit-content;
+    margin-bottom: 2px;
+}
+
+
+
 .msg-bottom{
-    position: relative;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
     height: 10%;
-    background-color: rgb(252 233 220);
+    
+    max-height: 5vh ;
 }
 
 .input-group{
     float: right;
-    margin-top: 13px;
+    margin: auto;
     margin-right: 20px;
     outline: none !important;
     border-radius: 30px;
     width: 61%!important;
     background-color: rgb(153, 28, 46);
+    max-height: 5vh;   
 }
 
 .form-control{
     border: 2px solid rgb(153, 28, 46);
     border-radius: 20px !important;
+    max-height: 5vh;    
 }
 
 .input-group-text{
     background: transparent !important;
     border: none !important;
+    color: rgba(252, 233, 220, 1);
+    padding: auto;
+    max-height: 5vh;
 }
 
 .input-group-text .fa{
