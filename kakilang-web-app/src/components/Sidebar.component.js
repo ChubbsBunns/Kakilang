@@ -8,7 +8,13 @@ import "./Sidebar.component.css";
  *
  * @component
  */
+
+
+
+
+
 function Sidebar() {
+
   return (
     <div className="sidebar">
       <header>
@@ -82,6 +88,7 @@ function Sidebar() {
           </button>
         </div>
       </div>
+      
 
       <div className="impromptus">
         <div>

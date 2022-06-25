@@ -1,0 +1,107 @@
+.event-container {
+  background-color: rgb(232, 193, 130);
+  display: grid;
+  grid-template-rows: 3fr 7fr;
+  height: 100vh;
+}
+
+.event-poster-image > img {
+  max-height: 30vh;
+  border-radius: 70px;
+}
+
+.event-overview {
+  max-height: 70vh;
+  margin-left: 0%;
+  padding-left: 5%;
+  text-align: left;
+  background-color: rgba(252, 233, 220, 1);
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-top: 5px solid rgb(248, 216, 195);
+  box-shadow: 3px 3px 10px;
+
+  overflow: auto;
+}
+
+.event-divider{
+    margin: 0%;
+    padding-left: 0%;
+}
+
+.event-title {
+  font: italic small-caps bold 30px sans-serif;
+  color: rgba(83, 1, 44, 1);
+  display: grid;
+  grid-template-columns: 8fr 1fr;
+}
+
+.event-edit-button{
+    font: normal small-caps bold 20px sans-serif;
+    margin-right: 10%;
+    width: fit-content;
+    padding: 5px;
+    background-color: rgba(249, 194, 164, 1);
+    
+    border-radius: 20px;
+    border: none;
+    border-bottom: 3px solid rgba(153, 28, 46, 1);
+    box-shadow: 0px 3px 7px;
+}
+
+.event-edit-button:hover{
+    background-color: rgba(252, 233, 220, 1);
+    
+    border-radius: 20px;
+    border: none;
+    border-bottom: 3px solid rgba(251, 127, 75, 1);
+    box-shadow: 0px 3px 7px;
+    color: black;
+    transform: translateY(-8px);
+    transition: 0.3s;
+}
+
+.event-edit-button:active{
+    background-color: rgba(251, 127, 75, 1);
+    
+    border-radius: 20px;
+    border: none;
+    border-bottom: 3px solid rgba(153, 28, 46, 1);
+    box-shadow: 0px 3px 2px;
+    color: rgba(252, 233, 220, 1);
+    transition: 0.3s;
+}
+
+.event-edit-button:focus{
+    background-color: rgba(251, 127, 75, 1);
+    border-radius: 20px;
+    border: none;
+    border-bottom: 3px solid rgba(153, 28, 46, 1);
+    box-shadow: 0px 3px 2px;
+    color: rgba(252, 233, 220, 1);
+    transition: 0.3s;
+}
+
+.event-date{
+    font: italic normal bold 22px sans-serif;
+    margin: 2px;
+    margin-left:0%;
+}
+
+.event-time{
+    font: italic normal bold 22px sans-serif;
+    margin: 2px;
+    margin-left:0%;
+}
+
+.event-overview-header{
+    font: normal normal normal 18px sans-serif;
+    margin: 10px;
+    margin-left:0%;
+}
+
+.event-details{
+    overflow: auto;
+}

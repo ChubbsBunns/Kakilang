@@ -2,6 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./MessageBox.component.css";
 
+/*
+import dylanimage from "./images/Dylan-img2.jpg";
+import pokemonimage from "./images/stephen.jpg";
+*/
+
 /**Messaging UI of the user
  *
  * @TODO actually work with the backend to make this usable
@@ -36,6 +41,7 @@ function MessageBox({ messages, currentUser, targetUser }) {
           <div className="outgoing-chats-img">
             <img src={img} className="dylan2-img" />
           </div>
+          <div className="next-line"></div>
         </div>
       </div>
     );
