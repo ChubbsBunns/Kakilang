@@ -29,7 +29,7 @@ body {
   height: 100vh;
   width: 100%;
   left: 0;
-  position: static;
+  position: relative;
   overflow: auto;
   max-height: 100vh;
 }
@@ -64,12 +64,10 @@ body {
   line-height: 30px;
   height: 30px;
   transition: all 0.3s;
-
-  width: 100%;
 }
 
 .sidebar-menu > li > a > i {
-  margin-right: 10px;
+  margin-right: 20px;
   margin-left: 15px;
 }
 
@@ -191,18 +189,6 @@ body {
   color: rgba(252, 233, 220, 1);
 }
 
-.testButton {
-  border: 3px solid #52a7d3;
-  background-color: #52a7d3;
-  color: #000000;
-}
-
-.testButton {
-  border: 3px solid red;
-  background-color: red;
-  color: #fff;
-}
-
 .choice-chat-type {
   box-sizing: border-box;
   display: grid;
@@ -272,7 +258,6 @@ body {
   padding-top: 4px;
   font: normal normal bold 18px sans-serif;
   overflow: auto;
-  min-height: 30vh;
 }
 
 .impromptus-title {
@@ -296,7 +281,6 @@ body {
   margin-bottom: 6px;
   border-radius: 30%;
   height: 28%;
-  min-height: 50px;
 }
 
 .impromptus > ul > li > button {
@@ -312,14 +296,14 @@ body {
   box-shadow: 0px 3px 3px;
 }
 
-.impromptus > ul > li > button:hover {
+.impromptus > ul > li > button:hover{
   background-color: rgba(252, 233, 220, 1);
   box-shadow: 0px 5px 4px;
   border-bottom: 3px solid rgb(193, 171, 157);
   transform: translateY(-3px);
 }
 
-.impromptus > ul > li > button:focus {
+.impromptus > ul > li > button:focus{
   text-align: center;
   padding: 5px;
   background-color: rgba(83, 1, 44, 1);
@@ -329,10 +313,10 @@ body {
   height: 100%;
   overflow: auto;
   box-shadow: 0px 10px 3px;
-  color: rgba(252, 233, 220, 1);
+  color:rgba(252, 233, 220, 1);
 }
 
-.impromptus > ul > li > button:active {
+.impromptus > ul > li > button:active{
   text-align: center;
   padding: 5px;
   background-color: rgb(0, 0, 0);
@@ -342,8 +326,5 @@ body {
   height: 100%;
   overflow: auto;
   box-shadow: 0px 10px 3px;
-  color: rgba(252, 233, 220, 1);
-}
-
-#someId.active {
+  color:rgba(252, 233, 220, 1);
 }

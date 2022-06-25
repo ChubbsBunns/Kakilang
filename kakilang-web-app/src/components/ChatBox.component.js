@@ -87,22 +87,13 @@ function ChatBox({ img, name, email, onChat }) {
   };
 
   return (
-<<<<<<< HEAD
     <div className="UI" id="text_interface">
       <div className="container">
         <div className="msg-header">
-=======
-    <div className="container">
-      <div className="msg-header">
-        <div className="msg-header-padding"></div>
-        <div className="msg-header-components">
-          <div></div>
->>>>>>> homepage-banner-remove
           <div className="msg-header-img">
             <img src={img} />
           </div>
           <div className="active">
-<<<<<<< HEAD
             <h4>{name}</h4>
             <h6>Last seen 3 hours ago...</h6>
           </div>
@@ -135,45 +126,6 @@ function ChatBox({ img, name, email, onChat }) {
               />
             </form>
           </div>
-=======
-            <div className="active-padding"></div>
-            <h4>{name}</h4>
-            <h6>Last seen 3 hours ago...</h6>
-            <div className="active-padding"></div>
-          </div>
-
-          <div className="header-icons">
-            <i className="fa fa-info-circle"></i>
-          </div>
-          <div></div>
-        </div>
-        <div className="msg-header-padding"></div>
-      </div>
-
-      <div className="chat-page">
-        <MessageBox
-          messages={messageBox}
-          currentUser={currentUSer}
-          targetUser={targetUser}
-        />
-        <div className="msg-bottom">
-          <div></div>
-          <form onSubmit={handleSend} className="input-group">
-            <input
-              type="string"
-              name="message"
-              className="form-control"
-              value={message}
-              onChange={messageEdit}
-              style={{ display: "inline" }}
-            />
-            <input
-              className="input-group-text"
-              type="submit"
-              style={{ display: "inline" }}
-            />
-          </form>
->>>>>>> homepage-banner-remove
         </div>
       </div>
     </div>

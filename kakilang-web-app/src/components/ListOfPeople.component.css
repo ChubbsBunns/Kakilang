@@ -10,36 +10,12 @@ body{
     text-decoration: none;
 }
 
-.filter-component{
-    max-height: 5vh;
-}
-
-
-
 .filter-options{
-    background-color: rgba(251, 127, 75, 1);
-    padding: 0;
-    margin: 0;
-    border: 1px solid rgba(83, 1, 44, 1);
-    border-radius: 25%;
-    box-shadow: 3px 2px 5px;
-    max-height: 5vh;
-}
-
-.filter-options:hover{
-    background-color: rgba(83, 1, 44, 1);
-    color:rgba(252, 233, 220, 1);
-    transition: 0.4s;
-}
-
-.list-of-people{
-    display: block;
-    max-height: 85vh;
-
+    background-color: green;
 }
 
 .list-of-people > ul > li > a > img{
-    max-width: 25%;
+    max-width: 20%;
     padding-right: 3px;
     margin-right: 5px;
 }
@@ -48,22 +24,24 @@ body{
 .list-of-people > ul{
     padding: 0px;
     list-style: none;
-    overflow: auto;
-    max-height: 85vh;
 }
 
 .list-of-people > ul> li{
     width: 100%;
+}
 
+.list-of-people{
+    display: block;
+    overflow: auto;
+    height: 80vh;
+}
+
+.list-of-people-component{
+    height: 90%;
 }
 
 #list_of_people {
     background-color: rgb(252, 233, 220);
-}
-
-.list-of-people > ul{
-    max-height: 85vh;
-    margin: 0px;
 }
 
 
@@ -93,17 +71,12 @@ body{
     background-color: rgb(153 28 46);
 }
 
-.list-of-people > ul> li > a:focus{
-    background-color: rgb(16, 7, 8);
-}
-
 .group-name{
-    
     block-size: 6vh;
     color:rgb(252 233 220);
     background-color: rgb(153 28 46);
     border-radius: 20px;
     border: rgb(83 1 44) solid 3px;
-    max-height: 10vh;
-    overflow: hidden;
+    margin: 3px 5px 0px 5px;
+
 }
