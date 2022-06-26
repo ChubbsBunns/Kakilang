@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar.component";
-
 import ListOfPeople from "./ListOfPeople.component";
 import axios from "axios";
 import ChatBox from "./ChatBox.component";

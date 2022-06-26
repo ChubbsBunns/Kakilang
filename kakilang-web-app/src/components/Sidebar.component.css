@@ -29,7 +29,7 @@ body {
   height: 100vh;
   width: 100%;
   left: 0;
-  position: static;
+  position: relative;
   overflow: auto;
   max-height: 100vh;
 }
@@ -64,12 +64,10 @@ body {
   line-height: 30px;
   height: 30px;
   transition: all 0.3s;
-
-  width: 100%;
 }
 
 .sidebar-menu > li > a > i {
-  margin-right: 10px;
+  margin-right: 20px;
   margin-left: 15px;
 }
 
@@ -191,18 +189,6 @@ body {
   color: rgba(252, 233, 220, 1);
 }
 
-.testButton {
-  border: 3px solid #52a7d3;
-  background-color: #52a7d3;
-  color: #000000;
-}
-
-.testButton {
-  border: 3px solid red;
-  background-color: red;
-  color: #fff;
-}
-
 .choice-chat-type {
   box-sizing: border-box;
   display: grid;
@@ -272,7 +258,6 @@ body {
   padding-top: 4px;
   font: normal normal bold 18px sans-serif;
   overflow: auto;
-  min-height: 30vh;
 }
 
 .impromptus-title {
@@ -296,7 +281,6 @@ body {
   margin-bottom: 6px;
   border-radius: 30%;
   height: 28%;
-  min-height: 50px;
 }
 
 .impromptus > ul > li > button {

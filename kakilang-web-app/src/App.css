@@ -1,4 +1,3 @@
-
 .App {
   text-align: center;
 }
@@ -15,28 +14,28 @@
 }
 
 .App-header {
-  background-color: #FB7F4B;
+  background-color: #fb7f4b;
   min-height: 1vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: top;
   font-size: calc(10px + 4vmin);
-  color: #53012C;
+  color: #53012c;
 }
 
 .App-link {
-  color: #53012C;
+  color: #53012c;
 }
 
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 * {
   margin: 0;
@@ -49,31 +48,24 @@
   background-color: rgb(249, 194, 164);
 }
 
-
-
 .header-main {
   display: grid;
   grid-template-columns: 1fr 1fr 4fr;
   max-height: 100vh;
 }
 
-.main-UI{
+.main-UI {
   max-height: 100vh;
 }
 
-.UI{
+.UI {
   max-height: 100vh;
 }
 
-#sidebar-component
-
-#list_of_people{
+#sidebar-component #list_of_people {
   max-width: 16vw;
 }
 
-#text_interface{
+#text_interface {
   max-width: 68vw;
 }
-
-
-
