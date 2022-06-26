@@ -45,31 +45,19 @@ function ProfilePage({ target, onChat }) {
   return (
     <div className="container-profile-page">
       <div className="profile-box">
-        <div></div>
         <div className="image-name-box">
           <img src={target.profileIMG} className="profile-picture" />
           <span className="name">
             <br />
             {target.name}
             <br />
-            <br />
+
             {Year}
             <br />
             {Major}
-            <br />
-            <br />
             {ChatButton(disabling)}
           </span>
-          {/* This one is the one that works */}
-          {/* 
-          <a href="#" className="cancel-button">
-            <i className="fa-solid fa-xmark"></i>
-          </a>
-          */}
         </div>
-        {/* This one is the one i want to implement */}
-        <div className="something"></div>
-        <div></div>
         <div className="information-box">
           <p className="interests-row">
             Interests:{" "}
@@ -80,7 +68,9 @@ function ProfilePage({ target, onChat }) {
           {House}
           {Floor}
         </div>
-        <div></div>
+        <div className="edit-button-div">
+          <button className="edit-button">Edit</button>
+        </div>
       </div>
     </div>
   );

@@ -6,47 +6,44 @@
 }
 
 .container-profile-page {
+  background-color: rgba(252, 233, 220, 1);
+  text-align: center;
+  color: white;
+  position: relative;
+  margin: auto;
+  height: 100vh;
   width: 100%;
-  height: 90%;
-  justify-content: center;
-  align-items: center;
-  max-width: 60vw;
-  margin:auto;
-  margin-top: 0;
-  overflow: auto;
+  box-sizing: border-box;
+  border-left: 2px solid rgba(153, 28, 46, 1);
+  max-height: fit-content;
 }
 
 .profile-box {
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr 8fr 1fr;  
-  background-color: rgba(249, 194, 164, 0.5);
-  text-align: center;
-  padding: 40px 90px;
-  color: white;
-  position: relative;
-  border-radius: 10%;
-  max-width: 90%;
-  margin: auto;
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .image-name-box {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   font: normal normal bold 30px sans-serif;
   background-color: rgba(251, 127, 75, 1);
   text-align: center;
-  padding: 70px 60px;
+  padding-top: 3%;
+  padding-bottom: 3%;
   color: rgb(83 1 44);
   position: relative;
-  border-radius: 20%;
-  width: 700px;
-  height: 400px;
-  max-height: 100%;
+  height: fit-content;
+  width: 100%;
+  height: fit-content;
   margin: auto;
-  max-width: 90%;
+  min-width: max-content;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  border-bottom: 5px solid rgba(153, 28, 46, 1);
+  box-shadow: 10px 0px 20px;
+  max-height: 50vh;
+  overflow: auto;
 }
-
 
 .cancel-button {
   /*
@@ -57,27 +54,23 @@
   border-radius: 30%;
 }
 
-.something{
-  margin:none;
-  padding-left:0%;
+.edit-button {
+  margin: none;
+  padding: 1%;
+  border-radius: 30%;
+  background-color: rgba(249, 194, 164, 1);
+  color: rgba(83, 1, 44, 1);
 }
 
-.something > a:hover {
-  background-color: rgba(249, 194, 164, 1);
-  color: black;
-  border-radius: 0%;
-  transition: 0.1s;
+.edit-button:hover {
+  background-color: rgba(153, 28, 46, 1);
+  color: rgba(252, 233, 220, 1);
+  border-radius: 10%;
+  transition: 0.2s;
   border: 2px solid rgba(83, 1, 44, 1);
 }
 
-.image-name-box > a:hover {
-  background-color: rgba(153, 28, 46, 1);
-  color: black;
-  border-radius: 30%;
-  transition: 0.3s;
-}
-
-.cancel-button > i{
+.cancel-button > i {
   background-color: rgb(65, 53, 46);
   color: rgba(83, 1, 44, 1);
   border-radius: 50%;
@@ -92,15 +85,16 @@
 }
 
 .information-box {
-  background-color: rgb(249 194 164);
   text-align: left;
   padding: 40px 90px;
   color: rgb(83 1 44);
-  position: relative;
-  border: 3px solid burlywood;
-  border-radius: 15%;
-  max-width: 90%;
+  position: sticky;
   margin: auto;
+}
+
+.message-button a {
+  color: rgba(153, 28, 46, 1);
+  text-decoration: none;
 }
 
 .message-button > a:visited {
@@ -120,16 +114,14 @@
 }
 
 .name {
-  padding-top: 10px;
+  margin: auto;
 }
 
 .profile-picture {
-  width: 200px;
   border-radius: 10%;
   background: rgba(249, 194, 164, 0.7);
   box-shadow: 10px 9px 15px black;
-
-  max-width: 90%;
+  margin: auto;
 }
 
 .interests-row,
