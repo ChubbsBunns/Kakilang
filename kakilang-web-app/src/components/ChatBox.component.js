@@ -85,6 +85,7 @@ function ChatBox({ img, name, email, onChat }) {
     name: localStorage.getItem("name"),
     email: localStorage.getItem("email"),
   };
+  const goToProfile = () => onChat("ProfilePage");
 
   return (
     <div className="UI" id="text_interface">
@@ -104,7 +105,7 @@ function ChatBox({ img, name, email, onChat }) {
             </div>
 
             <div className="header-icons">
-              <a onClick={onChat}>
+              <a onClick={goToProfile}>
                 <i className="fa fa-info-circle"></i>
               </a>
             </div>

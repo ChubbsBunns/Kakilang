@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Logout from "./Logout.component";
 import "./Sidebar.component.css";
+
 /**
  * Sidebar for navigation
  *
@@ -8,7 +10,9 @@ import "./Sidebar.component.css";
  *
  * @component
  */
-function Sidebar() {
+function Sidebar({ setBox }) {
+  const goToEvent = () => setBox("EventsPage");
+
   return (
     <div className="sidebar">
       <header>
@@ -90,7 +94,7 @@ function Sidebar() {
         </div>
         <ul className="impromptus-events">
           <li>
-            <button className="an-event">
+            <button className="an-event" onClick={goToEvent}>
               <i className="fa-solid fa-chess-king"></i> <br></br>Chess Blitz!
             </button>
           </li>
@@ -116,5 +120,9 @@ function Sidebar() {
     </div>
   );
 }
+
+Sidebar.propTypes = {
+  setBox: PropTypes.func.isRequired,
+};
 
 export default Sidebar;

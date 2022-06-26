@@ -1,16 +1,17 @@
 import React from "react";
-import "./ProfilePage.component.css";
 import PropTypes from "prop-types";
+import "./ProfilePage.component.css";
 
 function ProfilePage({ target, onChat }) {
   const disabling = target.email == localStorage.getItem("email");
+  const goToChat = () => onChat("ChatBox");
 
   const ChatButton = (disable) => {
     return disable ? (
       <></>
     ) : (
       <div className="message-button">
-        <a onClick={onChat} className="fa-solid fa-message"></a>
+        <a onClick={goToChat} className="fa-solid fa-message"></a>
       </div>
     );
   };

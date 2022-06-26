@@ -4,6 +4,7 @@ import ListOfPeople from "./ListOfPeople.component";
 import axios from "axios";
 import ChatBox from "./ChatBox.component";
 import ProfilePage from "./ProfilePage.component";
+import EventsPage from "./EventsPage.component";
 
 /** Static Group import */
 import dylan1 from "./images/Dylan-img1.png";
@@ -31,7 +32,7 @@ function Home() {
   const onSelectPerson = (targetUser) => () => {
     console.log(targetUser);
     setChatTarget(targetUser);
-    setChat(false);
+    setBox("ProfilePage");
   };
 
   const getGroupAsync = async () => {
@@ -51,27 +52,36 @@ function Home() {
     getGroupAsync();
   }, []);
 
-  const [chat, setChat] = useState(false);
-  const onChat = () => setChat(!chat);
+  const [box, setBox] = useState("ProfilePage");
+
+  function ActiveBox(box) {
+    switch (box) {
+      case "ChatBox":
+        return (
+          <ChatBox
+            img={chatTarget.profileIMG}
+            name={chatTarget.name}
+            email={chatTarget.email}
+            onChat={setBox}
+          />
+        );
+      case "EventsPage":
+        return <EventsPage />;
+      case "ProfilePage":
+      default:
+        return <ProfilePage target={chatTarget} onChat={setBox} />;
+    }
+  }
 
   return (
     <div className="header-main">
       <div>
-        <Sidebar />
+        <Sidebar setBox={setBox} />
       </div>
       <div className="UI" id="list_of_people">
         <ListOfPeople group={group} onSelectPerson={onSelectPerson} />
       </div>
-      {chat ? (
-        <ChatBox
-          img={chatTarget.profileIMG}
-          name={chatTarget.name}
-          email={chatTarget.email}
-          onChat={onChat}
-        />
-      ) : (
-        <ProfilePage target={chatTarget} onChat={onChat} />
-      )}
+      {ActiveBox(box)}
     </div>
   );
 }
