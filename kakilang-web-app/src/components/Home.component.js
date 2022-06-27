@@ -41,8 +41,12 @@ function Home() {
         console.log(err);
         return [];
       });
-    const index = response.findIndex(({ email }) => email == currentUser.email);
+    const index = response.findIndex(({ email }) => {
+      console.log(email);
+      return email == currentUser.email.toLowerCase();
+    });
     const [curr] = response.splice(index, 1);
+    console.log(curr);
     setCurrent(curr);
     response.unshift(curr);
     setGroup(response);

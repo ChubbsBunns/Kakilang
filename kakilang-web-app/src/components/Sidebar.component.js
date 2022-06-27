@@ -17,6 +17,7 @@ function Sidebar({ setBox, user, group, setGroup }) {
   const goToPeople = () => {
     setBox("ProfilePage");
     setGroup(group);
+    console.log(user);
     navigate("/home/" + user.email.split("@")[0]);
   };
 
