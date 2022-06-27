@@ -40,7 +40,6 @@ function ChatBox({ img, name, email, onChat }) {
     const targetResponse = response.filter(({ toEmail, fromEmail }) => {
       return toEmail == email || fromEmail == email;
     });
-    console.log("filtered: ", targetResponse);
     setMessageBox(targetResponse);
   };
 
@@ -53,7 +52,7 @@ function ChatBox({ img, name, email, onChat }) {
       console.log("Failed to connect: ", error)
     );
     newSocket.on("message", (message) => {
-      console.log(message);
+      message;
       getMessageAsync();
     });
 
@@ -74,7 +73,7 @@ function ChatBox({ img, name, email, onChat }) {
       message: message,
     };
     axios.post(server + "/message/send", messageData).then((res) => {
-      console.log(res.data);
+      res.data;
     });
     setMessage("");
   }

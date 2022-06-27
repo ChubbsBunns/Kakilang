@@ -17,7 +17,6 @@ function Sidebar({ setBox, user, group, setGroup }) {
   const goToPeople = () => {
     setBox("ProfilePage");
     setGroup(group);
-    console.log(user);
     navigate("/home/" + user.email.split("@")[0]);
   };
 
@@ -51,8 +50,9 @@ function Sidebar({ setBox, user, group, setGroup }) {
         <li className="sub-menu">
           <a
             href="#CCA"
-            onClick={filter((person) =>
-              person.cca.find((ig) => user.cca.includes(ig))
+            onClick={filter(
+              (person) =>
+                person == user || person.cca.find((ig) => user.cca.includes(ig))
             )}
           >
             <i className="fa-solid fa-baseball-bat-ball"></i> CCAs/IGs

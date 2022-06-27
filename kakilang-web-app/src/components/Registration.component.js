@@ -36,17 +36,29 @@ function Registration() {
   const ccaSetting = (event) => setCCA(event.target.value);
   // setting the img also changes the preview
   const imgSetting = (event) => {
-    if (event.target.files.length != 1) {
+    if (event.target.files.length == 0) {
       setPreview("/defaultProfile.png");
-      return;
+      return false;
+    } else if (event.target.files.length > 1) {
+      alert("Please upload only 1 image");
+      event.target.value = null;
+      setPreview("/defaultProfile.png");
+      return false;
+    } else if (event.target.files[0].size > 9e6) {
+      alert("Please upload an image smaller than 9 MB ");
+      setPreview("/defaultProfile.png");
+
+      event.target.value = null;
+      return false;
+    } else {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function () {
+        setPreview(reader.result);
+      };
+      setIMG(file);
     }
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = function () {
-      setPreview(reader.result);
-    };
-    setIMG(file);
   };
 
   /** Define the server to connect */
@@ -63,10 +75,10 @@ function Registration() {
     registrationData.append("name", name);
     registrationData.append("email", email);
     registrationData.append("password", password);
-    registrationData.append("major", major);
-    registrationData.append("house", house);
-    registrationData.append("floor", floor);
-    registrationData.append("cca", cca);
+    major ? registrationData.append("major", major) : null;
+    house ? registrationData.append("house", house) : null;
+    floor ? registrationData.append("floor", floor) : null;
+    cca ? registrationData.append("cca", cca) : null;
     registrationData.append("myImage", img);
 
     // Axios post with headers for Multer to work
@@ -77,9 +89,13 @@ function Registration() {
         },
       })
       .then((res) => {
-        res.data.isSuccessful
-          ? goTo("/", { replace: true })
-          : alert(res.data.message);
+        if (res.data.isSuccessful) {
+          alert("Registeration Successful");
+          goTo("/", { replace: true });
+        } else {
+          alert(res.data.message);
+          goTo("/register", { replace: true });
+        }
         console.log(res.data.message);
       })
       .catch((err) => {
