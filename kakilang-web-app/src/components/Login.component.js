@@ -42,7 +42,7 @@ function Login({ setAuth }) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const user = { email: email, password: password };
+    const user = { email: email.toLowerCase(), password: password };
 
     //@TODO setup USER details
     axios.post(server + "/login", user).then((res) => {
