@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Logout from "./Logout.component";
 import "./Sidebar.component.css";
+import { useNavigate } from "react-router";
 
 /**
  * Sidebar for navigation
@@ -10,8 +11,16 @@ import "./Sidebar.component.css";
  *
  * @component
  */
-function Sidebar({ setBox }) {
+function Sidebar({ setBox, user, group, setGroup }) {
+  const navigate = useNavigate();
   const goToEvent = () => setBox("EventsPage");
+  const goToPeople = () => {
+    setBox("ProfilePage");
+    setGroup(group);
+    navigate("/home/" + user.email.split("@")[0]);
+  };
+
+  const filter = (predicate) => () => setGroup(group.filter(predicate));
 
   return (
     <div className="sidebar">
@@ -21,19 +30,30 @@ function Sidebar({ setBox }) {
 
       <ul className="sidebar-menu">
         <li>
-          <a href="#">
+          <a
+            href="#Housemates"
+            onClick={filter((person) => person.house == user.house)}
+          >
             <span className="fa fa-house"></span>
             <span id="Houses"> Housemates</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a
+            href="#Floormates"
+            onClick={filter((person) => person.floor == user.floor)}
+          >
             <span className="fa fa-people-roof"></span>
             <span id="Floor"> Floormates</span>
           </a>
         </li>
         <li className="sub-menu">
-          <a href="#">
+          <a
+            href="#CCA"
+            onClick={filter((person) =>
+              person.cca.find((ig) => user.cca.includes(ig))
+            )}
+          >
             <i className="fa-solid fa-baseball-bat-ball"></i> CCAs/IGs
             <i className="fa fa-chevron-circle-down indicator"></i>
           </a>
@@ -62,7 +82,7 @@ function Sidebar({ setBox }) {
             <p className="choice-people-or-events-text">Display:</p>
           </div>
           <div className="choice-people-or-events-buttons">
-            <button className="event-button">
+            <button className="event-button" onClick={goToPeople}>
               <i className="fa-solid fa-people-group"></i>
               <br></br>People
             </button>
@@ -123,6 +143,9 @@ function Sidebar({ setBox }) {
 
 Sidebar.propTypes = {
   setBox: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  group: PropTypes.array,
+  setGroup: PropTypes.func.isRequired,
 };
 
 export default Sidebar;

@@ -7,6 +7,7 @@ import Home from "./components/Home.component";
 import Registration from "./components/Registration.component";
 import TestFunction from "./components/TestFunction.component";
 import ProtectedRoute from "./ProtectedRoute";
+import NotMatch from "./components/NotMatch.component";
 
 function App() {
   const [isAuth, setUserAuth] = useState(false);
@@ -27,6 +28,7 @@ function App() {
               }
             />
             <Route exact path="/SecretTesting" element={<TestFunction />} />
+            <Route path="*" element={<NotMatch />} />
           </Routes>
         </BrowserRouter>
       </div>
