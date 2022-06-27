@@ -19,8 +19,8 @@ function Login({ setAuth }) {
    * @property {password} password - The user's password.
    * @property {function} setPassword - Changes the password value
    */
-  const [email, setEmail] = useState("example@email.com");
-  const [password, setPassword] = useState("password123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   /**
    * Goes to websubpages.
@@ -93,6 +93,7 @@ function Login({ setAuth }) {
             type="email"
             name="Email"
             value={email}
+            placeholder="Email address"
             onChange={emailChange}
           />
           <br />
@@ -100,6 +101,7 @@ function Login({ setAuth }) {
             type="password"
             name="Password"
             value={password}
+            placeholder="Password"
             onChange={passwordChange}
           />
           <br />
