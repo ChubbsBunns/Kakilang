@@ -15,10 +15,10 @@ import Dropdown from "./Dropdown.component";
  */
 function Registration() {
   /** Login Information */
-  const [email, setEmail] = useState("example@email.com");
-  const [password, setPassword] = useState("password123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   /** Profile Information */
-  const [name, setName] = useState("Example Surname");
+  const [name, setName] = useState("");
   const [major, setMajor] = useState();
   const [cca, setCCA] = useState();
   const [floor, setFloor] = useState();
@@ -94,12 +94,19 @@ function Registration() {
       <div className="Login-window">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <h1> Register an account </h1>
-          <input type="string" name="Name" value={name} onChange={nameChange} />
+          <input
+            type="string"
+            name="Name"
+            value={name}
+            onChange={nameChange}
+            placeholder="Name"
+          />
           <br />
           <input
             type="email"
             name="Email"
             value={email}
+            placeholder="Email address"
             onChange={emailChange}
           />
           <br />
@@ -107,6 +114,7 @@ function Registration() {
             type="password"
             name="Password"
             value={password}
+            placeholder="Password"
             onChange={passwordChange}
           />
           <br />
