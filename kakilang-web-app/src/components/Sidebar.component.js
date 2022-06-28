@@ -29,7 +29,22 @@ function Sidebar({ setBox, user, group, setGroup }) {
       <header className="sidebar-logo-logout">
         <div className="sidebar-header-title">My Kakis!</div> <Logout />
       </header>
-      <div></div>
+
+      <div className="create-event-component">
+        <button className="create-event-button">Create an Event!</button>
+      </div>
+
+      <div className="conversations-component">
+        <p className="conversations-title">Chats w/ Kakis!</p>
+        <ul className="conversations-chat-list">
+          <li>
+            <button className="conversations-chat">Marcus Lim </button>
+          </li>
+          <li>
+            <button className="conversations-chat">William Chau </button>
+          </li>
+        </ul>
+      </div>
 
       {/** 
       <ul className="sidebar-menu">
