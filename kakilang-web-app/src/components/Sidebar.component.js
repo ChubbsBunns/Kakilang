@@ -20,14 +20,18 @@ function Sidebar({ setBox, user, group, setGroup }) {
     navigate("/home/" + user.email.split("@")[0]);
   };
 
+  /*
   const filter = (predicate) => () => setGroup(group.filter(predicate));
+*/
 
   return (
     <div className="sidebar">
-      <header>
-        My Kakis! <Logout />
+      <header className="sidebar-logo-logout">
+        <div className="sidebar-header-title">My Kakis!</div> <Logout />
       </header>
+      <div></div>
 
+      {/** 
       <ul className="sidebar-menu">
         <li>
           <a
@@ -77,6 +81,7 @@ function Sidebar({ setBox, user, group, setGroup }) {
           </ul>
         </li>
       </ul>
+      */}
       <div className="choice-people-or-events">
         <div className="choice-people-or-events-container">
           <div>

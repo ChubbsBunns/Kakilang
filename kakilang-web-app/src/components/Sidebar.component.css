@@ -11,20 +11,10 @@ body {
   text-decoration: none;
 }
 
-.sidebar header {
-  font-size: 22px;
-  color: antiquewhite;
-  text-align: left;
-  line-height: 70px;
-  padding-left: 30px;
-  background-color: rgb(153, 28, 46);
-  user-select: none;
-}
-
 .sidebar {
   display: grid;
-  grid-template-rows: 1fr 8fr 3fr 3fr 9fr;
-  background-color: rgb(153, 28, 46);
+  grid-template-rows: 3fr 5fr 3fr 3fr 12fr;
+  background-color: rgba(232, 193, 130, 1);
   color: rgb(255, 235, 205);
   height: 100vh;
   width: 100%;
@@ -32,6 +22,27 @@ body {
   position: relative;
   overflow: auto;
   max-height: 100vh;
+}
+
+.sidebar-logo-logout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.3vw;
+}
+
+.sidebar header {
+  font-size: 22px;
+  color: antiquewhite;
+  text-align: left;
+  line-height: 70px;
+
+  background-color: rgba(232, 193, 130, 1);
+  user-select: none;
+}
+
+.sidebar-header-title {
+  text-align: center;
+  color: rgba(83, 1, 44, 1);
 }
 
 .sidebar-menu {
@@ -106,15 +117,6 @@ body {
   transition: 0.3s;
 }
 
-/*
-.sidebar .sub-menu > ul {
-
-    list-style-type: none;
-    display: none;
-
-}
-*/
-
 .sidebar .sub-menu ul {
   padding: 0;
   margin: 0;
@@ -129,7 +131,6 @@ body {
 
 .choice-people-or-events {
   box-sizing: border-box;
-  background-color: rgba(153, 28, 46, 1);
 }
 
 .choice-people-or-events-container {
@@ -251,9 +252,9 @@ body {
   background-color: rgba(249, 194, 164, 1);
   margin: 10px;
   color: rgba(83, 1, 44, 1);
-  border-radius: 15%;
+  border-radius: 10px;
   display: grid;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 1fr 20fr;
   margin-top: 0;
   padding-top: 4px;
   font: normal normal bold 18px sans-serif;
@@ -280,7 +281,7 @@ body {
   margin: auto;
   margin-bottom: 6px;
   border-radius: 30%;
-  height: 28%;
+  height: 20%;
 }
 
 .impromptus > ul > li > button {
