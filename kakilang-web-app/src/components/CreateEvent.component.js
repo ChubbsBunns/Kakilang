@@ -1,25 +1,15 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Proptypes from "prop-types";
 import axios from "axios";
 
 /**
- * This functional component is used purely for testing purposes
+ * This component is a creation page for events
  */
-function TestFunction() {
+function CreateEvent({ owner }) {
   /** Define the server to connect */
   const server = process.env.REACT_APP_SERVER;
   const [preview, setPreview] = useState("/defaultEvent.jpg");
-  const [owner, setOwner] = useState();
 
-  /** Handlers */
-  const createOwner = () => {
-    const fake = {
-      name: "Fake creater2",
-      _id: "62b2bff4dd64d02a57a6b5ec",
-    };
-    setOwner(fake);
-    console.log("Success");
-  };
   const imgSetting = (event) => {
     const error = (message = null) => {
       message ? alert(message) : null;
@@ -90,7 +80,6 @@ function TestFunction() {
 
   return (
     <>
-      <button onClick={createOwner}> Create An Owner </button>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <input type="String" name="name" placeholder="Name*" />
         <br />
@@ -111,4 +100,12 @@ function TestFunction() {
   );
 }
 
-export default TestFunction;
+CreateEvent.propTypes = {
+  owner: {
+    name: Proptypes.string.isRequired,
+    profileIMG: Proptypes.string,
+    _id: Proptypes.string.isRequired,
+  },
+};
+
+export default CreateEvent;

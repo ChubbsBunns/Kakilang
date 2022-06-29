@@ -56,6 +56,8 @@ const registerRouter = require("./routes/register");
 const loginRouter = require("./routes/login");
 const chatboxRouter = require("./routes/chatbox");
 const usersRouter = require("./routes/users");
+const eventsRouter = require("./routes/events");
+
 app.use((req, res, next) => {
   req.io = io;
   return next();
@@ -65,7 +67,7 @@ app.use("/register", registerRouter);
 app.use("/", loginRouter);
 app.use("/message", chatboxRouter);
 app.use("/users", usersRouter);
-app.use("/uploads", express.static("uploads"));
+app.use("/events", eventsRouter);
 
 //@TODO Unsure how to translate this to a file
 app.get("/getUser", verifyJWT, (req, res) => {
