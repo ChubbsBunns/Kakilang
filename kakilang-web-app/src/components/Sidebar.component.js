@@ -4,6 +4,10 @@ import Logout from "./Logout.component";
 import "./Sidebar.component.css";
 import { useNavigate } from "react-router";
 
+import Kakilang_logo from "./images/KakilangLogo.png";
+import William_profile_pic from "./images/william.jpg";
+import Marcus_profile_pic from "./images/marcus.jpg";
+
 /**
  * Sidebar for navigation
  *
@@ -27,7 +31,10 @@ function Sidebar({ setBox, user, group, setGroup }) {
   return (
     <div className="sidebar">
       <header className="sidebar-logo-logout">
-        <div className="sidebar-header-title">My Kakis!</div> <Logout />
+        <div className="sidebar-header-title">
+          <img src={Kakilang_logo}></img>
+        </div>{" "}
+        <Logout />
       </header>
 
       <div className="create-event-component">
@@ -38,10 +45,34 @@ function Sidebar({ setBox, user, group, setGroup }) {
         <p className="conversations-title">Chats w/ Kakis!</p>
         <ul className="conversations-chat-list">
           <li>
-            <button className="conversations-chat">Marcus Lim </button>
+            <button className="conversations-chat">
+              <img src={Marcus_profile_pic}></img>Marcus Lim{" "}
+            </button>
           </li>
           <li>
-            <button className="conversations-chat">William Chau </button>
+            <button className="conversations-chat">
+              <img src={William_profile_pic}></img>William Chau{" "}
+            </button>
+          </li>
+          <li>
+            <button className="conversations-chat">
+              <img src={Marcus_profile_pic}></img>Marcus Lim{" "}
+            </button>
+          </li>
+          <li>
+            <button className="conversations-chat">
+              <img src={William_profile_pic}></img>William Chau{" "}
+            </button>
+          </li>
+          <li>
+            <button className="conversations-chat">
+              <img src={Marcus_profile_pic}></img>Marcus Lim{" "}
+            </button>
+          </li>
+          <li>
+            <button className="conversations-chat">
+              <img src={William_profile_pic}></img>William Chau{" "}
+            </button>
           </li>
         </ul>
       </div>
