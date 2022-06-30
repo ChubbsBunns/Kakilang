@@ -1,11 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-<<<<<<< HEAD
-import Logout from "./Logout.component";
-import "./EventCreation.component.css";
-=======
 import axios from "axios";
->>>>>>> a2c28f41d2b3e070b20ec0968fd1a14acbc29734
 
 /**
  * This functional component is used purely for testing purposes
@@ -92,11 +87,6 @@ function TestFunction() {
       });
     eventData.forEach((v, k) => console.log(k, ":", v));
   };
-<<<<<<< HEAD
-  const [login, setLogin] = useState(getCurrentUser());
-=======
-
->>>>>>> a2c28f41d2b3e070b20ec0968fd1a14acbc29734
   return (
     <>
       <button onClick={createOwner}> Create An Owner </button>
