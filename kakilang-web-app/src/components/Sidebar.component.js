@@ -7,7 +7,7 @@ import "./Sidebar.component.css";
 import { useNavigate } from "react-router";
 */
 
-import Kakilang_logo from "./images/KakilangLogo.png";
+import Kakilang_logo from "./images/Kakilang-log-just-the-word.png";
 
 /*
 import William_profile_pic from "./images/william.jpg";
