@@ -24,7 +24,7 @@ const upload = multer({ storage: storage });
 
 /** Routing for Events **/
 
-// Create
+// Create Events
 router.route("/create").post(upload.single("eventImage"), (req, res) => {
   const file = req.file;
   const details = req.body;
@@ -50,7 +50,7 @@ router.route("/create").post(upload.single("eventImage"), (req, res) => {
   });
 });
 
-// Read
+// Read Events
 router.route("/getEvents").get((req, res) => {
   Events.find((err, events) => {
     if (err) res.status(418).send(err);
@@ -58,7 +58,7 @@ router.route("/getEvents").get((req, res) => {
   });
 });
 
-// Update
+// Update Events
 router.route("/update/:id").patch(async (req, res) => {
   Events.findByIdAndUpdate(req.params.id, req.body, (err, docs) => {
     if (err) {
@@ -70,7 +70,7 @@ router.route("/update/:id").patch(async (req, res) => {
   });
 });
 
-// Delete
+// Delete Events
 router.route("/delete/:id").delete((req, res) => {
   Events.findByIdAndDelete(req.params.id, (err, docs) => {
     if (err) {
@@ -82,6 +82,8 @@ router.route("/delete/:id").delete((req, res) => {
   });
 });
 
+// @TODO Delete this when testing is complete
+// For testing purposes
 router.route("/test").post(upload.single("wrong"), (req, res) => {
   console.log("testing");
   const file = req.file;
