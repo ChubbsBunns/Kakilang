@@ -17,7 +17,7 @@ body {
 
 .sidebar {
   display: grid;
-  grid-template-rows: 3fr 1.8fr 1.8fr 1.8fr 1.8fr 1.8fr 8fr;
+  grid-template-rows: 3fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 1.5fr 8fr;
   background-color: rgba(251, 127, 75, 1);
   color: rgb(255, 235, 205);
   height: 100vh;
@@ -60,7 +60,7 @@ body {
 
 .create-event-component {
   min-height: fit-content;
-  max-height: 10.7vh;
+  max-height: 9vh;
   max-width: 16.67vw;
   display: flex;
   justify-content: center;
@@ -70,14 +70,15 @@ body {
 
 .create-event-button {
   box-sizing: border-box;
-  height: 90%;
   padding: 0.3vh;
   border-radius: 3vh;
-  min-height: 10vh;
+  min-height: 6vh;
   border: clamp(0.8vh, 5px, 1vh) double #000000;
   background-color: rgba(251, 127, 75, 1);
   box-shadow: 0px 4px 6px #000000;
   width: clamp(fit-content, 10vw, 16.67vw);
+
+  height: clamp(4vh, fit-content, 5vh);
 }
 
 .create-event-button:hover {
@@ -99,8 +100,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: clamp(3px, 20px, 4.5vh);
+  font-size: clamp(2px, 20px, 2.8vh);
   margin: auto;
+}
+
+.create-event-component > i {
+  font-size: clamp(2px, 20px, 2.8vh);
 }
 
 /*

@@ -68,14 +68,21 @@ function Sidebar({ setBox, user, group, setGroup }) {
 
       <div className="create-event-component">
         <button className="create-event-button">
-          <p>Discover Kakis!</p>
+          <p>My Chats</p>
         </button>
       </div>
 
       <div className="create-event-component">
         <button className="create-event-button">
-          <p>Discover Events!</p>
+          <p>My Events</p>
         </button>
+      </div>
+
+      <div className="create-event-component">
+        <button className="create-event-button">
+          <p>My Profile</p>
+        </button>
+        <i className="fa-solid fa-gear"></i>
       </div>
 
       {/*
