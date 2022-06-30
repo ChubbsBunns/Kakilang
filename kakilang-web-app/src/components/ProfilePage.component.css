@@ -16,6 +16,7 @@
   box-sizing: border-box;
   border-left: 2px solid rgba(153, 28, 46, 1);
   max-height: fit-content;
+  max-width: 66.67vw;
 }
 
 .profile-box {

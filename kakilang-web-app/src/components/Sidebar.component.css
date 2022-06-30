@@ -11,10 +11,14 @@ body {
   text-decoration: none;
 }
 
+*::-webkit-scrollbar-track {
+  background: green;
+}
+
 .sidebar {
   display: grid;
-  grid-template-rows: 3fr 3fr 6fr 3fr 3fr 8fr;
-  background-color: rgba(232, 193, 130, 1);
+  grid-template-rows: 3fr 1.8fr 1.8fr 1.8fr 1.8fr 1.8fr 8fr;
+  background-color: rgba(251, 127, 75, 1);
   color: rgb(255, 235, 205);
   height: 100vh;
   width: 100%;
@@ -22,12 +26,22 @@ body {
   position: relative;
   overflow: auto;
   max-height: 100vh;
+  max-width: 16.67vw;
 }
 
 .sidebar-logo-logout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 0.3vw;
+  max-height: 15vh;
+}
+
+.sidebar-header-title {
+  max-height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .sidebar header {
@@ -36,40 +50,60 @@ body {
   text-align: left;
   line-height: 70px;
 
-  background-color: rgba(232, 193, 130, 1);
+  background-color: rgba(251, 127, 75, 1);
   user-select: none;
+}
+
+.sidebar-header-title > img {
+  border-radius: 0%;
 }
 
 .create-event-component {
   min-height: fit-content;
   max-height: 10.7vh;
+  max-width: 16.67vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .create-event-button {
   box-sizing: border-box;
-  height: 80%;
+  height: 90%;
   padding: 0.3vh;
-  border-radius: 15px;
-
+  border-radius: 3vh;
   min-height: 10vh;
-  border: 5px double #a27d33;
-  background-color: rgb(255, 249, 127);
-  box-shadow: 0px 4px #d1b06f;
+  border: clamp(0.8vh, 5px, 1vh) double #000000;
+  background-color: rgba(251, 127, 75, 1);
+  box-shadow: 0px 4px 6px #000000;
+  width: clamp(fit-content, 10vw, 16.67vw);
 }
 
 .create-event-button:hover {
-  border: 5px double #a27d33;
+  border: clamp(0.8vh, 5px, 1vh) double #a27d33;
   font-weight: bold;
   color: #a27d33;
   background-color: rgb(255, 232, 151);
+  transition: 0.2s;
 }
 
 .create-event-button:active {
-  border: 5px double rgb(255, 249, 127);
+  border: clamp(0.8vh, 5px, 1vh) double rgb(255, 249, 127);
   font-weight: bold;
   color: rgb(255, 249, 127);
   background-color: #a27d33;
 }
+
+.create-event-button > p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(3px, 20px, 4.5vh);
+  margin: auto;
+}
+
+/*
 
 .conversations-title {
   margin: auto;
@@ -86,11 +120,12 @@ body {
   max-height: 21.4vh;
   display: grid;
   grid-template-rows: 1fr 9fr;
-  overflow: auto;
 }
 
 .conversations-chat-list {
   padding: 0%;
+  overflow: auto;
+  height: 100%;
 }
 
 .conversations-chat {
@@ -120,6 +155,9 @@ body {
 .conversations-chat > img {
   height: 5vh;
   margin: auto;
+  padding-right: 8px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 /* This is the previous sidebar code
 
@@ -205,7 +243,7 @@ body {
   margin: 0;
 }
 
-*/
+
 
 .indicator {
   float: right;
@@ -240,25 +278,32 @@ body {
 }
 
 .choice-people-or-events-buttons > button {
-  background-color: rgba(251, 127, 75, 1);
   width: 80%;
   height: 100%;
   margin: auto;
   padding-top: 7px;
   margin-top: 0;
   border-radius: 45%;
-  border-bottom: 5px solid rgb(190, 96, 56);
   box-shadow: 0px 3px 5px black;
 }
 
 .event-button {
+  background-color: rgba(251, 127, 75, 1);
+  border-bottom: 5px solid rgb(190, 96, 56) !important;
   font-size: 18px;
   border: none;
   margin: auto;
-  background-color: rgb(255, 249, 127);
 }
 
-.choice-people-or-events-buttons > button:hover {
+.people-button {
+  background-color: rgba(251, 127, 75, 1);
+  border-bottom: 5px solid rgb(190, 96, 56) !important;
+  font-size: 18px;
+  border: none;
+  margin: auto;
+}
+
+.people-button:hover {
   background-color: rgba(249, 194, 164, 1);
   transform: translatey(-3px);
   transition: 0.1s;
@@ -268,7 +313,25 @@ body {
   border-bottom: 5px solid rgb(162, 82, 47);
 }
 
-.choice-people-or-events-buttons > button:focus {
+.people-button:focus {
+  background-color: rgba(153, 28, 46, 1);
+  transition: 0.3s;
+  border-bottom: 3px solid rgba(83, 1, 44, 1);
+  box-shadow: 0px 1px 2px black;
+  color: rgba(252, 233, 220, 1);
+}
+
+.event-button:hover {
+  background-color: rgba(249, 194, 164, 1);
+  transform: translatey(-3px);
+  transition: 0.1s;
+
+  border-right: 3px solid rgb(157, 79, 46);
+  border-left: 3px solid rgb(152, 76, 44);
+  border-bottom: 5px solid rgb(162, 82, 47);
+}
+
+.event-button:focus {
   background-color: rgba(153, 28, 46, 1);
   transition: 0.3s;
   border-bottom: 3px solid rgba(83, 1, 44, 1);
@@ -334,9 +397,11 @@ body {
   color: rgba(252, 233, 220, 1);
 }
 
+*/
+
 .impromptus {
   background-color: rgba(252, 233, 220, 1);
-  margin: 10px;
+  margin: 3%;
   color: rgba(83, 1, 44, 1);
   border-radius: 10px;
   display: grid;
@@ -347,6 +412,7 @@ body {
   font: normal normal bold 18px sans-serif;
   overflow: auto;
   border: 2px solid rgba(83, 1, 44, 1);
+  max-height: 40vh;
 }
 
 .impromptus-title {
@@ -367,9 +433,16 @@ body {
   border-right: 0px;
 }
 
+.impromptus > ul::-webkit-scrollbar-track {
+  background: green;
+}
+
 .impromptus > ul > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: auto;
-  margin-bottom: 6px;
+  margin-bottom: 0.5vh;
   border-radius: 30%;
   height: 20%;
   min-height: 5vh;
@@ -377,21 +450,34 @@ body {
 
 .impromptus > ul > li > button {
   text-align: center;
-  padding: 5px;
   background-color: rgba(251, 127, 75, 1);
   margin-bottom: 3px;
   border-radius: 15%;
   width: 100%;
   height: 100%;
   overflow: auto;
-  font: normal normal bold 15px sans-serif;
+  /*font-size: clamp(10px, 3vh, 4vh);*/
   box-shadow: 0px 3px 3px;
+
+  font-size: clamp(11px, 0.3vw, 16px);
+}
+
+.an-event {
+  max-width: 15.5vw;
+}
+
+.impromptu-event-title {
+  font-size: clamp(1vw, 3vh, 2em);
+}
+
+.an-event > i {
+  font-size: clamp(1vw, 3vh, 2em);
 }
 
 .impromptus > ul > li > button:hover {
-  background-color: rgba(252, 233, 220, 1);
+  background-color: rgba(249, 194, 164, 1);
   box-shadow: 0px 5px 4px;
-  border-bottom: 3px solid rgb(193, 171, 157);
+  border-bottom: 3px solid rgba(249, 194, 164, 1);
   transform: translateY(-3px);
 }
 

@@ -2,11 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import Logout from "./Logout.component";
 import "./Sidebar.component.css";
+
+/*
 import { useNavigate } from "react-router";
+*/
 
 import Kakilang_logo from "./images/KakilangLogo.png";
+
+/*
 import William_profile_pic from "./images/william.jpg";
 import Marcus_profile_pic from "./images/marcus.jpg";
+*/
 
 /**
  * Sidebar for navigation
@@ -15,9 +21,14 @@ import Marcus_profile_pic from "./images/marcus.jpg";
  *
  * @component
  */
+
+function Sidebar() {
+  /*
 function Sidebar({ setBox, user, group, setGroup }) {
   const navigate = useNavigate();
   const goToEvent = () => setBox("EventsPage");
+
+  the function that pushes one to another persons personal account
   const goToPeople = () => {
     setBox("ProfilePage");
     setGroup(group);
@@ -38,9 +49,36 @@ function Sidebar({ setBox, user, group, setGroup }) {
       </header>
 
       <div className="create-event-component">
-        <button className="create-event-button">Create an Event!</button>
+        <button className="create-event-button">
+          <p>Create an Event!</p>
+        </button>
       </div>
 
+      <div className="create-event-component">
+        <button className="create-event-button">
+          <p>Discover Kakis!</p>
+        </button>
+      </div>
+
+      <div className="create-event-component">
+        <button className="create-event-button">
+          <p>Discover Events!</p>
+        </button>
+      </div>
+
+      <div className="create-event-component">
+        <button className="create-event-button">
+          <p>Discover Kakis!</p>
+        </button>
+      </div>
+
+      <div className="create-event-component">
+        <button className="create-event-button">
+          <p>Discover Events!</p>
+        </button>
+      </div>
+
+      {/*
       <div className="conversations-component">
         <p className="conversations-title">Chats w/ Kakis!</p>
         <ul className="conversations-chat-list">
@@ -77,7 +115,7 @@ function Sidebar({ setBox, user, group, setGroup }) {
         </ul>
       </div>
 
-      {/** 
+      
       <ul className="sidebar-menu">
         <li>
           <a
@@ -127,19 +165,20 @@ function Sidebar({ setBox, user, group, setGroup }) {
           </ul>
         </li>
       </ul>
-      */}
+      
       <div className="choice-people-or-events">
         <div className="choice-people-or-events-container">
           <div>
             <p className="choice-people-or-events-text">Display:</p>
           </div>
           <div className="choice-people-or-events-buttons">
-            <button className="event-button" onClick={goToPeople}>
+            <button className="people-button" onClick={goToPeople}>
               <i className="fa-solid fa-people-group"></i>
               <br></br>People
             </button>
             <button className="event-button">
-              <i className="fa-solid fa-calendar-day"></i> <br></br>Events
+              <i className="fa-solid fa-calendar-day"></i>
+              <br></br>Events
             </button>
           </div>
         </div>
@@ -158,6 +197,7 @@ function Sidebar({ setBox, user, group, setGroup }) {
           </button>
         </div>
       </div>
+      */}
 
       <div className="impromptus">
         <div>
@@ -166,25 +206,30 @@ function Sidebar({ setBox, user, group, setGroup }) {
         </div>
         <ul className="impromptus-events">
           <li>
-            <button className="an-event" onClick={goToEvent}>
-              <i className="fa-solid fa-chess-king"></i> <br></br>Chess Blitz!
+            <button className="an-event" /*onClick={goToEvent} */>
+              <i className="fa-solid fa-chess-king"></i> <br></br>
+              <p className="impromptu-event-title">Chess Blitz!</p>
             </button>
           </li>
           <li>
             <button className="an-event">
-              <i className="fa-solid fa-gamepad"></i> <br></br>A really long and
-              elaborate title even though we should advise people not to write
-              them this long
+              <i className="fa-solid fa-gamepad"></i> <br></br>
+              <p className="impromptu-event-title">
+                A really long and elaborate title even though we should advise
+                people not to write them this long
+              </p>
             </button>
           </li>
           <li>
             <button className="an-event">
-              <i className="fa-solid fa-headset"></i> <br></br>Chill and talk
+              <i className="fa-solid fa-headset"></i> <br></br>
+              <p className="impromptu-event-title">Chill and talk</p>
             </button>
           </li>
           <li>
             <button className="an-event">
-              <i className="fa-brands fa-battle-net"></i> <br></br>Overwatch
+              <i className="fa-brands fa-battle-net"></i> <br></br>
+              <p className="impromptu-event-title">Overwatch</p>
             </button>
           </li>
         </ul>

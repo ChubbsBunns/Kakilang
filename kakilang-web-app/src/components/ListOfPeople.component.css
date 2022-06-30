@@ -10,6 +10,11 @@ body {
   text-decoration: none;
 }
 
+.list-component {
+  max-height: 100vh;
+  max-width: 16.67vw;
+}
+
 .filter-component {
   max-height: 5vh;
 }

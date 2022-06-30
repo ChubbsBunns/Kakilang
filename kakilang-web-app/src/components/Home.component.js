@@ -7,6 +7,7 @@ import ListOfPeople from "./ListOfPeople.component";
 import ChatBox from "./ChatBox.component";
 import ProfilePage from "./ProfilePage.component";
 import EventsPage from "./EventsPage.component";
+
 import staticGroup from "./staticGroup";
 
 /**
@@ -27,7 +28,9 @@ function Home() {
   const [dynamicList, setDynamicList] = useState(staticGroup);
 
   const onSelectPerson = (targetUser) => () => {
-    setChatTarget(targetUser);
+    {
+      setChatTarget(targetUser);
+    }
     setBox("ProfilePage");
   };
 
@@ -91,6 +94,7 @@ function Home() {
       <div className="UI" id="list_of_people">
         <ListOfPeople group={dynamicList} onSelectPerson={onSelectPerson} />
       </div>
+
       {ActiveBox(box)}
     </div>
   );
