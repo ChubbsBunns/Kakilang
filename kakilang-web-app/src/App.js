@@ -16,6 +16,9 @@ import ChatBox from "./components/Box/ChatBox.component";
 import ProfileBox from "./components/Box/ProfileBox.component";
 
 import "./App.css";
+import ChatList from "./components/List/ChatList.component";
+import EmptyBox from "./components/Box/EmptyBox.component";
+import EventList from "./components/List/EventList.component";
 
 function App() {
   const errorProfile = {
@@ -48,10 +51,7 @@ function App() {
                   path="/discover/kakis/*"
                   element={<ListOfPeople user={user} setTarget={setTarget} />}
                 >
-                  <Route
-                    path=""
-                    element={<ProfileBox user={user} target={user} />}
-                  />
+                  <Route path="" element={<EmptyBox />} />
                   <Route path=":targetHandle">
                     <Route
                       path="profile"
@@ -67,15 +67,17 @@ function App() {
 
                 <Route
                   path="/discover/events/*"
-                  element={<ListOfPeople user={user} setTarget={setTarget} />}
+                  element={<EventList user={user} setTarget={setTarget} />}
                 >
+                  <Route path="" element={<EmptyBox />} />
                   <Route path=":eventID" element={<EventsBox />} />
                 </Route>
 
                 <Route
                   path="/myChats/*"
-                  element={<ListOfPeople user={user} setTarget={setTarget} />}
+                  element={<ChatList user={user} setTarget={setTarget} />}
                 >
+                  <Route path="" element={<EmptyBox />} />
                   <Route path=":targetHandle/*">
                     <Route
                       path="chat"
@@ -90,8 +92,9 @@ function App() {
 
                 <Route
                   path="/myEvents/*"
-                  element={<ListOfPeople user={user} setTarget={setTarget} />}
+                  element={<EventList user={user} setTarget={setTarget} />}
                 >
+                  <Route path="" element={<EmptyBox />} />
                   <Route path="create" element={<EventCreationBox />} />
                   <Route
                     path=":eventID"
