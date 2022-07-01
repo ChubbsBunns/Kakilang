@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.container-profile-page {
+  background-color: rgba(252, 233, 220, 1);
+  text-align: center;
+  color: white;
+  position: relative;
+  margin: auto;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  border-left: 2px solid rgba(153, 28, 46, 1);
+  max-height: fit-content;
+  max-width: 66.67vw;
+}
+
+.profile-box {
+  max-height: 100vh;
+  overflow: auto;
+}
+
+.image-name-box {
+  display: grid;
+  font: normal normal bold 30px sans-serif;
+  background-color: rgba(251, 127, 75, 1);
+  text-align: center;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  color: rgb(83 1 44);
+  position: relative;
+  height: fit-content;
+  width: 100%;
+  height: fit-content;
+  margin: auto;
+  min-width: max-content;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  border-bottom: 5px solid rgba(153, 28, 46, 1);
+  box-shadow: 10px 0px 20px;
+  max-height: 50vh;
+  overflow: auto;
+}
+
+.cancel-button {
+  /*
+  background-color: rgba(249, 194, 164, 1);
+  */
+  background-color: rgb(65, 53, 46);
+  color: rgba(83, 1, 44, 1);
+  border-radius: 30%;
+}
+
+.edit-button {
+  margin: none;
+  padding: 1%;
+  border-radius: 30%;
+  background-color: rgba(249, 194, 164, 1);
+  color: rgba(83, 1, 44, 1);
+}
+
+.edit-button:hover {
+  background-color: rgba(153, 28, 46, 1);
+  color: rgba(252, 233, 220, 1);
+  border-radius: 10%;
+  transition: 0.2s;
+  border: 2px solid rgba(83, 1, 44, 1);
+}
+
+.cancel-button > i {
+  background-color: rgb(65, 53, 46);
+  color: rgba(83, 1, 44, 1);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+}
+
+.major,
+.year {
+  font: normal normal normal 25px sans-serif;
+}
+
+.information-box {
+  text-align: left;
+  padding: 40px 90px;
+  color: rgb(83 1 44);
+  position: sticky;
+  margin: auto;
+}
+
+.message-button a {
+  color: rgba(153, 28, 46, 1);
+  text-decoration: none;
+}
+
+.message-button > a:visited {
+  color: rgba(153, 28, 46, 1);
+  text-decoration: none;
+}
+
+.message-button > a:link {
+  color: rgba(153, 28, 46, 1);
+  text-decoration: none;
+}
+
+.message-button > a:hover {
+  color: rgba(83, 1, 44, 1);
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+.name {
+  margin: auto;
+}
+
+.profile-picture {
+  border-radius: 10%;
+  background: rgba(249, 194, 164, 0.7);
+  box-shadow: 10px 9px 15px black;
+  margin: auto;
+}
+
+.interests-row,
+.house-row,
+.floor-row {
+  font: normal normal normal 20px sans-serif;
+}
+
+.interests,
+.house,
+.floor {
+  font: normal normal bold 20px sans-serif;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg) scale(1);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-3deg) scale(1.2);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(3deg) scale(1.4);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg) scale(1.6);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(3deg) scale(1.8);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-3deg) scale(2);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg) scale(1.8);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-3deg) scale(1.6);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(3deg) scale(1.4);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg) scale(1.2);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-3deg) scale(1);
+  }
+}

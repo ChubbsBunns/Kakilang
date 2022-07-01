@@ -69,43 +69,7 @@ app.use("/message", chatboxRouter);
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);
 
-//@TODO Unsure how to translate this to a file
-app.get("/getUser", verifyJWT, (req, res) => {
-  res.json({
-    isLoggedIn: true,
-    email: req.user.email,
-    name: req.user.name,
-    img: req.user.img,
-  });
-});
-
 //start the server
 httpServer.listen(port, () => {
   console.log(`Server is running on port : ${port}`);
 });
-
-//JWT setup
-const jwt = require("jsonwebtoken");
-
-function verifyJWT(req, res, next) {
-  const token = req.headers["x-access-token"]?.split("Bearer")[1];
-  if (token) {
-    //console.log("Verifying");
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return res.json({
-          isLoggedIn: false,
-          message: "Failed to Authenticate",
-        });
-      }
-      req.user = {};
-      req.user.id = decoded.id;
-      req.user.email = decoded.email;
-      req.user.name = decoded.name;
-      req.user.img = decoded.img;
-      next();
-    });
-  } else {
-    res.json({ message: "Incorrect Token Given", isLoggedIn: false });
-  }
-}

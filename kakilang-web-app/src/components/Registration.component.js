@@ -4,6 +4,7 @@ import "./Login.component.css";
 import { useNavigate } from "react-router-dom";
 import BigLogo from "./BigLogo.component";
 import Dropdown from "./Dropdown.component";
+import { majors, houses, floors, ccas } from "./staticVariables";
 
 /**
  * User Register component
@@ -174,32 +175,5 @@ function Registration() {
 }
 
 // default variables for options
-const houses = [
-  { label: "I'll rather not say", value: null },
-  { label: "Saren", value: "Saren" },
-  { label: "Ianthe", value: "Ianthe" },
-  { label: "Ursala", value: "Ursala" },
-  { label: "Nocturna", value: "Nocturna" },
-  { label: "Triton", value: "Triton" },
-  { label: "Ankaa", value: "Ankaa" },
-];
-const floors = Array.from({ length: 19 }, (_, i) => 3 + i * 1).map((num) => {
-  return { value: num, label: "Cinnamon Wing Floor " + num };
-});
-floors[0] = { value: null, label: "I'll rather not say" };
-const ccas = [
-  { value: null, label: "I'll rather not say" },
-  { value: "Floorball", label: "Floorball" },
-  { value: "USP Tabletop", label: "USP Tabletop" },
-  { value: "UStetris", label: "UStetris" },
-];
-const majors = [
-  { value: null, label: "I'll rather not say" },
-  { value: "Computer Science", label: "Computer Science" },
-  { value: "Information Systems", label: "Information Systems" },
-  { value: "Computer Engineering", label: "Computer Engineering" },
-  { value: "Business Analytics", label: "Business Analytics" },
-  { value: "Information Security", label: "Information Security" },
-];
 
 export default Registration;

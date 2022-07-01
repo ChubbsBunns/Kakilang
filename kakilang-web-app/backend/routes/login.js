@@ -39,6 +39,9 @@ router.route("/login").post((req, res) => {
           img: dbUser.profileIMG,
         };
 
+        // return the user with censored password
+        dbUser.password = "";
+
         // Creating the JWT
         jwt.sign(
           payload,
@@ -50,8 +53,7 @@ router.route("/login").post((req, res) => {
               message: "Success",
               token: "Bearer" + token,
               login: true,
-              name: dbUser.name,
-              img: dbUser.profileIMG,
+              user: dbUser,
             });
           }
         );
@@ -61,6 +63,48 @@ router.route("/login").post((req, res) => {
       }
     });
   });
+});
+
+/**
+ * JWT authentication function
+ */
+function verifyJWT(req, res, next) {
+  const token = req.headers["x-access-token"]?.split("Bearer")[1];
+  if (token) {
+    //console.log("Verifying");
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        return res.json({
+          isLoggedIn: false,
+          message: "Failed to Authenticate",
+        });
+      }
+
+      req.id = decoded.id;
+
+      next();
+    });
+  } else {
+    res
+      .status(403)
+      .json({ message: "Incorrect Token Given", isLoggedIn: false });
+  }
+}
+
+router.route("/getUser").get(verifyJWT, (req, res) => {
+  User.findById(req.id)
+    .then((dbUser) => {
+      //remove password before sending
+      dbUser.password = "";
+
+      res.status(200).json({
+        isLoggedIn: true,
+        user: dbUser,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json(badLogin(err));
+    });
 });
 
 module.exports = router;

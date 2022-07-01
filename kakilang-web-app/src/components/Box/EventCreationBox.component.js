@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import Proptypes from "prop-types";
 import axios from "axios";
 
+import "./EventCreationBox.component.css";
+
 /**
  * This component is a creation page for events
  */
-function CreateEvent({ owner }) {
+function EventCreationBox({ owner }) {
   /** Define the server to connect */
   const server = process.env.REACT_APP_SERVER;
   const [preview, setPreview] = useState("/defaultEvent.jpg");
 
+  /** Handle Events  **/
   const imgSetting = (event) => {
     const error = (message = null) => {
       message ? alert(message) : null;
       setPreview("/defaultEvent.jpg");
+      event.target.value = null;
       return false;
     };
     if (event.target.files.length == 0) {
@@ -60,7 +64,6 @@ function CreateEvent({ owner }) {
         return;
       }
     }
-
     //Success
     axios
       .post(server + "/events/create", eventData, {
@@ -78,34 +81,57 @@ function CreateEvent({ owner }) {
     eventData.forEach((v, k) => console.log(k, ":", v));
   };
 
+  const today = new Date().toISOString().split(".")[0];
+
   return (
-    <>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <input type="String" name="name" placeholder="Name*" />
+    <div className="event-creation-component">
+      <div className="event-details-title">Event Details:</div>
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
+        <input
+          className="input-name"
+          type="String"
+          name="name"
+          placeholder="Name*"
+        />
         <br />
-        <input type="String" name="description" placeholder="Description*" />
+        <input
+          className="input-description"
+          type="String"
+          name="description"
+          placeholder="Description*"
+        />
         <br />
-        <label>
-          Event begin date*: <span />
-          <input type="datetime-local" name="eventDate" />
-        </label>
+        <div className="input-date-time">
+          <label>
+            Event begin date*: <span />
+            <input type="datetime-local" name="eventDate" min={today} />
+          </label>
+        </div>
         <br />
-        <input type="file" name="eventImage" onChange={imgSetting} />
+        <div className="input-image">
+          <input type="file" name="eventImage" onChange={imgSetting} />
+        </div>
         <br />
-        <img src={preview} alt="Unable to display image" />
+        <div className="preview-image">
+          <img src={preview} alt="Unable to display image" />
+        </div>
         <br />
-        <input type="Submit" name="Create new Event" />
+        <input
+          className="submit-button"
+          type="Submit"
+          name="Create new Event"
+        />
       </form>
-    </>
+    </div>
   );
 }
 
-CreateEvent.propTypes = {
-  owner: {
+EventCreationBox.propTypes = {
+  owner: Proptypes.shape({
     name: Proptypes.string.isRequired,
     profileIMG: Proptypes.string,
     _id: Proptypes.string.isRequired,
-  },
+  }),
 };
 
-export default CreateEvent;
+export default EventCreationBox;

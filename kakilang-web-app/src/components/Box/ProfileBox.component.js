@@ -1,11 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./ProfilePage.component.css";
+import "./ProfileBox.component.css";
+import { useNavigate } from "react-router";
 
-function ProfilePage({ target, onChat }) {
-  const disabling = target.email == localStorage.getItem("email");
-  const goToChat = () => onChat("ChatBox");
+/**
+ * This is a Profile Box.
+ *
+ * As a Box, it will occupy only the right side of the page.
+ * A list is required or there will be empty spaces.
+ */
+function ProfileBox({ user, target }) {
+  /** Constants */
+  const disabling = target.email == user.email.toLowerCase();
+  const navigate = useNavigate();
 
+  /** Handle changes **/
+  const goToChat = () => navigate("../chat");
   const ChatButton = (disable) => {
     return disable ? (
       <></>
@@ -77,9 +87,9 @@ function ProfilePage({ target, onChat }) {
   );
 }
 
-ProfilePage.propTypes = {
+ProfileBox.propTypes = {
+  user: PropTypes.object.isRequired,
   target: PropTypes.object.isRequired,
-  onChat: PropTypes.func.isRequired,
 };
 
-export default ProfilePage;
+export default ProfileBox;

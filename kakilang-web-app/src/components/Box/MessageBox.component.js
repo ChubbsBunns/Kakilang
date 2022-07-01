@@ -67,7 +67,7 @@ function MessageBox({ messages, currentUser, targetUser }) {
       if (fromEmail === currentUser.email) {
         const prop = {
           message: message,
-          img: currentUser.img,
+          img: currentUser.profileIMG,
           date: parseDate(createdAt),
           id: _id,
         };
@@ -75,7 +75,7 @@ function MessageBox({ messages, currentUser, targetUser }) {
       } else {
         const prop = {
           message: message,
-          img: targetUser.img,
+          img: targetUser.profileIMG,
           date: parseDate(createdAt),
           id: _id,
         };

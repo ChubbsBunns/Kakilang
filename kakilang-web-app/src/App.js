@@ -1,32 +1,129 @@
 import React, { useState } from "react";
-import "./App.css";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 
+/** import Components & CSS **/
 import Login from "./components/Login.component";
-import Home from "./components/Home.component";
 import Registration from "./components/Registration.component";
 import TestFunction from "./components/TestFunction.component";
 import ProtectedRoute from "./ProtectedRoute";
 import NotMatch from "./components/NotMatch.component";
+import Sidebar from "./components/Sidebar.component";
+import ListOfPeople from "./components/List/ListOfPeople.component";
+import ProfilePage from "./components/Page/ProfilePage.component";
+import EventsBox from "./components/Box/EventsBox.component";
+import EventCreationBox from "./components/Box/EventCreationBox.component";
+import ChatBox from "./components/Box/ChatBox.component";
+import ProfileBox from "./components/Box/ProfileBox.component";
+
+import "./App.css";
 
 function App() {
-  const [isAuth, setUserAuth] = useState(false);
+  const errorProfile = {
+    name: "Error",
+    profileIMG: "/defaultProfile.png",
+    email: "Error@Erros.com",
+  };
+  const [isLogin, setLogin] = useState(false);
+  const [isOwner, setOwnership] = useState(false);
+  const [user, setUser] = useState(errorProfile);
+  const [target, setTarget] = useState(errorProfile);
 
   return (
     <div className="App">
       <div className="App-body">
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Login setAuth={setUserAuth} />} />
-            <Route exact path="/register" element={<Registration />} />
             <Route
-              path="/home/:handle"
-              element={
-                <ProtectedRoute isAuth={isAuth} redirectPath="/">
-                  <Home />
-                </ProtectedRoute>
-              }
+              path="/"
+              element={<Login setAuth={setLogin} setUser={setUser} />}
             />
+            <Route path="/register" element={<Registration />} />
+
+            {/** Can only access if logged in**/}
+            <Route
+              element={<ProtectedRoute isAuth={isLogin} redirectPath="/" />}
+            >
+              <Route element={<Sidebar user={user} />}>
+                <Route
+                  path="/discover/kakis/*"
+                  element={<ListOfPeople user={user} setTarget={setTarget} />}
+                >
+                  <Route
+                    path=""
+                    element={<ProfileBox user={user} target={user} />}
+                  />
+                  <Route path=":targetHandle">
+                    <Route
+                      path="profile"
+                      element={<ProfileBox user={user} target={target} />}
+                    />
+
+                    <Route
+                      path="chat"
+                      element={<ChatBox user={user} target={target} />}
+                    />
+                  </Route>
+                </Route>
+
+                <Route
+                  path="/discover/events/*"
+                  element={<ListOfPeople user={user} setTarget={setTarget} />}
+                >
+                  <Route path=":eventID" element={<EventsBox />} />
+                </Route>
+
+                <Route
+                  path="/myChats/*"
+                  element={<ListOfPeople user={user} setTarget={setTarget} />}
+                >
+                  <Route path=":targetHandle/*">
+                    <Route
+                      path="chat"
+                      element={<ChatBox user={user} target={target} />}
+                    />
+                    <Route
+                      path="profile"
+                      element={<ProfileBox user={user} target={target} />}
+                    />
+                  </Route>
+                </Route>
+
+                <Route
+                  path="/myEvents/*"
+                  element={<ListOfPeople user={user} setTarget={setTarget} />}
+                >
+                  <Route path="create" element={<EventCreationBox />} />
+                  <Route
+                    path=":eventID"
+                    element={<EventsBox setOwnership={setOwnership} />}
+                  />
+                  <Route
+                    element={
+                      <ProtectedRoute isAuth={isOwner} redirectPath="" />
+                    }
+                  >
+                    <Route
+                      path=":eventID/edit"
+                      element={<EventCreationBox />}
+                    />
+                  </Route>
+                </Route>
+
+                <Route
+                  path="/myProfile/*"
+                  element={
+                    <>
+                      <div></div>
+                      <ProfilePage user={user} target={user} />
+                    </>
+                  }
+                >
+                  <Route path="edit" element={<Registration />} />
+                </Route>
+              </Route>
+              <Route path="*" element={<NotMatch />} />
+            </Route>
+
             <Route exact path="/SecretTesting" element={<TestFunction />} />
             <Route path="*" element={<NotMatch />} />
           </Routes>

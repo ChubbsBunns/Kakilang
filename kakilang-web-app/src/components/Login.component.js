@@ -1,39 +1,34 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./Login.component.css";
-import { useNavigate } from "react-router-dom";
-import BigLogo from "./BigLogo.component";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+/**Import Components & CSS */
+import BigLogo from "./BigLogo.component";
 const defaultProfile = "/defaultProfile.png";
+import "./Login.component.css";
 
 /**
  * Login Component
  *
  * @component
  */
-function Login({ setAuth }) {
-  /**
-   * @memberof Login
-   * @property {email} email - The user's email.
-   * @property {function} setEmail - Changes the email value
-   * @property {password} password - The user's password.
-   * @property {function} setPassword - Changes the password value
-   */
+function Login({ setAuth, setUser }) {
+  const server = process.env.REACT_APP_SERVER;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  /**
-   * Goes to websubpages.
-   * See react-route-dom useNavigate()
-   *
-   * @example
-   * goTo("/home"); goes to https://website.com/currentSub/home
-   * goTo("https://website.com/", {replace: true}) goes to https://website.com/
-   */
+  const redirect = "/myProfile";
   const goTo = useNavigate();
 
-  /** Load env and get the server name */
-  const server = process.env.REACT_APP_SERVER;
+  /** Helper functions */
+  function setDefaultIMG(user) {
+    if (!user.profileIMG) {
+      user.profileIMG = defaultProfile;
+      return user;
+    } else {
+      return user;
+    }
+  }
 
   /** Handle input changes*/
   const emailChange = (event) => setEmail(event.target.value);
@@ -47,15 +42,13 @@ function Login({ setAuth }) {
     //@TODO setup USER details
     axios.post(server + "/login", user).then((res) => {
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("email", email);
-      localStorage.setItem("name", res.data.name);
-      localStorage.setItem("img", res.data.img || defaultProfile);
-      const handle = email.split("@")[0];
       if (res.data.login) {
         setAuth(true);
-        goTo("/home/" + handle);
+        setUser(setDefaultIMG(res.data.user));
+        goTo(redirect);
       } else {
         setAuth(false);
+        setUser({});
         alert(res.data.message);
       }
     });
@@ -70,16 +63,18 @@ function Login({ setAuth }) {
         headers: { "x-access-token": localStorage.getItem("token") },
       })
       .then((res) => {
-        localStorage.setItem("email", res.data.email);
-        localStorage.setItem("name", res.data.name);
-        localStorage.setItem("img", res.data.img || defaultProfile);
-        const handle = res.data.email?.split("@")[0];
+        const user = res.data.user;
         if (res.data.isLoggedIn) {
           setAuth(true);
-          goTo("/home/" + handle);
+          setUser(setDefaultIMG(user));
+          goTo(redirect);
         } else {
           setAuth(false);
+          setUser({});
         }
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
       });
   }, []);
 
@@ -118,6 +113,7 @@ function Login({ setAuth }) {
 
 Login.propTypes = {
   setAuth: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
 };
 
 export default Login;

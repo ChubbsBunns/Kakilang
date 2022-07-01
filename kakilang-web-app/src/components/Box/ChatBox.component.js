@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import MessageBox from "./MessageBox.component";
 import io from "socket.io-client";
+import { useNavigate } from "react-router-dom";
+
+import MessageBox from "./MessageBox.component";
+const defaultProfile = "./defaultProfile.png";
 import "./MessageBox.component.css";
 
 const server = process.env.REACT_APP_SERVER;
@@ -14,12 +17,14 @@ const server = process.env.REACT_APP_SERVER;
  *
  * @component
  */
-function ChatBox({ img, name, email, onChat }) {
+function ChatBox({ user, target }) {
   const [message, setMessage] = useState("");
   const [messageBox, setMessageBox] = useState([]);
+  const navigate = useNavigate();
 
-  /** Handle message input changes */
+  /** Handle changes */
   const messageEdit = (event) => setMessage(event.target.value);
+  const goToProfile = () => navigate("../profile");
 
   /** Get different Messages from different people */
   const getMessageAsync = async () => {
@@ -27,7 +32,7 @@ function ChatBox({ img, name, email, onChat }) {
       .get(server + "/message/get", {
         params: {
           token: localStorage.getItem("token"),
-          email: localStorage.getItem("email"),
+          email: user.email,
         },
       })
       .then((res) => {
@@ -38,7 +43,7 @@ function ChatBox({ img, name, email, onChat }) {
         return [];
       });
     const targetResponse = response.filter(({ toEmail, fromEmail }) => {
-      return toEmail == email || fromEmail == email;
+      return toEmail == target.email || fromEmail == target.email;
     });
     setMessageBox(targetResponse);
   };
@@ -59,7 +64,7 @@ function ChatBox({ img, name, email, onChat }) {
     getMessageAsync();
 
     return () => newSocket.close();
-  }, [email]);
+  }, [target]);
 
   /**
    * Handles when the message is sent.
@@ -68,8 +73,8 @@ function ChatBox({ img, name, email, onChat }) {
   function handleSend(event) {
     event.preventDefault();
     const messageData = {
-      fromEmail: localStorage.getItem("email"),
-      toEmail: email,
+      fromEmail: user.email,
+      toEmail: target.email,
       message: message,
     };
     axios.post(server + "/message/send", messageData).then((res) => {
@@ -77,14 +82,6 @@ function ChatBox({ img, name, email, onChat }) {
     });
     setMessage("");
   }
-
-  const targetUser = { img: img, name: name, email: email };
-  const currentUSer = {
-    img: localStorage.getItem("img"),
-    name: localStorage.getItem("name"),
-    email: localStorage.getItem("email"),
-  };
-  const goToProfile = () => onChat("ProfilePage");
 
   return (
     <div className="UI" id="text_interface">
@@ -94,11 +91,11 @@ function ChatBox({ img, name, email, onChat }) {
           <div className="msg-header-components">
             <div></div>
             <div className="msg-header-img">
-              <img src={img} />
+              <img src={target.profileIMG || defaultProfile} />
             </div>
             <div className="active">
               <div className="active-padding"></div>
-              <h4>{name}</h4>
+              <h4>{target.name}</h4>
               <h6>Last seen 3 hours ago...</h6>
               <div className="active-padding"></div>
             </div>
@@ -116,8 +113,8 @@ function ChatBox({ img, name, email, onChat }) {
         <div className="chat-page">
           <MessageBox
             messages={messageBox}
-            currentUser={currentUSer}
-            targetUser={targetUser}
+            currentUser={user}
+            targetUser={target}
           />
           <div className="msg-bottom">
             <div></div>
@@ -144,29 +141,16 @@ function ChatBox({ img, name, email, onChat }) {
 }
 
 ChatBox.propTypes = {
-  img: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  onChat: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    profileIMG: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+  target: PropTypes.shape({
+    profileIMG: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ChatBox;
-
-/**
- * Dylan's sending UI
- *
- * <div className="msg-bottom">
- *      <div className="input-group">
- *        <input
- *          type="text"
- *          className="form-control"
- *          placeholder="write message..."
- *        /></input>
- *        <div className="input-group-append">
- *          <span className="input-group-text">
- *            <i className="fa fa-paper-plane"></i>
- *          </span>
- *        </div>
- *      </div>
- *    </div>
- */
