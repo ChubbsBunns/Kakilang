@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Proptypes from "prop-types";
 import axios from "axios";
+import { useNavigate } from "react-router";
+import { confirm } from "react-confirm-box";
 
 import "./EventCreationBox.component.css";
-import { useNavigate } from "react-router";
 
 /**
  * This component is a editing page for a event
@@ -46,6 +47,32 @@ function EventEditingBox({ owner, target }) {
       };
     }
   };
+  const handleDelete = async () => {
+    const result = await confirm("Delete this event?");
+    let oldIMG = "";
+    if (target.eventIMG && target.eventIMG !== "/defaultEvent.jpg") {
+      oldIMG = target.eventIMG;
+    }
+
+    if (result) {
+      axios
+        .delete(server + "/events/delete/" + target._id, {
+          data: {
+            oldIMG: oldIMG,
+          },
+        })
+        .then((res) => {
+          console.log(res.data.update);
+          navigate("/myEvents");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return;
+    } else {
+      console.log("Event is not deleted!");
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -66,7 +93,6 @@ function EventEditingBox({ owner, target }) {
 
     // Prevent Bad input
     for (let [k, v] of eventData.entries()) {
-      (v, k) => console.log(k, ":", v);
       if (k !== "eventImage" && !v) {
         alert("Please fill in the compulsory fields");
         window.location.reload(false);
@@ -83,7 +109,6 @@ function EventEditingBox({ owner, target }) {
       .catch((err) => {
         console.log(err);
       });
-    eventData.forEach((v, k) => console.log(k, ":", v));
   };
 
   const today = new Date().toISOString().split(".")[0].slice(0, -3);
@@ -138,6 +163,9 @@ function EventEditingBox({ owner, target }) {
           name="Create new Event"
         />
       </form>
+      <button className="delete-button" onClick={handleDelete}>
+        Delete
+      </button>
     </div>
   );
 }

@@ -59,7 +59,6 @@ function EventCreationBox({ owner }) {
 
     // Prevent Bad input
     for (let [k, v] of eventData.entries()) {
-      (v, k) => console.log(k, ":", v);
       if (k !== "eventImage" && !v) {
         alert("Please fill in the compulsory fields");
         window.location.reload(false);
@@ -89,7 +88,6 @@ function EventCreationBox({ owner }) {
   };
 
   let today = new Date().toISOString().split(".")[0].slice(0, -3);
-  console.log(today);
 
   return (
     <div className="event-creation-component">

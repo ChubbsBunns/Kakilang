@@ -95,14 +95,27 @@ router.route("/update/:id").patch(upload.single("eventImage"), (req, res) => {
 
 // Delete Events
 router.route("/delete/:id").delete((req, res) => {
-  Events.findByIdAndDelete(req.params.id, (err, docs) => {
+  const oldFile = req.body.oldIMG;
+  const deleteIMG = async () => {
+    let isDeleted = { result: "No event images" };
+    if (oldFile) {
+      const temp = oldFile.split("/");
+      const oldFileName = temp[temp.length - 1].split(".")[0];
+      isDeleted = await cloudinary.uploader.destroy("Events/" + oldFileName);
+    }
+    return isDeleted;
+  };
+
+  Events.findByIdAndDelete(req.params.id, async (err) => {
     if (err) {
       console.log(err);
       res.status(500).json({ message: err });
     }
-    console.log("Deleted: ", docs);
+    const deleteStatus = await deleteIMG();
+    console.log("Image deleted?:", deleteStatus.result);
+    console.log("Event Deleted");
     req.io.emit("updateEvent");
-    res.status(200).json({ message: "OK", update: docs });
+    res.sendStatus(200);
   });
 });
 

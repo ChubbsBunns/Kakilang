@@ -44,7 +44,6 @@ function EventList({ user, setTarget }) {
       // Adjust for different definitions of myEvent
       (event.owner.id == user._id ? myEvent : otherEvent).push(event);
     });
-    console.log(myEvent);
     // can be used to only display personal events
     setGroup(myEvent.concat(otherEvent));
   };

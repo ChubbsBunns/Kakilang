@@ -110,3 +110,20 @@
 .submit-button:active {
   background-color: (232, 193, 130, 1);
 }
+
+.delete-button {
+  font-weight: bold;
+  padding: 1vw;
+  border-radius: 30%;
+  color: rgba(252, 233, 220, 1);
+  background-color: rgb(242, 13, 13);
+  border-bottom: 0.5vh solid rgba(153, 28, 46, 1);
+  margin-bottom: 4vh;
+}
+
+.delete-button:hover {
+  font-weight: bolder;
+  padding: 1.2vw;
+  border-radius: 20%;
+  transition: 0.2s;
+}

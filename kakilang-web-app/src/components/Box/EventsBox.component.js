@@ -28,8 +28,6 @@ function EventsBox({ user, target, setOwnership }) {
       setOwnership(true);
       setCanEdit(true);
     } else {
-      console.log("User:", user._id);
-      console.log("Owner:", target.owner.id);
       setOwnership(false);
       setCanEdit(false);
     }
