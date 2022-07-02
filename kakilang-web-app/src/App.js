@@ -70,7 +70,16 @@ function App() {
                   element={<EventList user={user} setTarget={setTarget} />}
                 >
                   <Route path="" element={<EmptyBox />} />
-                  <Route path=":eventID" element={<EventsBox />} />
+                  <Route
+                    path=":eventID"
+                    element={
+                      <EventsBox
+                        user={user}
+                        target={target}
+                        setOwnership={setOwnership}
+                      />
+                    }
+                  />
                 </Route>
 
                 <Route
@@ -95,10 +104,19 @@ function App() {
                   element={<EventList user={user} setTarget={setTarget} />}
                 >
                   <Route path="" element={<EmptyBox />} />
-                  <Route path="create" element={<EventCreationBox />} />
+                  <Route
+                    path="create"
+                    element={<EventCreationBox owner={user} />}
+                  />
                   <Route
                     path=":eventID"
-                    element={<EventsBox setOwnership={setOwnership} />}
+                    element={
+                      <EventsBox
+                        user={user}
+                        target={target}
+                        setOwnership={setOwnership}
+                      />
+                    }
                   />
                   <Route
                     element={

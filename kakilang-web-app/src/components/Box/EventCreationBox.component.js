@@ -3,6 +3,7 @@ import Proptypes from "prop-types";
 import axios from "axios";
 
 import "./EventCreationBox.component.css";
+import { useNavigate } from "react-router";
 
 /**
  * This component is a creation page for events
@@ -72,16 +73,18 @@ function EventCreationBox({ owner }) {
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log(res.statusText);
+        useNavigate()("..");
       })
       .catch((err) => {
         console.log(err);
         alert(err);
       });
-    eventData.forEach((v, k) => console.log(k, ":", v));
+    //eventData.forEach((v, k) => console.log(k, ":", v));
   };
 
-  const today = new Date().toISOString().split(".")[0];
+  let today = new Date().toISOString().split(".")[0].slice(0, -3);
+  console.log(today);
 
   return (
     <div className="event-creation-component">
@@ -94,17 +97,22 @@ function EventCreationBox({ owner }) {
           placeholder="Name*"
         />
         <br />
-        <input
+        <textarea
           className="input-description"
           type="String"
           name="description"
           placeholder="Description*"
-        />
+        ></textarea>
         <br />
         <div className="input-date-time">
           <label>
             Event begin date*: <span />
-            <input type="datetime-local" name="eventDate" min={today} />
+            <input
+              type="datetime-local"
+              name="eventDate"
+              min={today}
+              step="60"
+            />
           </label>
         </div>
         <br />
