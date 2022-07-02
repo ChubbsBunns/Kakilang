@@ -19,6 +19,7 @@ import "./App.css";
 import ChatList from "./components/List/ChatList.component";
 import EmptyBox from "./components/Box/EmptyBox.component";
 import EventList from "./components/List/EventList.component";
+import EventEditingBox from "./components/Box/EventEditingBox.component";
 
 function App() {
   const errorProfile = {
@@ -125,7 +126,7 @@ function App() {
                   >
                     <Route
                       path=":eventID/edit"
-                      element={<EventCreationBox />}
+                      element={<EventEditingBox owner={user} target={target} />}
                     />
                   </Route>
                 </Route>

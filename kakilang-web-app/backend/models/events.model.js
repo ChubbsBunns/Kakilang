@@ -9,7 +9,7 @@ const EventsSchema = new Schema(
     eventDate: { type: String, required: true },
     owner: {
       id: { type: String, required: true },
-      name: { type: String, required: true },
+      name: { type: String },
       profileIMG: { type: String },
       type: Object,
       required: true,

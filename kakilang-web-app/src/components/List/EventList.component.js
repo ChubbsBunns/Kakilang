@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import io from "socket.io-client";
 import { Outlet, useNavigate } from "react-router-dom";
 
 /** Import Components & CSS **/
@@ -49,7 +50,20 @@ function EventList({ user, setTarget }) {
   };
   /** Run once for performance */
   useEffect(() => {
+    const newSocket = io(server);
+    newSocket.on("connect", () => {
+      console.log("listening for updateEvent", newSocket.id);
+    });
+    newSocket.on("connection_error", (error) =>
+      console.log("Failed to connect: ", error)
+    );
+    newSocket.on("updateEvent", () => {
+      getGroupAsync();
+    });
+
     getGroupAsync();
+
+    return () => newSocket.close();
   }, []);
 
   return (

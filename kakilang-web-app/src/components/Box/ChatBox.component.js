@@ -8,8 +8,6 @@ import MessageBox from "./MessageBox.component";
 const defaultProfile = "./defaultProfile.png";
 import "./MessageBox.component.css";
 
-const server = process.env.REACT_APP_SERVER;
-
 /**
  * Chat Box
  *
@@ -18,6 +16,7 @@ const server = process.env.REACT_APP_SERVER;
  * @component
  */
 function ChatBox({ user, target }) {
+  const server = process.env.REACT_APP_SERVER;
   const [message, setMessage] = useState("");
   const [messageBox, setMessageBox] = useState([]);
   const navigate = useNavigate();

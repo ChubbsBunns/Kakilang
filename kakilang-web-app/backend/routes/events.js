@@ -46,6 +46,7 @@ router.route("/create").post(upload.single("eventImage"), (req, res) => {
       res.sendStatus(500);
     }
     console.log("Event Created!");
+    req.io.emit("updateEvent");
     res.sendStatus(200);
   });
 });
@@ -59,14 +60,36 @@ router.route("/getEvents").get((req, res) => {
 });
 
 // Update Events
-router.route("/update/:id").patch(async (req, res) => {
-  Events.findByIdAndUpdate(req.params.id, req.body, (err, docs) => {
+router.route("/update/:id").patch(upload.single("eventImage"), (req, res) => {
+  const file = req.file;
+  const details = req.body;
+  const oldFile = req.body.oldIMG;
+  const update = {
+    eventIMG: file?.path,
+    ...details,
+  };
+  delete update.oldIMG;
+
+  const deleteOld = async () => {
+    let isDeleted = { result: "no file change" };
+    if (update.eventIMG && update.eventIMG !== oldFile) {
+      const temp = oldFile.split("/");
+      const oldFileName = temp[temp.length - 1].split(".")[0];
+      isDeleted = await cloudinary.uploader.destroy("Events/" + oldFileName);
+    }
+    return isDeleted;
+  };
+
+  Events.findByIdAndUpdate(req.params.id, update, async (err, dbEvent) => {
     if (err) {
       console.log(err);
       res.status(500).json({ message: err });
     }
-    console.log("Updated: ", docs);
-    res.status(200).json({ message: "OK", update: docs });
+    const deleteStatus = await deleteOld();
+    console.log("Old Image deleted?:", deleteStatus.result);
+    req.io.emit("updateEvent");
+    console.log("Event Updated");
+    res.status(200).json({ message: "OK", update: dbEvent });
   });
 });
 
@@ -78,6 +101,7 @@ router.route("/delete/:id").delete((req, res) => {
       res.status(500).json({ message: err });
     }
     console.log("Deleted: ", docs);
+    req.io.emit("updateEvent");
     res.status(200).json({ message: "OK", update: docs });
   });
 });

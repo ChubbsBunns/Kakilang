@@ -6,19 +6,28 @@ import "./EventCreationBox.component.css";
 import { useNavigate } from "react-router";
 
 /**
- * This component is a creation page for events
+ * This component is a editing page for a event
  */
-function EventCreationBox({ owner }) {
+function EventEditingBox({ owner, target }) {
   /** Define the server to connect */
   const server = process.env.REACT_APP_SERVER;
+  const oldIMG = target.eventIMG;
+  const [name, setName] = useState(target.name);
+  const [description, setDescription] = useState(target.description);
+  const [eventDate, setEventDate] = useState(target.eventDate);
+  const [preview, setPreview] = useState(
+    target.eventIMG || "/defaultEvent.jpg"
+  );
   const navigate = useNavigate();
-  const [preview, setPreview] = useState("/defaultEvent.jpg");
 
   /** Handle Events  **/
+  const nameChange = (e) => setName(e.target.value);
+  const descChange = (e) => setDescription(e.target.value);
+  const dateChange = (e) => setEventDate(e.target.value);
   const imgSetting = (event) => {
     const error = (message = null) => {
       message ? alert(message) : null;
-      setPreview("/defaultEvent.jpg");
+      setPreview(target.eventIMG || "/defaultEvent.jpg");
       event.target.value = null;
       return false;
     };
@@ -42,20 +51,18 @@ function EventCreationBox({ owner }) {
 
     // FormData for multer
     const eventData = new FormData(e.target);
-    try {
-      if (!owner._id || !owner.name) {
-        throw new Error("Missing creator information");
-      }
-      eventData.append("ownerID", owner._id);
-      eventData.append("ownerName", owner.name);
-      owner.profileIMG
-        ? eventData.append("profileIMG", owner.profileIMG)
-        : null;
-    } catch (error) {
+    if (!owner._id || !owner.name) {
       alert("Oops it looks like an error occured\nTry again later");
-      console.log(error);
+      console.log("Missing creator information");
+      return;
+    } else if (owner._id !== target.owner.id) {
+      alert("Oops it looks like an error occured\nTry again later");
+      console.log("Illegal editing access!");
       return;
     }
+
+    // Additional input
+    oldIMG ? eventData.append("oldIMG", oldIMG) : null;
 
     // Prevent Bad input
     for (let [k, v] of eventData.entries()) {
@@ -67,29 +74,19 @@ function EventCreationBox({ owner }) {
       }
     }
     //Success
-    const post = async () => {
-      const success = await axios
-        .post(server + "/events/create", eventData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((res) => {
-          console.log(res.statusText);
-          return true;
-        })
-        .catch((err) => {
-          console.log(err);
-          alert(err);
-          return false;
-        });
-      return success;
-    };
-    post() ? navigate("..") : null;
+    axios
+      .patch(server + "/events/update/" + target._id, eventData)
+      .then((res) => {
+        console.log(res.data.update);
+        navigate("/myEvents");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    eventData.forEach((v, k) => console.log(k, ":", v));
   };
 
-  let today = new Date().toISOString().split(".")[0].slice(0, -3);
-  console.log(today);
+  const today = new Date().toISOString().split(".")[0].slice(0, -3);
 
   return (
     <div className="event-creation-component">
@@ -99,6 +96,8 @@ function EventCreationBox({ owner }) {
           className="input-name"
           type="String"
           name="name"
+          value={name}
+          onChange={nameChange}
           placeholder="Name*"
         />
         <br />
@@ -106,6 +105,8 @@ function EventCreationBox({ owner }) {
           className="input-description"
           type="String"
           name="description"
+          value={description}
+          onChange={descChange}
           placeholder="Description*"
         ></textarea>
         <br />
@@ -115,6 +116,8 @@ function EventCreationBox({ owner }) {
             <input
               type="datetime-local"
               name="eventDate"
+              value={eventDate}
+              onChange={dateChange}
               min={today}
               step="60"
             />
@@ -139,12 +142,13 @@ function EventCreationBox({ owner }) {
   );
 }
 
-EventCreationBox.propTypes = {
+EventEditingBox.propTypes = {
   owner: Proptypes.shape({
     name: Proptypes.string.isRequired,
     profileIMG: Proptypes.string,
     _id: Proptypes.string.isRequired,
   }),
+  target: Proptypes.object.isRequired,
 };
 
-export default EventCreationBox;
+export default EventEditingBox;
