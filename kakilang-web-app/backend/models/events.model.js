@@ -12,11 +12,26 @@ const EventsSchema = new Schema(
       name: { type: String },
       profileIMG: { type: String },
       type: Object,
+      required: false,
+    },
+    ownerID: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
       required: true,
+    },
+    registeredIDs: {
+      type: [mongoose.Types.ObjectId],
+      ref: "User",
+      required: false,
     },
   },
   { timestamps: true }
 );
+
+EventsSchema.methods.info = function () {
+  const basic = this;
+  return basic;
+};
 
 /**
  * Event Model

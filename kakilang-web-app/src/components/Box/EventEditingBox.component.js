@@ -56,7 +56,7 @@ function EventEditingBox({ owner, target }) {
 
     if (result) {
       axios
-        .delete(server + "/events/delete/" + target._id, {
+        .delete(server + "/events/" + target._id, {
           data: {
             oldIMG: oldIMG,
           },
@@ -101,7 +101,7 @@ function EventEditingBox({ owner, target }) {
     }
     //Success
     axios
-      .patch(server + "/events/update/" + target._id, eventData)
+      .patch(server + "/events/" + target._id, eventData)
       .then((res) => {
         console.log(res.data.update);
         navigate("/myEvents");

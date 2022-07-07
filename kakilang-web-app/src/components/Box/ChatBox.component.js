@@ -5,7 +5,6 @@ import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 
 import MessageBox from "./MessageBox.component";
-const defaultProfile = "./defaultProfile.png";
 import "./MessageBox.component.css";
 
 /**
@@ -16,9 +15,12 @@ import "./MessageBox.component.css";
  * @component
  */
 function ChatBox({ user, target }) {
+  /** Debug inputs */
+
   const server = process.env.REACT_APP_SERVER;
   const [message, setMessage] = useState("");
   const [messageBox, setMessageBox] = useState([]);
+  const [convoID, setConvoID] = useState(target.convoID);
   const navigate = useNavigate();
 
   /** Handle changes */
@@ -26,14 +28,9 @@ function ChatBox({ user, target }) {
   const goToProfile = () => navigate("../profile");
 
   /** Get different Messages from different people */
-  const getMessageAsync = async () => {
+  const getMessageAsync = async (convoID) => {
     const response = await axios
-      .get(server + "/message/get", {
-        params: {
-          token: localStorage.getItem("token"),
-          email: user.email,
-        },
-      })
+      .get(server + "/message/convo/" + convoID)
       .then((res) => {
         return res.data.messages;
       })
@@ -41,11 +38,13 @@ function ChatBox({ user, target }) {
         console.log(err);
         return [];
       });
-    const targetResponse = response.filter(({ toEmail, fromEmail }) => {
-      return toEmail == target.email || fromEmail == target.email;
-    });
+    const targetResponse = response;
     setMessageBox(targetResponse);
   };
+
+  useEffect(() => {
+    setConvoID(target.convoID);
+  }, [target]);
 
   useEffect(() => {
     const newSocket = io(server);
@@ -55,15 +54,48 @@ function ChatBox({ user, target }) {
     newSocket.on("connection_error", (error) =>
       console.log("Failed to connect: ", error)
     );
-    newSocket.on("message", (message) => {
-      message;
-      getMessageAsync();
+    newSocket.on("message", (data) => {
+      console.log("socket: ", data);
+      if (data.convoID == convoID) {
+        console.log("Updating Messages!");
+        getMessageAsync(convoID);
+      }
     });
 
-    getMessageAsync();
+    convoID ? getMessageAsync(convoID) : null;
 
     return () => newSocket.close();
-  }, [target]);
+  }, [convoID]);
+
+  async function newConvo() {
+    const messageData = {
+      senderID: user._id,
+      targetID: target._id,
+      message: message,
+    };
+    const convoID = await axios
+      .post(server + "/message/convo", messageData)
+      .then((res) => {
+        console.log(res.data);
+        target.convoID = res.data.convoID;
+        return res.data.convoID;
+      });
+    setConvoID(convoID);
+    console.log(convoID);
+  }
+
+  function existingConvo() {
+    const messageData = {
+      senderID: user._id,
+      message: message,
+    };
+    console.log("old");
+    axios
+      .post(server + "/message/convo/" + convoID, messageData)
+      .then((res) => {
+        console.log(res.data);
+      });
+  }
 
   /**
    * Handles when the message is sent.
@@ -71,14 +103,12 @@ function ChatBox({ user, target }) {
    */
   function handleSend(event) {
     event.preventDefault();
-    const messageData = {
-      fromEmail: user.email,
-      toEmail: target.email,
-      message: message,
-    };
-    axios.post(server + "/message/send", messageData).then((res) => {
-      res.data;
-    });
+    console.log(convoID);
+    if (convoID) {
+      existingConvo();
+    } else {
+      newConvo();
+    }
     setMessage("");
   }
 
@@ -90,7 +120,7 @@ function ChatBox({ user, target }) {
           <div className="msg-header-components">
             <div></div>
             <div className="msg-header-img">
-              <img src={target.profileIMG || defaultProfile} />
+              <img src={target.img} />
             </div>
             <div className="active">
               <div className="active-padding"></div>
@@ -110,11 +140,7 @@ function ChatBox({ user, target }) {
         </div>
 
         <div className="chat-page">
-          <MessageBox
-            messages={messageBox}
-            currentUser={user}
-            targetUser={target}
-          />
+          <MessageBox messages={messageBox} currentUser={user} />
           <div className="msg-bottom">
             <div></div>
             <form onSubmit={handleSend} className="input-group">
@@ -143,12 +169,13 @@ ChatBox.propTypes = {
   user: PropTypes.shape({
     profileIMG: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
   target: PropTypes.shape({
-    profileIMG: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
+    convoID: PropTypes.string,
+    _id: PropTypes.string,
   }).isRequired,
 };
 

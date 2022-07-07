@@ -3,6 +3,7 @@ require("dotenv").config();
 
 //Setup Route and dependencies
 const Events = require("../models/events.model");
+const Convo = require("../models/conversation.model");
 const router = require("express").Router();
 
 /** Setup Cloudinary and Multer for uploading banner images **/
@@ -25,34 +26,39 @@ const upload = multer({ storage: storage });
 /** Routing for Events **/
 
 // Create Events
-router.route("/create").post(upload.single("eventImage"), (req, res) => {
+router.route("/").post(upload.single("eventImage"), (req, res) => {
   const file = req.file;
   const details = req.body;
-  const owner = {
-    id: details.ownerID,
-    name: details.ownerName,
-    profileIMG: details.profileIMG,
-  };
 
   const newEvents = new Events({
     eventIMG: file?.path,
-    owner: owner,
     ...details,
   });
 
   newEvents.save((err) => {
     if (err) {
       console.log(err);
-      res.sendStatus(500);
+      res.status(502).json({ err: err });
+      return;
     }
     console.log("Event Created!");
+    const newConvo = new Convo({
+      EventChat: newEvents._id,
+    });
+    newConvo.save((err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+    });
+
     req.io.emit("updateEvent");
-    res.sendStatus(200);
+    res.sendStatus(201);
   });
 });
 
 // Read Events
-router.route("/getEvents").get((req, res) => {
+router.route("/").get((req, res) => {
   Events.find((err, events) => {
     if (err) res.status(418).send(err);
     res.status(200).json({ events: events });
@@ -60,7 +66,7 @@ router.route("/getEvents").get((req, res) => {
 });
 
 // Update Events
-router.route("/update/:id").patch(upload.single("eventImage"), (req, res) => {
+router.route("/:id").patch(upload.single("eventImage"), (req, res) => {
   const file = req.file;
   const details = req.body;
   const oldFile = req.body.oldIMG;
@@ -94,7 +100,7 @@ router.route("/update/:id").patch(upload.single("eventImage"), (req, res) => {
 });
 
 // Delete Events
-router.route("/delete/:id").delete((req, res) => {
+router.route("/:id").delete((req, res) => {
   const oldFile = req.body.oldIMG;
   const deleteIMG = async () => {
     let isDeleted = { result: "No event images" };
@@ -109,7 +115,7 @@ router.route("/delete/:id").delete((req, res) => {
   Events.findByIdAndDelete(req.params.id, async (err) => {
     if (err) {
       console.log(err);
-      res.status(500).json({ message: err });
+      res.status(502).json({ message: err });
     }
     const deleteStatus = await deleteIMG();
     console.log("Image deleted?:", deleteStatus.result);
@@ -117,17 +123,6 @@ router.route("/delete/:id").delete((req, res) => {
     req.io.emit("updateEvent");
     res.sendStatus(200);
   });
-});
-
-// @TODO Delete this when testing is complete
-// For testing purposes
-router.route("/test").post(upload.single("wrong"), (req, res) => {
-  console.log("testing");
-  const file = req.file;
-  const details = req.body;
-  console.log("File:", file);
-  console.log("Details:", details);
-  res.sendStatus(200);
 });
 
 module.exports = router;

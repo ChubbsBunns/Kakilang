@@ -61,7 +61,13 @@ function App() {
 
                     <Route
                       path="chat"
-                      element={<ChatBox user={user} target={target} />}
+                      element={
+                        <ChatBox
+                          user={user}
+                          target={target}
+                          setTarget={setTarget}
+                        />
+                      }
                     />
                   </Route>
                 </Route>

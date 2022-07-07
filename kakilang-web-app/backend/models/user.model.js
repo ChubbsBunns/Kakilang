@@ -17,16 +17,35 @@ const userSchema = new Schema(
     cca: { type: Array, required: false },
     year: { type: Number, required: false },
     profileIMG: { type: String, required: false },
-    profile: {
-      bio: { type: String, required: false },
-      interest: { type: String, required: false },
-      display: { type: Array, required: false },
-      type: Object,
+    profileID: {
+      type: mongoose.Types.ObjectId,
+      ref: "Profile",
       required: false,
     },
   },
   { timestamps: true }
 );
+
+userSchema.methods.info = function () {
+  const basic = {
+    _id: this._id,
+    name: this.name,
+    profileIMG: this.profileIMG,
+    profileID: this.profileID,
+  };
+  return basic;
+};
+
+userSchema.methods.profile = function () {
+  this.populate("profileID");
+  const basic = {
+    _id: this._id,
+    name: this.name,
+    profileIMG: this.profileIMG,
+    profileID: this.profileID,
+  };
+  return basic;
+};
 
 const User = mongoose.model("User", userSchema);
 

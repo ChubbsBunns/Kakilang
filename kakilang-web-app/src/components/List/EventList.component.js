@@ -27,10 +27,10 @@ function EventList({ user, setTarget }) {
     navigate(targetHandle);
   };
 
-  /** Get the list of people from server */
+  /** Get the list of events from server */
   const getGroupAsync = async () => {
     const response = await axios
-      .get(server + "/events/getEvents")
+      .get(server + "/events")
       .then((res) => {
         return res.data.events;
       })

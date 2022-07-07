@@ -13,7 +13,7 @@ import pokemonimage from "./images/stephen.jpg";
  *
  * @component
  */
-function MessageBox({ messages, currentUser, targetUser }) {
+function MessageBox({ messages, currentUser }) {
   function renderReceivedMessage({ message, img, date, id }) {
     return (
       <div className="received-chats" key={id}>
@@ -63,8 +63,8 @@ function MessageBox({ messages, currentUser, targetUser }) {
   }
 
   function RenderMessage() {
-    return messages.map(({ fromEmail, message, createdAt, _id }) => {
-      if (fromEmail === currentUser.email) {
+    return messages.map(({ senderID, message, createdAt, _id }) => {
+      if (senderID._id === currentUser._id) {
         const prop = {
           message: message,
           img: currentUser.profileIMG,
@@ -75,7 +75,7 @@ function MessageBox({ messages, currentUser, targetUser }) {
       } else {
         const prop = {
           message: message,
-          img: targetUser.profileIMG,
+          img: senderID.profileIMG,
           date: parseDate(createdAt),
           id: _id,
         };
@@ -100,7 +100,6 @@ function MessageBox({ messages, currentUser, targetUser }) {
 MessageBox.propTypes = {
   messages: PropTypes.array,
   currentUser: PropTypes.object,
-  targetUser: PropTypes.object,
 };
 
 export default MessageBox;

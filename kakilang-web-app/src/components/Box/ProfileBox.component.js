@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
  */
 function ProfileBox({ user, target }) {
   /** Constants */
-  const disabling = target.email == user.email.toLowerCase();
+  const disabling = target._id == user._id;
   const navigate = useNavigate();
 
   /** Handle changes **/
