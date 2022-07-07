@@ -1,4 +1,5 @@
 import React from "react";
+import Logo from "./images/KakilangLogo.png";
 
 /**
  * Big Logo
@@ -13,7 +14,10 @@ function BigLogo() {
       <header className="App-header">
         <a href="/" className="App-link">
           {" "}
-          <h1> Kakilang!</h1>{" "}
+          <h1>
+            {" "}
+            <img src={Logo}></img>
+          </h1>{" "}
         </a>
       </header>
     </div>
