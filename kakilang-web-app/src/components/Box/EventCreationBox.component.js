@@ -68,7 +68,7 @@ function EventCreationBox({ owner }) {
     //Success
     const post = async () => {
       const success = await axios
-        .post(server + "/events/create", eventData, {
+        .post(server + "/events", eventData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

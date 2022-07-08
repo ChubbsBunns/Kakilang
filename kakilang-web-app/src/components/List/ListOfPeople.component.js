@@ -5,7 +5,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
-const defaultProfile = "/defaultProfile.png";
 import { staticGroup } from "../staticVariables";
 
 /**
@@ -23,16 +22,32 @@ function ListOfPeople({ user, setTarget }) {
   const [group, setGroup] = useState(staticGroup);
 
   /** Handle selections */
-  const onSelectPerson = (targetUser) => () => {
+  const onSelectPerson = (targetUser) => async () => {
+    const convoID = await getConvoAsync(targetUser._id);
+    targetUser.convoID = convoID;
     setTarget(targetUser);
-    const targetHandle = targetUser?.email?.split("@")[0];
+    const targetHandle = targetUser?.name?.split(" ")[0];
     navigate(targetHandle + "/profile");
+  };
+
+  /** Get Convo between two people **/
+  const getConvoAsync = async (targetID) => {
+    const response = await axios
+      .get(server + "/message/user/" + user._id + "/" + targetID)
+      .then((res) => {
+        return res.data.convoID;
+      })
+      .catch((err) => {
+        console.log(err);
+        return null;
+      });
+    return response;
   };
 
   /** Get the list of people from server */
   const getGroupAsync = async () => {
     const response = await axios
-      .get(server + "/users/getBasic")
+      .get(server + "/users")
       .then((res) => {
         return res.data.users;
       })
@@ -40,8 +55,8 @@ function ListOfPeople({ user, setTarget }) {
         console.log(err);
         return [];
       });
-    const index = response.findIndex(({ email }) => {
-      return email == user.email.toLowerCase();
+    const index = response.findIndex(({ _id }) => {
+      return _id == user._id;
     });
     // put current user at the top (may remove user)
     const [curr] = response.splice(index, 1);
@@ -69,11 +84,10 @@ function ListOfPeople({ user, setTarget }) {
             <div className="list-of-people">
               <ul>
                 {group.map((person) => {
-                  person.profileIMG = person.profileIMG || defaultProfile;
                   return (
                     <li key={person._id}>
                       <a onClick={onSelectPerson(person)}>
-                        <img src={person.profileIMG} />
+                        <img src={person.img} />
                         {person.name}
                       </a>
                     </li>
@@ -94,7 +108,7 @@ function ListOfPeople({ user, setTarget }) {
 
 ListOfPeople.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
   }),
   setTarget: PropTypes.func.isRequired,
 };

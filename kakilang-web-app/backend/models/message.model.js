@@ -12,17 +12,23 @@ const Schema = mongoose.Schema;
  */
 const messageSchema = new Schema(
   {
-    toEmail: {
-      type: String,
+    convoID: {
+      type: mongoose.Types.ObjectId,
+      ref: "Convo",
       required: true,
     },
-    fromEmail: {
-      type: String,
+    senderID: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     message: {
       type: String,
       required: true,
+    },
+    image: {
+      type: String,
+      required: false,
     },
   },
   { timestamps: true }

@@ -7,16 +7,32 @@ const EventsSchema = new Schema(
     eventIMG: { type: String },
     description: { type: String },
     eventDate: { type: String, required: true },
-    owner: {
-      id: { type: String, required: true },
-      name: { type: String },
-      profileIMG: { type: String },
-      type: Object,
+    ownerID: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
       required: true,
+    },
+    registeredIDs: {
+      type: [mongoose.Types.ObjectId],
+      ref: "User",
+      required: false,
     },
   },
   { timestamps: true }
 );
+
+EventsSchema.methods.info = function () {
+  const basic = {
+    _id: this._id,
+    name: this.name,
+    img: this.eventIMG || "/defaultEvent.jpg",
+    eventDate: this.eventDate,
+    description: this.description,
+    ownerID: this.ownerID,
+    registeredIDs: this.registeredIDs,
+  };
+  return basic;
+};
 
 /**
  * Event Model

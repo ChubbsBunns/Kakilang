@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
  */
 function ProfileBox({ user, target }) {
   /** Constants */
-  const disabling = target.email == user.email.toLowerCase();
+  const disabling = target._id == user._id;
   const navigate = useNavigate();
 
   /** Handle changes **/
@@ -26,58 +26,31 @@ function ProfileBox({ user, target }) {
     );
   };
 
-  const Year = <span className="year">Year 2</span>;
-
-  const Major =
-    target.major != "undefined" ? (
-      <span className="major">{target.major}</span>
-    ) : (
-      <></>
-    );
-
-  const House =
-    target.house != "undefined" ? (
-      <p className="house-row">
-        House: <span className="house">{target.house}</span>
-      </p>
-    ) : (
-      <></>
-    );
-
-  const Floor = target.floor ? (
-    <p className="floor-row">
-      Floor:
-      <span className="floor"> Cinnamon Wing {target.floor} Floor</span>
-    </p>
-  ) : (
-    <></>
-  );
+  const profile = target.profile;
 
   return (
     <div className="container-profile-page">
       <div className="profile-box">
         <div className="image-name-box">
-          <img src={target.profileIMG} className="profile-picture" />
+          <img src={target.img} className="profile-picture" />
           <span className="name">
             <br />
             {target.name}
             <br />
 
-            {Year}
+            {profile.year}
             <br />
-            {Major}
+            {profile.major}
             {ChatButton(disabling)}
           </span>
         </div>
         <div className="information-box">
           <p className="interests-row">
-            Interests:{" "}
-            <span className="interests">
-              Gaming, Books and Hardcore Snail Racing{" "}
-            </span>
+            {profile.interest ? "Interests:" : ""}
+            <span className="interests">{profile.interest}</span>
           </p>
-          {House}
-          {Floor}
+          {profile.house}
+          {profile.floor ? "Floor: " + profile.floor : ""}
         </div>
         <div className="edit-button-div">
           <button className="edit-button">Edit</button>

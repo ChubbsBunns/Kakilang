@@ -42,7 +42,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docs": "jsdoc -c jsdoc.conf.json",
-    "serverStart": "node backend/server.js"
+    "serverStart": "nodemon backend/server.js"
   },
   "eslintConfig": {
     "extends": [

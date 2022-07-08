@@ -3,6 +3,7 @@ const router = require("express").Router();
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { generateToken } = require("../middleware/auth");
 
 /**
  * Creates an error message for bad login
@@ -35,8 +36,6 @@ router.route("/login").post((req, res) => {
         const payload = {
           id: dbUser._id,
           email: dbUser.email,
-          name: dbUser.name,
-          img: dbUser.profileIMG,
         };
 
         // return the user with censored password
@@ -46,10 +45,10 @@ router.route("/login").post((req, res) => {
         jwt.sign(
           payload,
           process.env.JWT_SECRET,
-          { expiresIn: "1h" },
+          { expiresIn: "2h" },
           (err, token) => {
-            if (err) return res.json(badLogin(err));
-            return res.json({
+            if (err) return res.status(500).json(badLogin(err));
+            return res.status(200).json({
               message: "Success",
               token: "Bearer" + token,
               login: true,
@@ -59,7 +58,7 @@ router.route("/login").post((req, res) => {
         );
       } else {
         // Password is wrong
-        return res.json(badLogin());
+        return res.status(403).json(badLogin());
       }
     });
   });
@@ -106,5 +105,7 @@ router.route("/getUser").get(verifyJWT, (req, res) => {
       res.status(500).json(badLogin(err));
     });
 });
+
+router.route("/login").get(generateToken);
 
 module.exports = router;

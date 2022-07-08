@@ -5,8 +5,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
-const defaultProfile = "/defaultProfile.png";
-import { staticGroup } from "../staticVariables";
 
 /**
  * Chat List of exising messages
@@ -18,32 +16,30 @@ function ChatList({ user, setTarget }) {
   /** Declare constants */
   const server = process.env.REACT_APP_SERVER;
   const navigate = useNavigate();
-  const [group, setGroup] = useState(staticGroup);
+  const [group, setGroup] = useState([]);
 
   /** Handle selections */
   const onSelectPerson = (targetUser) => () => {
     setTarget(targetUser);
-    const targetHandle = targetUser?.email?.split("@")[0];
+    const targetHandle = targetUser.name.split(" ")[0];
     navigate(targetHandle + "/chat");
   };
 
   /** Get the list of people from server */
   const getGroupAsync = async () => {
     const response = await axios
-      .get(server + "/users/getBasic")
+      .get(server + "/message/user/" + user._id)
       .then((res) => {
-        return res.data.users;
+        return res.data.convos;
       })
       .catch((err) => {
         console.log(err);
         return [];
       });
-    const index = response.findIndex(({ email }) => {
-      return email == user.email.toLowerCase();
+    const treated = response.map((convo) => {
+      return convo;
     });
-    // remove current user at the top
-    response.splice(index, 1);
-    setGroup(response);
+    setGroup(treated);
   };
   /** Run once for performance */
   useEffect(() => {
@@ -65,21 +61,17 @@ function ChatList({ user, setTarget }) {
           <div className="list-of-people-component">
             <div className="list-of-people">
               <ul>
-                {group.map((person) => {
-                  person.profileIMG = person.profileIMG || defaultProfile;
+                {group.map((convo) => {
                   return (
-                    <li key={person._id}>
-                      <a onClick={onSelectPerson(person)}>
-                        <img src={person.profileIMG} />
-                        {person.name}
+                    <li key={convo._id}>
+                      <a onClick={onSelectPerson(convo)}>
+                        <img src={convo.img} />
+                        {convo.name}
                       </a>
                     </li>
                   );
                 })}
               </ul>
-            </div>
-            <div className="group-name">
-              <i>Group Name Placeholder</i>
             </div>
           </div>
         </div>
@@ -91,7 +83,7 @@ function ChatList({ user, setTarget }) {
 
 ChatList.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
   }),
   setTarget: PropTypes.func.isRequired,
 };

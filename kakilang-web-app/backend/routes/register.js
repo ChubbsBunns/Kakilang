@@ -52,14 +52,28 @@ router.route("/add").post(upload.single("myImage"), async (req, res) => {
 
     // Construct a user from the model
     const newUser = new User({
-      name: user.name,
-      major: user.major,
-      house: user.house,
-      floor: user.floor,
-      cca: user.cca,
       email: user.email.toLowerCase(),
       password: user.password,
+      name: user.name,
       profileIMG: file?.path,
+      profile: {
+        major: {
+          value: user.major,
+          display: true,
+        },
+        house: {
+          value: user.house,
+          display: true,
+        },
+        floor: {
+          value: user.floor,
+          display: true,
+        },
+        cca: {
+          value: user.cca,
+          display: true,
+        },
+      },
     });
 
     // Save the user to mongoDB
