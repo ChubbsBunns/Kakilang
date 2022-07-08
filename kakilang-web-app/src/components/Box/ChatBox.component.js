@@ -26,6 +26,7 @@ function ChatBox({ user, target }) {
   /** Handle changes */
   const messageEdit = (event) => setMessage(event.target.value);
   const goToProfile = () => navigate("../profile");
+  const goToEvent = () => navigate("..");
 
   /** Get different Messages from different people */
   const getMessageAsync = async (convoID) => {
@@ -125,12 +126,11 @@ function ChatBox({ user, target }) {
             <div className="active">
               <div className="active-padding"></div>
               <h4>{target.name}</h4>
-              <h6>Last seen 3 hours ago...</h6>
               <div className="active-padding"></div>
             </div>
 
             <div className="header-icons">
-              <a onClick={goToProfile}>
+              <a onClick={target.eventDate ? goToEvent : goToProfile}>
                 <i className="fa fa-info-circle"></i>
               </a>
             </div>
@@ -176,6 +176,7 @@ ChatBox.propTypes = {
     name: PropTypes.string.isRequired,
     convoID: PropTypes.string,
     _id: PropTypes.string,
+    eventDate: PropTypes.string,
   }).isRequired,
 };
 

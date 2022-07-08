@@ -61,7 +61,7 @@ router.route("/").post(upload.single("eventImage"), (req, res) => {
 router.route("/").get((req, res) => {
   Events.find((err, events) => {
     if (err) res.status(418).send(err);
-    res.status(200).json({ events: events });
+    res.status(200).json({ events: events?.map((event) => event.info()) });
   });
 });
 
@@ -76,22 +76,22 @@ router.route("/:id").patch(upload.single("eventImage"), (req, res) => {
   };
   delete update.oldIMG;
 
-  const deleteOld = async () => {
+  const deleteOld = () => {
     let isDeleted = { result: "no file change" };
     if (update.eventIMG && update.eventIMG !== oldFile) {
       const temp = oldFile.split("/");
       const oldFileName = temp[temp.length - 1].split(".")[0];
-      isDeleted = await cloudinary.uploader.destroy("Events/" + oldFileName);
+      isDeleted = cloudinary.uploader.destroy("Events/" + oldFileName);
     }
     return isDeleted;
   };
 
-  Events.findByIdAndUpdate(req.params.id, update, async (err, dbEvent) => {
+  Events.findByIdAndUpdate(req.params.id, update, (err, dbEvent) => {
     if (err) {
       console.log(err);
       res.status(500).json({ message: err });
     }
-    const deleteStatus = await deleteOld();
+    const deleteStatus = deleteOld();
     console.log("Old Image deleted?:", deleteStatus.result);
     req.io.emit("updateEvent");
     console.log("Event Updated");
@@ -122,6 +122,54 @@ router.route("/:id").delete((req, res) => {
     console.log("Event Deleted");
     req.io.emit("updateEvent");
     res.sendStatus(200);
+  });
+});
+
+// GET a User's Events
+router.route("/user/:id").get((req, res) => {
+  const queryID = req.params.id;
+  Events.find({
+    $or: [{ ownerID: queryID }, { registeredIDs: queryID }],
+  }).then((dbEvents) => {
+    res.status(200).json({ events: dbEvents?.map((event) => event.info()) });
+  });
+});
+
+// Registering for an event
+router.route("/:eventID/:userID").patch((req, res) => {
+  const update = {
+    $push: {
+      registeredIDs: req.params.userID,
+    },
+  };
+
+  Events.findByIdAndUpdate(req.params.eventID, update, async (err, dbEvent) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ message: err });
+    }
+    req.io.emit("updateEvent");
+    dbEvent;
+    res.status(200).json({ message: "OK" });
+  });
+});
+
+// Unregistering for an event
+router.route("/:eventID/:userID").delete((req, res) => {
+  const update = {
+    $pull: {
+      registeredIDs: req.params.userID,
+    },
+  };
+  console.log("deletus", req.params.eventID);
+  Events.findByIdAndUpdate(req.params.eventID, update, async (err, dbEvent) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ message: err });
+    }
+    req.io.emit("updateEvent");
+    dbEvent;
+    res.status(200).json({ message: "OK" });
   });
 });
 

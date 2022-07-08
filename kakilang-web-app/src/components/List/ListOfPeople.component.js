@@ -5,7 +5,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
-const defaultProfile = "/defaultProfile.png";
 import { staticGroup } from "../staticVariables";
 
 /**
@@ -24,10 +23,8 @@ function ListOfPeople({ user, setTarget }) {
 
   /** Handle selections */
   const onSelectPerson = (targetUser) => async () => {
-    targetUser.img = targetUser.profileIMG;
     const convoID = await getConvoAsync(targetUser._id);
     targetUser.convoID = convoID;
-    console.log(targetUser);
     setTarget(targetUser);
     const targetHandle = targetUser?.name?.split(" ")[0];
     navigate(targetHandle + "/profile");
@@ -87,11 +84,10 @@ function ListOfPeople({ user, setTarget }) {
             <div className="list-of-people">
               <ul>
                 {group.map((person) => {
-                  person.profileIMG = person.profileIMG || defaultProfile;
                   return (
                     <li key={person._id}>
                       <a onClick={onSelectPerson(person)}>
-                        <img src={person.profileIMG} />
+                        <img src={person.img} />
                         {person.name}
                       </a>
                     </li>

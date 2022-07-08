@@ -5,8 +5,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
-const defaultProfile = "/defaultProfile.png";
-const defaultEvent = "/defaultEvent.jpg";
 
 /**
  * Chat List of exising messages
@@ -39,9 +37,6 @@ function ChatList({ user, setTarget }) {
         return [];
       });
     const treated = response.map((convo) => {
-      convo.img = convo.eventDate
-        ? convo.eventIMG || defaultEvent
-        : convo.profileIMG || defaultProfile;
       return convo;
     });
     setGroup(treated);

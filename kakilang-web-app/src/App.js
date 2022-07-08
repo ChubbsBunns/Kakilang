@@ -20,6 +20,7 @@ import ChatList from "./components/List/ChatList.component";
 import EmptyBox from "./components/Box/EmptyBox.component";
 import EventList from "./components/List/EventList.component";
 import EventEditingBox from "./components/Box/EventEditingBox.component";
+import MyEventList from "./components/List/MyEventList.component";
 
 function App() {
   const errorProfile = {
@@ -61,13 +62,7 @@ function App() {
 
                     <Route
                       path="chat"
-                      element={
-                        <ChatBox
-                          user={user}
-                          target={target}
-                          setTarget={setTarget}
-                        />
-                      }
+                      element={<ChatBox user={user} target={target} />}
                     />
                   </Route>
                 </Route>
@@ -77,24 +72,39 @@ function App() {
                   element={<EventList user={user} setTarget={setTarget} />}
                 >
                   <Route path="" element={<EmptyBox />} />
-                  <Route
-                    path=":eventID"
-                    element={
-                      <EventsBox
-                        user={user}
-                        target={target}
-                        setOwnership={setOwnership}
-                      />
-                    }
-                  />
+                  <Route path=":eventID/*">
+                    <Route
+                      path=""
+                      element={
+                        <EventsBox
+                          user={user}
+                          target={target}
+                          setOwnership={setOwnership}
+                        />
+                      }
+                    />
+                    <Route
+                      path="chat"
+                      element={<ChatBox user={user} target={target} />}
+                    />
+                  </Route>
                 </Route>
-
                 <Route
                   path="/myChats/*"
                   element={<ChatList user={user} setTarget={setTarget} />}
                 >
                   <Route path="" element={<EmptyBox />} />
                   <Route path=":targetHandle/*">
+                    <Route
+                      path=""
+                      element={
+                        <EventsBox
+                          user={user}
+                          target={target}
+                          setOwnership={setOwnership}
+                        />
+                      }
+                    />
                     <Route
                       path="chat"
                       element={<ChatBox user={user} target={target} />}
@@ -108,22 +118,12 @@ function App() {
 
                 <Route
                   path="/myEvents/*"
-                  element={<EventList user={user} setTarget={setTarget} />}
+                  element={<MyEventList user={user} setTarget={setTarget} />}
                 >
                   <Route path="" element={<EmptyBox />} />
                   <Route
                     path="create"
                     element={<EventCreationBox owner={user} />}
-                  />
-                  <Route
-                    path=":eventID"
-                    element={
-                      <EventsBox
-                        user={user}
-                        target={target}
-                        setOwnership={setOwnership}
-                      />
-                    }
                   />
                   <Route
                     element={
@@ -133,6 +133,22 @@ function App() {
                     <Route
                       path=":eventID/edit"
                       element={<EventEditingBox owner={user} target={target} />}
+                    />
+                  </Route>
+                  <Route path=":eventID/*">
+                    <Route
+                      path=""
+                      element={
+                        <EventsBox
+                          user={user}
+                          target={target}
+                          setOwnership={setOwnership}
+                        />
+                      }
+                    />
+                    <Route
+                      path="chat"
+                      element={<ChatBox user={user} target={target} />}
                     />
                   </Route>
                 </Route>

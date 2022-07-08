@@ -93,7 +93,7 @@ router.route("/user/:userID").get((req, res) => {
           if (convo.participants.length == 0) {
             let target = convo.EventChat.info();
 
-            return { convoID: convo._id, ...target._doc };
+            return { convoID: convo._id, ...target };
           } else {
             let target = convo.participants[0].info();
             target.convoID = convo._id;
@@ -137,11 +137,8 @@ router.route("/user/:user1ID/:user2ID").get((req, res) => {
 router.route("/event/:eventID").get((req, res) => {
   const queryID = req.params.eventID;
   Convo.findOne({ EventChat: queryID })
-    .populate("EventChat")
     .then((dbEventConvo) => {
-      const target = dbEventConvo.EventChat;
-      target.convo_id = dbEventConvo._id;
-      res.status(200).json({ convo: target });
+      res.status(200).json({ convoID: dbEventConvo?._id });
     })
     .catch((err) => {
       console.log(err);

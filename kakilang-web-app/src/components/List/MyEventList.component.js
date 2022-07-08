@@ -12,7 +12,7 @@ import "./ListOfPeople.component.css";
  *
  * List of existing events
  */
-function EventList({ user, setTarget }) {
+function MyEventList({ user, setTarget }) {
   /** Declare constants */
   const server = process.env.REACT_APP_SERVER;
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function EventList({ user, setTarget }) {
     const convoID = await getConvoAsync(targetEvent._id);
     targetEvent.convoID = convoID;
     setTarget(targetEvent);
-    const targetHandle = targetEvent?.name?.replace(/( )/gi, "-");
+    const targetHandle = targetEvent.name.replace(/( )/gi, "-");
     navigate(targetHandle);
   };
 
@@ -44,7 +44,7 @@ function EventList({ user, setTarget }) {
   /** Get the list of events from server */
   const getGroupAsync = async () => {
     const response = await axios
-      .get(server + "/events")
+      .get(server + "/events/user/" + user._id)
       .then((res) => {
         return res.data.events;
       })
@@ -56,8 +56,8 @@ function EventList({ user, setTarget }) {
       otherEvent = [];
     response.forEach((event) => {
       (event.ownerID == user._id ? myEvent : otherEvent).push(event);
+      setGroup(myEvent.concat(otherEvent));
     });
-    setGroup(myEvent.concat(otherEvent));
   };
   /** Run once for performance */
   useEffect(() => {
@@ -113,7 +113,7 @@ function EventList({ user, setTarget }) {
   );
 }
 
-EventList.propTypes = {
+MyEventList.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
@@ -121,4 +121,4 @@ EventList.propTypes = {
   setTarget: PropTypes.func.isRequired,
 };
 
-export default EventList;
+export default MyEventList;

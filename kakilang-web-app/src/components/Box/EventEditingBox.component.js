@@ -12,13 +12,11 @@ import "./EventCreationBox.component.css";
 function EventEditingBox({ owner, target }) {
   /** Define the server to connect */
   const server = process.env.REACT_APP_SERVER;
-  const oldIMG = target.eventIMG;
+  const oldIMG = target.img;
   const [name, setName] = useState(target.name);
   const [description, setDescription] = useState(target.description);
   const [eventDate, setEventDate] = useState(target.eventDate);
-  const [preview, setPreview] = useState(
-    target.eventIMG || "/defaultEvent.jpg"
-  );
+  const [preview, setPreview] = useState(target.img || "/defaultEvent.jpg");
   const navigate = useNavigate();
 
   /** Handle Events  **/
@@ -28,7 +26,7 @@ function EventEditingBox({ owner, target }) {
   const imgSetting = (event) => {
     const error = (message = null) => {
       message ? alert(message) : null;
-      setPreview(target.eventIMG || "/defaultEvent.jpg");
+      setPreview(target.img || "/defaultEvent.jpg");
       event.target.value = null;
       return false;
     };
@@ -50,8 +48,8 @@ function EventEditingBox({ owner, target }) {
   const handleDelete = async () => {
     const result = await confirm("Delete this event?");
     let oldIMG = "";
-    if (target.eventIMG && target.eventIMG !== "/defaultEvent.jpg") {
-      oldIMG = target.eventIMG;
+    if (target.img && target.img !== "/defaultEvent.jpg") {
+      oldIMG = target.img;
     }
 
     if (result) {
@@ -82,14 +80,14 @@ function EventEditingBox({ owner, target }) {
       alert("Oops it looks like an error occured\nTry again later");
       console.log("Missing creator information");
       return;
-    } else if (owner._id !== target.owner.id) {
+    } else if (owner._id !== target.ownerID) {
       alert("Oops it looks like an error occured\nTry again later");
       console.log("Illegal editing access!");
       return;
     }
 
     // Additional input
-    oldIMG ? eventData.append("oldIMG", oldIMG) : null;
+    oldIMG !== "/defaultEvent.jpg" ? eventData.append("oldIMG", oldIMG) : null;
 
     // Prevent Bad input
     for (let [k, v] of eventData.entries()) {
