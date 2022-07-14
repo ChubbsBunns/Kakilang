@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Login.component.css";
+import "./RegistrationAdditionalStyling.component.css";
 import { useNavigate } from "react-router-dom";
 import BigLogo from "./BigLogo.component";
 import Dropdown from "./Dropdown.component";
 import { majors, houses, floors, ccas } from "./staticVariables";
+
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+/*
+
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+*/
 
 /**
  * User Register component
@@ -109,32 +120,33 @@ function Registration() {
     <>
       <BigLogo />
       <div className="Login-window">
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+        <FormControl onSubmit={handleSubmit} encType="multipart/form-data">
           <h1> Register an account </h1>
-          <input
+          <TextField
             type="string"
             name="Name"
             value={name}
             onChange={nameChange}
-            placeholder="Name"
+            label="Name"
           />
           <br />
-          <input
+          <TextField
             type="email"
             name="Email"
             value={email}
-            placeholder="Email address"
             onChange={emailChange}
+            label="Email Address"
           />
           <br />
-          <input
+          <TextField
             type="password"
             name="Password"
             value={password}
-            placeholder="Password"
             onChange={passwordChange}
+            label="Password"
           />
           <br />
+
           <Dropdown
             label="Major"
             options={majors}
@@ -167,8 +179,8 @@ function Registration() {
           <br />
           <img src={preview} alt="Unable to display image" />
           <br />
-          <input className="submit" type="submit" value="Register" />
-        </form>
+        </FormControl>
+        <Button className="submit" type="submit" value="Register" />
       </div>
     </>
   );

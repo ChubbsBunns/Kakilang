@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 /**Import Components & CSS */
+/*
+import Button from "@mui/material/Button";
 import BigLogo from "./BigLogo.component";
+*/
+import FrontPageLogo from "./images/Kakilang_Frontpage.JPG";
+import Logo from "./images/KakilangLogo.png";
+
 const defaultProfile = "/defaultProfile.png";
 import "./Login.component.css";
 
@@ -77,37 +85,83 @@ function Login({ setAuth, setUser }) {
         console.log(err.response.data.message);
       });
   }, []);
-
+  {
+    /** 
+      <div
+        className="Login-Component"
+        style={{ backgroundImage: `url(${FrontPageLogo})` }}
+      ></div>
+      */
+  }
   return (
-    <>
-      <BigLogo />
-      <div className="Login-window">
-        <form onSubmit={handleSubmit}>
-          <h1> Log In </h1>
-          <input
-            type="email"
-            name="Email"
-            value={email}
-            placeholder="Email address"
-            onChange={emailChange}
-          />
-          <br />
-          <input
-            type="password"
-            name="Password"
-            value={password}
-            placeholder="Password"
-            onChange={passwordChange}
-          />
-          <br />
-          <input className="submit" type="submit" value="Log In" />
-        </form>
-        <i>
-          {" "}
-          Need an account? <a href="/register"> Sign up </a>{" "}
-        </i>
+    <div className="Login-Entire-Component">
+      <div
+        className="Login-Image"
+        style={{ backgroundImage: `url(${FrontPageLogo})` }}
+      ></div>
+      <div className="Login-Page">
+        {/**
+        <BigLogo />
+         */}
+
+        <div className="Login-window">
+          <div className="Kakilang-Login-Logo">
+            <img src={Logo}></img>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <h1> Log In </h1>
+            <TextField
+              id="outlined-basic"
+              label="Username/Email"
+              variant="outlined"
+              type="email"
+              name="Email"
+              value={email}
+              onChange={emailChange}
+            />
+            {/** 
+            <input />
+            <input />
+            */}
+            <br />
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              variant="outlined"
+              type="password"
+              name="Password"
+              value={password}
+              /*
+              placeholder="Password"
+              */
+              onChange={passwordChange}
+              /*Style for Material UI*/
+              sx={{
+                backgroundColor: "#fce9dc",
+                margin: 2,
+              }}
+            />
+
+            <br />
+            <Button
+              variant="contained"
+              className="submit"
+              type="submit"
+              value="Log In"
+            >
+              Sign In!
+            </Button>
+          </form>
+          {/**
+          <Button variant="contained">I AM A BABY</Button>
+           */}
+          <i>
+            {" "}
+            Need an account? <a href="/register"> Sign up </a>{" "}
+          </i>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,56 +1,159 @@
+.Login-Entire-Component {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.App-link {
+  height: 15vh;
+  margin: 0%;
+}
+
+@media (min-width: 0px) {
+  .Login-Page {
+    flex-basis: 100%;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    box-shadow: 3px 3px 10px black;
+    flex-direction: row;
+    overflow: auto;
+    background-color: #fce9dc;
+  }
+
+  .Login-Image {
+    flex-basis: 0%;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+
+    box-sizing: border-box;
+    margin: 0;
+    flex-direction: row;
+    /*
+    background-image: {asdasd};
+    */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (min-width: 600px) {
+  .Login-Page {
+    flex-basis: 66.666667%;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    max-width: 66.666667%;
+    box-sizing: border-box;
+    margin: 0;
+    box-shadow: 3px 3px 10px black;
+    flex-direction: row;
+  }
+
+  .Login-Image {
+    flex-basis: 33.333333%;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    max-width: 33.333333%;
+
+    box-sizing: border-box;
+    margin: 0;
+    flex-direction: row;
+    /*
+    background-image: {asdasd};
+    */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .Login-Page {
+    flex-basis: 41.666667%;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    max-width: 66.666667%;
+    box-sizing: border-box;
+    margin: 0;
+    box-shadow: 3px 3px 10px black;
+    flex-direction: row;
+    background-color: #fce9dc;
+  }
+
+  .Login-Image {
+    flex-basis: 58.333333%;
+    -webkit-box-flex: 0;
+    flex-grow: 0;
+    max-width: 58.333333%;
+
+    box-sizing: border-box;
+    margin: 0;
+    flex-direction: row;
+    /*
+    background-image: {asdasd};
+    */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
 .Login-window {
-    background-color: #F9C2A4;
-    min-height: 100vh;
-    min-width: 90vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #53012C;
-    border-radius: 4px;
-    font-size: calc(2px + 4vmin);
+  background-color: #fce9dc;
+  height: 100vh;
+  color: #53012c;
+  font-size: calc(2px + 4vmin);
+}
+
+.Kakilang-Login-Logo > img {
+  border-radius: 0%;
 }
 
 .Login-window h1 {
-    font-size: calc(10px + 6vmin);
+  font-size: calc(10px + 6vmin);
 }
 
 .Login-window form {
-    width: 90vw;
-    border: none;
-    border-radius: 4px;
-    outline: none;
-    margin-bottom: 4vh;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  margin-bottom: 4vh;
 }
 
-
 .Login-window input {
-    height: 13vh;
-    position: relative;
-    padding: 0px 4vw;
-    border: none;
-    border-radius: 4px;
-    font-size: calc(2px + 4vmin);
-    font-weight: 400;
-    line-height: normal;
-    color: #53012C;
-    outline: none;
-    box-shadow: 0px 4px 20px 0px transparent;
-    margin-bottom: 4vh;
+  position: relative;
+  max-height: 20vh;
+  border: none;
+  border-radius: 4px;
+  font-size: calc(2px + 4vmin);
+  font-weight: 400;
+  line-height: normal;
+  color: #53012c;
+  outline: none;
+  box-shadow: 0px 4px 20px 0px transparent;
+  margin: 0.5vh;
+  background-color: #fce9dc;
+  font-family: roboto;
 }
 
 .Login-window input.submit {
-    width: 10vw;
-    height: 6vh;
-    position: relative;
-    padding: 0px 0px;
-    border: none;
-    border-radius: 4px;
-    font-size: calc(2px + 2vmin);;
-    font-weight: 400;
-    line-height: normal;
-    color: #53012C;
-    outline: none;
-    box-shadow: 0px 4px 20px 0px transparent;
+  width: 10vw;
+  height: 6vh;
+  position: relative;
+  padding: 0px 0px;
+  border: none;
+  border-radius: 4px;
+  font-size: calc(2px + 2vmin);
+  font-weight: 400;
+  line-height: normal;
+  color: #53012c;
+  outline: none;
+  box-shadow: 0px 4px 20px 0px transparent;
 }
-
-
