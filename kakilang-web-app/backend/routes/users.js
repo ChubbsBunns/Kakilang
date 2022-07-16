@@ -1,11 +1,18 @@
-//Setup Route and dependencies
+/**
+ * Router for Users at /users
+ * API for User and Profile CRUD
+ */
+
 const router = require("express").Router();
+const { verifyJWT } = require("../middleware/token");
 const User = require("../models/user.model");
 
 /** Rotuing for users */
 
-// Get All Users
-router.route("/").get((req, res) => {
+/** Get All Users
+ * JWT authentication required
+ */
+router.route("/").get(verifyJWT, (req, res) => {
   User.find((err, dbUsers) => {
     if (err) res.status(418).json({ err: err });
     const all = [];
@@ -18,8 +25,11 @@ router.route("/").get((req, res) => {
   });
 });
 
-// Get User No Auth
-router.route("/:id").get((req, res) => {
+/**
+ * Get User info
+ * JWT authentication required
+ */
+router.route("/:id").get(verifyJWT, (req, res) => {
   User.findById(req.params.id)
     .then((dbUser) => {
       res.status(200).json({ user: dbUser.info() });
@@ -30,8 +40,11 @@ router.route("/:id").get((req, res) => {
     });
 });
 
-// Get Filtered All
-router.route("/:key/:value").get((req, res) => {
+/**
+ * Get Filtered All
+ * JWT authentication required
+ */
+router.route("/:key/:value").get(verifyJWT, (req, res) => {
   const key = req.params.key;
   if (key == "email" || key == "password") {
     return res.status(200).json({ users: [] });

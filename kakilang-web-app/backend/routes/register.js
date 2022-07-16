@@ -1,4 +1,8 @@
-/** Setup .env file to be handled */
+/**
+ * Router for Authentication at /register
+ * API for authentication CRUD
+ */
+
 require("dotenv").config();
 
 /** Setup Route and dependencies */
@@ -48,7 +52,7 @@ router.route("/add").post(upload.single("myImage"), async (req, res) => {
     res.json({ message: "Invalid Email or Password", isSuccessful: false });
   } else {
     /** Safely encrypt the password */
-    user.password = await bcrypt.hash(user.password, 10);
+    user.password = await bcrypt.hash(user.password, process.env.BCRYPT_SALT);
 
     // Construct a user from the model
     const newUser = new User({

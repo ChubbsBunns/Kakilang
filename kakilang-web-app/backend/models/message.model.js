@@ -1,15 +1,16 @@
+/**
+ * Message Schema
+ * Stores the contents of a message,
+ * with reference to the conversation and the sender
+ *
+ * @param convoID
+ * @param senderID
+ * @param message
+ * @param image Optional
+ */
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-/**
- * Schema of the User
- * For MongoDB get and post requests
- * @memberof userSchema
- *
- * @property {string} _id - Unique Database ID
- * @property {string} email - Unique User's email
- * @property {string} password - Encrypted User's password
- */
 const messageSchema = new Schema(
   {
     convoID: {
@@ -35,5 +36,4 @@ const messageSchema = new Schema(
 );
 
 const Message = mongoose.model("Message", messageSchema);
-
 module.exports = Message;

@@ -1,23 +1,31 @@
-//Setup .env file to be handled
+/**
+ * Router for Chatbox functions at /chatbox
+ * API for messages and convo CRUD
+ */
+
 require("dotenv").config();
 
 const Message = require("../models/message.model");
 const Convo = require("../models/conversation.model");
+const { verifyJWT, isUserSessionToken } = require("../middleware/token");
 const router = require("express").Router();
 
 /**
- * Creating new messages and a new convo
+ * Creates new messages and a new convo
+ * JWT authentication and User Session authentication required for usage
+ * Socket emits "message" with convoID
  */
-router.route("/convo").post((req, res) => {
+router.route("/convo").post(verifyJWT, (req, res) => {
+  if (!isUserSessionToken(req.jwt, req.body.senderID)) {
+    return res.send(403).json({ message: "Usage not allowed" });
+  }
+
   const participants = [req.body.senderID, req.body.targetID];
-  const newConvo = new Convo({
-    participants: participants,
-  });
+  const newConvo = new Convo({ participants: participants });
   newConvo.save((err) => {
-    if (err) {
-      res.status(500).send({ err: err });
-    }
+    if (err) res.status(500).send({ err: err });
   });
+
   const newMessage = new Message({
     convoID: newConvo._id,
     senderID: req.body.senderID,
@@ -34,9 +42,15 @@ router.route("/convo").post((req, res) => {
 });
 
 /**
- * Creating new messages in existing convo
+ * Creates new messages in existing convo
+ * JWT authentication and User Session authentication required for usage
+ * Socket emits "message" with convoID
  */
-router.route("/convo/:convoID").post((req, res) => {
+router.route("/convo/:convoID").post(verifyJWT, (req, res) => {
+  if (!isUserSessionToken(req.jwt, req.body.senderID)) {
+    return res.status(403).json({ message: "Usage not allowed" });
+  }
+
   const newMessage = new Message({
     convoID: req.params.convoID,
     ...req.body,
@@ -53,9 +67,29 @@ router.route("/convo/:convoID").post((req, res) => {
 
 /**
  * Get messages from ConvoID
+ * JWT authentication and User Session authentication required for usage
  */
-router.route("/convo/:convoID").get((req, res) => {
+router.route("/convo/:convoID").get(verifyJWT, async (req, res) => {
   const queryID = req.params.convoID;
+  let isAuth = false;
+  const convoParticipants = await Convo.findById(queryID)
+    .populate("EventChat", "ownerID registeredIDs")
+    .then((dbConvo) => {
+      return dbConvo.EventChat
+        ? [dbConvo.EventChat.ownerID, ...dbConvo.EventChat.registeredIDs]
+        : dbConvo.participants;
+    })
+    .catch((err) => {
+      console.log(err);
+      return [];
+    });
+
+  for (let i = 0; i < convoParticipants.length; i++) {
+    isAuth = isUserSessionToken(req.jwt, convoParticipants[i]);
+    if (isAuth) break;
+  }
+  if (!isAuth) return res.status(403).json({ message: "Read not allowed" });
+
   Message.find({ convoID: queryID })
     .populate("senderID", "name profileIMG")
     .then((dbMessages) => {
@@ -69,9 +103,14 @@ router.route("/convo/:convoID").get((req, res) => {
 
 /**
  * Get Convo from single userID
+ * JWT authentication and User Session authentication required for usage
  */
-router.route("/user/:userID").get((req, res) => {
+router.route("/user/:userID").get(verifyJWT, (req, res) => {
   const queryID = req.params.userID;
+  if (!isUserSessionToken(req.jwt, queryID)) {
+    return res.status(403).json({ message: "Read not allowed" });
+  }
+
   Convo.find({ $or: [{ participants: queryID }, { EventChat: { $ne: null } }] })
     .populate({
       path: "participants",
@@ -110,12 +149,24 @@ router.route("/user/:userID").get((req, res) => {
 
 /**
  * Get Convo from two UserID
+ * JWT authentication and User Session authentication required for usage
  */
 router.route("/user/:user1ID/:user2ID").get((req, res) => {
+  const user1ID = req.params.user1ID;
+  const user2ID = req.params.user2ID;
+
+  const isAuth =
+    isUserSessionToken(req.jwt, user1ID) ||
+    isUserSessionToken(req.jwt, user2ID);
+
+  if (!isAuth) {
+    return res.status(403).json({ message: "Read not allowed" });
+  }
+
   Convo.findOne({
     $or: [
-      { participants: [req.params.user1ID, req.params.user2ID] },
-      { participants: [req.params.user2ID, req.params.user1ID] },
+      { participants: [user1ID, user2ID] },
+      { participants: [user2ID, user1ID] },
     ],
   })
     .then((convo) => {

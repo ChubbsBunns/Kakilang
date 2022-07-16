@@ -1,9 +1,15 @@
+//@TODO
+/**
+ * Router for Authentication at /token
+ * API for authentication CRUD
+ */
+
 /** Import router and dependencies */
 const router = require("express").Router();
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { generateToken } = require("../middleware/auth");
+const { generateToken } = require("../middleware/token");
 
 /**
  * Creates an error message for bad login
