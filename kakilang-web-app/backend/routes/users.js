@@ -4,7 +4,7 @@
  */
 
 const router = require("express").Router();
-const { verifyJWT } = require("../middleware/token");
+const { verifyJWT } = require("../token");
 const User = require("../models/user.model");
 
 /** Rotuing for users */

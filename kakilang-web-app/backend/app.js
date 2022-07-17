@@ -42,6 +42,7 @@ const loginRouter = require("./routes/login");
 const chatboxRouter = require("./routes/chatbox");
 const usersRouter = require("./routes/users");
 const eventsRouter = require("./routes/events");
+const authRouter = require("./routes/auth");
 
 app.use((req, res, next) => {
   req.io = io;
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 
 app.use("/register", registerRouter);
 app.use("/", loginRouter);
+app.use("/auth", authRouter);
 app.use("/message", chatboxRouter);
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);

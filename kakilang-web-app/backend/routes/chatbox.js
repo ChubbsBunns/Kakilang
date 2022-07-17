@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const Message = require("../models/message.model");
 const Convo = require("../models/conversation.model");
-const { verifyJWT, isUserSessionToken } = require("../middleware/token");
+const { verifyJWT, isUserSessionToken } = require("../token");
 const router = require("express").Router();
 
 /**

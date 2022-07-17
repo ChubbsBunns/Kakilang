@@ -28,7 +28,7 @@ const upload = multer({ storage: storage });
 
 /** Routing for Events **/
 
-const { verifyJWT, isUserSessionToken } = require("../middleware/token");
+const { verifyJWT, isUserSessionToken } = require("../token");
 
 /**
  * Create Events

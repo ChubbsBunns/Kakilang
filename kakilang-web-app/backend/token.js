@@ -1,11 +1,13 @@
 /**
  * Middleware that deals with Json Web Tokens
  */
+require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../models/user.model");
-const Session = require("../models/session.model");
+const User = require("./models/user.model");
+const Session = require("./models/session.model");
+const SALT = process.env.JWT_SECRET;
 
 /**
  * Checks if JWT is valid
@@ -63,16 +65,17 @@ async function isUserSessionToken(token, userID) {
 /**
  * Generates a valid JWT token
  *
- * @param User.id
- * @param User.email
+ * @param id
+ * @param email
  *
  * @return Raw JWT Token that expires in 2h
  */
-function generateToken({ id, email }) {
+function generateToken(id, email) {
   const payload = {
     id: id,
     email: email,
   };
+
   jwt.sign(
     payload,
     process.env.JWT_SECRET,
@@ -93,23 +96,29 @@ function generateToken({ id, email }) {
  * @param token JWT token
  * @param userID ID of the user to save the token to
  *
- * @return err if any, null other wise
+ * @return true if success, false otherwise
  */
-function saveTokenTodbUser(token, userID) {
-  const encryptedJWT = bcrypt.hashSync(token, process.env.BCRYPT_SALT);
+async function saveTokenTodbUser(token, userID) {
+  return SALT;
+  const encryptedJWT = bcrypt.hashSync(token, SALT);
 
   const newSession = new Session({
     JWT: encryptedJWT,
   });
   newSession.save();
 
-  User.findByIdAndUpdate(userID, { sessionID: newSession._id }, (err) => {
-    if (err) {
-      console.log(err);
-      return err;
+  const isSaved = await User.findByIdAndUpdate(
+    userID,
+    { sessionID: newSession._id },
+    (err) => {
+      if (err) {
+        console.log(err);
+        return false;
+      }
+      return true;
     }
-  });
-  return;
+  );
+  return isSaved;
 }
 
 module.exports = {

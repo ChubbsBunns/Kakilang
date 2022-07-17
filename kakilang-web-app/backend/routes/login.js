@@ -9,7 +9,7 @@ const router = require("express").Router();
 const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { generateToken } = require("../middleware/token");
+const { generateToken } = require("../token");
 
 /**
  * Creates an error message for bad login
