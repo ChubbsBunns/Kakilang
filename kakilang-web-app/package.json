@@ -20,6 +20,7 @@
     "http": "^0.0.1-security",
     "jsdoc": "^3.6.10",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.8.0",
     "mongoose": "^6.3.3",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
@@ -37,6 +38,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "serverTest": "jest --watchAll",
     "eject": "react-scripts eject",
     "docs": "jsdoc -c jsdoc.conf.json",
     "serverStart": "nodemon backend/server.js"

@@ -26,12 +26,13 @@ const badLogin = (err = undefined) =>
  */
 router.route("/login").post((req, res) => {
   const userLogin = req.body;
+  if (!userLogin?.email) return res.status(400).json(badLogin());
 
   // Promise to find the User in the database
   User.findOne({ email: userLogin.email }).then((dbUser) => {
     if (!dbUser) {
       // No such email found
-      return res.json(badLogin());
+      return res.status(403).json(badLogin());
     }
 
     // Compare the password with the encrypted password
