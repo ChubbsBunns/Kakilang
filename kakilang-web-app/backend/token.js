@@ -1,13 +1,14 @@
 /**
  * Middleware that deals with Json Web Tokens
  */
-require("dotenv").config();
+const path = `${__dirname}/../.env`;
+require("dotenv").config({ path: path });
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("./models/user.model");
 const Session = require("./models/session.model");
-const SALT = process.env.JWT_SECRET;
+const SALT = parseInt(process.env.BCRYPT_SALT);
 
 /**
  * Checks if JWT is valid
@@ -20,7 +21,7 @@ function verifyJWT(req, res, next) {
   const token = req.headers["x-access-token"]?.split("Bearer")[1];
   if (!token) {
     return res
-      .status(403)
+      .status(400)
       .json({ message: "No Token Given", isLoggedIn: false });
   }
 
@@ -45,21 +46,25 @@ function verifyJWT(req, res, next) {
  * @param token The JWT token
  * @param userID The user's ID to check the token against
  *
- * @return true if token is valid to the user, false otherwise
+ * @return dbUser if true, returns false otherwise
  */
 async function isUserSessionToken(token, userID) {
+  let dbUser;
   const encryptedJWT = await User.findById(userID)
-    .populate("Session")
-    .then((dbUser) => {
-      return dbUser.sessionID?.JWT;
+    .populate({
+      path: "sessionID",
+    })
+    .then((dbSession) => {
+      console.log(dbSession.sessionID.JWT);
+      dbUser = dbSession;
+      return dbSession.sessionID.JWT;
     })
     .catch((err) => {
       console.log(err);
       return null;
     });
-
   if (!encryptedJWT) return false;
-  return bcrypt.compareSync(token, encryptedJWT);
+  return bcrypt.compareSync(token, encryptedJWT) ? dbUser : false;
 }
 
 /**
@@ -76,49 +81,39 @@ function generateToken(id, email) {
     email: email,
   };
 
-  jwt.sign(
-    payload,
-    process.env.JWT_SECRET,
-    { expiresIn: "2h" },
-    (err, token) => {
-      if (err) {
-        console.log(err);
-        return "";
-      }
-      return token;
-    }
-  );
+  try {
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
+    return token;
+  } catch (error) {
+    console.log(error);
+    return "";
+  }
 }
 
 /**
  * Makes a JWT token valid to a user session
  *
  * @param token JWT token
- * @param userID ID of the user to save the token to
+ * @param dbUser User from the database
  *
  * @return true if success, false otherwise
  */
-async function saveTokenTodbUser(token, userID) {
-  return SALT;
-  const encryptedJWT = bcrypt.hashSync(token, SALT);
+async function saveTokenTodbUser(token, dbUser) {
+  if (!dbUser) return false;
 
+  const user = new User(dbUser);
+  const encryptedJWT = bcrypt.hashSync(token, SALT);
   const newSession = new Session({
     JWT: encryptedJWT,
   });
   newSession.save();
 
-  const isSaved = await User.findByIdAndUpdate(
-    userID,
-    { sessionID: newSession._id },
-    (err) => {
-      if (err) {
-        console.log(err);
-        return false;
-      }
-      return true;
-    }
-  );
-  return isSaved;
+  user.sessionID = newSession._id;
+  user.save();
+
+  return true;
 }
 
 module.exports = {

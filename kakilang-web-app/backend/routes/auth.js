@@ -22,7 +22,8 @@ const {
 router.route("/").post((req, res) => {
   const userPassword = req.body?.password;
   const userEmail = req.body?.email;
-  if (!userEmail) return res.status(400).json(badLogin("No Email Given"));
+  if (!userEmail || !userPassword)
+    return res.status(400).json(badLogin("No Email Given"));
 
   User.findOne({ email: userEmail })
     .then((dbUser) => {
@@ -32,17 +33,13 @@ router.route("/").post((req, res) => {
         if (!correctPass) return res.status(403).json(badLogin());
 
         const token = generateToken(dbUser._id, userEmail);
-        if (!saveTokenTodbUser(token, dbUser._id)) {
-          return res.status(500).json(badLogin());
-        }
-
-        const isSaved = saveTokenTodbUser(token, dbUser._id);
+        const isSaved = saveTokenTodbUser(token, dbUser);
 
         return res.status(200).json({
+          token: "Bearer" + token,
           isLoggedIn: true,
           debug: isSaved,
           user: dbUser.info(),
-          token: "Bearer" + token,
         });
       });
     })
@@ -59,21 +56,20 @@ function badLogin(err = "Invalid Email or Password") {
  *
  * Returns successful user login
  */
-router.route("/").get(verifyJWT, (req, res) => {
-  if (!isUserSessionToken(req.jwt, req.jwtID)) {
+router.route("/").get(verifyJWT, async (req, res) => {
+  const dbUser = await isUserSessionToken(req.jwt, req.jwtID);
+  if (!dbUser) {
     return res.status(403).json(badLogin("Invalid User Session"));
   }
 
-  User.findByID(req.jwtID)
-    .then((dbUser) => {
-      return res.status(200).json({
-        isLoggedIn: true,
-        user: dbUser.info(),
-      });
-    })
-    .catch((err) => {
-      return res.status(500).json(badLogin(err));
-    });
+  return res.status(200).json({
+    isLoggedIn: true,
+    user: dbUser.info(),
+  });
 });
+
+//@TODO regenerate Token
+
+//@TODO destroy Token
 
 module.exports = router;
