@@ -12,6 +12,7 @@ const {
   generateToken,
   saveTokenTodbUser,
 } = require("../token");
+const Session = require("../models/session.model");
 
 /**
  * Creates an authenticated session
@@ -69,7 +70,34 @@ router.route("/").get(verifyJWT, async (req, res) => {
 });
 
 //@TODO regenerate Token
+router.route("/").patch(verifyJWT, async (req, res) => {
+  const dbUser = await isUserSessionToken(req.jwt, req.jwtID);
+  if (!dbUser) {
+    return res.status(403).json(badLogin("Invalid User Session"));
+  }
 
-//@TODO destroy Token
+  const newToken = generateToken(dbUser._id, dbUser.email);
+  saveTokenTodbUser(newToken, dbUser);
+
+  return res.status(200).json({
+    user: dbUser.info(),
+    token: "Bearer" + newToken,
+  });
+});
+
+router.route("/").delete(verifyJWT, async (req, res) => {
+  const dbUser = await isUserSessionToken(req.jwt, req.jwtID);
+  if (!dbUser) {
+    return res.status(403).json(badLogin("Invalid User Session"));
+  }
+
+  const sessionID = dbUser.sessionID?._id;
+  Session.findByIdAndDelete(sessionID);
+  dbUser.sessionID = undefined;
+  console.log(dbUser.sessionID);
+  await dbUser.save();
+  console.log(dbUser);
+  return res.status(202).json();
+});
 
 module.exports = router;

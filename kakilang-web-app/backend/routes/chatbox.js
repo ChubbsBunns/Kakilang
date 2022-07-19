@@ -16,7 +16,10 @@ const router = require("express").Router();
  * Socket emits "message" with convoID
  */
 router.route("/convo").post(verifyJWT, (req, res) => {
-  if (!isUserSessionToken(req.jwt, req.body.senderID)) {
+  const senderID = req.body.senderID;
+  const dbUser = isUserSessionToken(req.jwtID, senderID);
+
+  if (!dbUser || dbUser._id !== senderID) {
     return res.send(403).json({ message: "Usage not allowed" });
   }
 
@@ -47,13 +50,17 @@ router.route("/convo").post(verifyJWT, (req, res) => {
  * Socket emits "message" with convoID
  */
 router.route("/convo/:convoID").post(verifyJWT, (req, res) => {
-  if (!isUserSessionToken(req.jwt, req.body.senderID)) {
+  const senderID = req.body.senderID;
+  const dbUser = isUserSessionToken(req.jwtID, senderID);
+
+  if (!dbUser) {
     return res.status(403).json({ message: "Usage not allowed" });
   }
 
   const newMessage = new Message({
     convoID: req.params.convoID,
-    ...req.body,
+    senderID: req.body.senderID,
+    message: req.body.message,
   });
   newMessage.save((err) => {
     if (err) {
@@ -67,11 +74,10 @@ router.route("/convo/:convoID").post(verifyJWT, (req, res) => {
 
 /**
  * Get messages from ConvoID
- * JWT authentication and User Session authentication required for usage
+ * JWT authentication required for usage
  */
 router.route("/convo/:convoID").get(verifyJWT, async (req, res) => {
   const queryID = req.params.convoID;
-  let isAuth = false;
   const convoParticipants = await Convo.findById(queryID)
     .populate("EventChat", "ownerID registeredIDs")
     .then((dbConvo) => {
@@ -84,11 +90,9 @@ router.route("/convo/:convoID").get(verifyJWT, async (req, res) => {
       return [];
     });
 
-  for (let i = 0; i < convoParticipants.length; i++) {
-    isAuth = isUserSessionToken(req.jwt, convoParticipants[i]);
-    if (isAuth) break;
+  if (!convoParticipants.includes(req.jwtID)) {
+    return res.status(403).json({ message: "Read not allowed" });
   }
-  if (!isAuth) return res.status(403).json({ message: "Read not allowed" });
 
   Message.find({ convoID: queryID })
     .populate("senderID", "name profileIMG")
@@ -107,7 +111,8 @@ router.route("/convo/:convoID").get(verifyJWT, async (req, res) => {
  */
 router.route("/user/:userID").get(verifyJWT, (req, res) => {
   const queryID = req.params.userID;
-  if (!isUserSessionToken(req.jwt, queryID)) {
+  const dbUser = isUserSessionToken(req.jwtID, queryID);
+  if (!dbUser) {
     return res.status(403).json({ message: "Read not allowed" });
   }
 
@@ -151,13 +156,13 @@ router.route("/user/:userID").get(verifyJWT, (req, res) => {
  * Get Convo from two UserID
  * JWT authentication and User Session authentication required for usage
  */
-router.route("/user/:user1ID/:user2ID").get((req, res) => {
+router.route("/user/:user1ID/:user2ID").get(verifyJWT, (req, res) => {
   const user1ID = req.params.user1ID;
   const user2ID = req.params.user2ID;
 
   const isAuth =
-    isUserSessionToken(req.jwt, user1ID) ||
-    isUserSessionToken(req.jwt, user2ID);
+    isUserSessionToken(req.jwtID, user1ID) ||
+    isUserSessionToken(req.jwtID, user2ID);
 
   if (!isAuth) {
     return res.status(403).json({ message: "Read not allowed" });

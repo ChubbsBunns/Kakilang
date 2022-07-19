@@ -7,8 +7,6 @@ const router = require("express").Router();
 const { verifyJWT } = require("../token");
 const User = require("../models/user.model");
 
-/** Rotuing for users */
-
 /** Get All Users
  * JWT authentication required
  */
@@ -32,11 +30,17 @@ router.route("/").get(verifyJWT, (req, res) => {
 router.route("/:id").get(verifyJWT, (req, res) => {
   User.findById(req.params.id)
     .then((dbUser) => {
+      if (!dbUser) {
+        return res.status(404).json({ err: "User not found" });
+      }
       res.status(200).json({ user: dbUser.info() });
     })
     .catch((err) => {
+      if (err.kind == "ObjectId") {
+        return res.status(400).json({ err: "Invalid ObjectID" });
+      }
       console.log(err);
-      res.status(500).json({ err: err });
+      return res.status(500).json({ err: err });
     });
 });
 

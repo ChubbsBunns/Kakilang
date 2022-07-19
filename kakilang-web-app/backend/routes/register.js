@@ -82,7 +82,7 @@ router.route("/add").post(upload.single("myImage"), async (req, res) => {
 
     // Save the user to mongoDB
     newUser.save();
-    res.json({ message: "Success", isSuccessful: true });
+    res.status(201).json({ message: "Success", isSuccessful: true });
   }
 });
 

@@ -5,13 +5,12 @@ const path = `${__dirname}/../.env`;
 require("dotenv").config({ path: path });
 
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const User = require("./models/user.model");
 const Session = require("./models/session.model");
-const SALT = parseInt(process.env.BCRYPT_SALT);
 
 /**
  * Checks if JWT is valid
+ * Token should be found in headers["x-access-token"]
  *
  * @onfufilled JWT is returned as req.jwt, userID is returned as req.jwtID,
  * and the next function is called
@@ -50,21 +49,21 @@ function verifyJWT(req, res, next) {
  */
 async function isUserSessionToken(token, userID) {
   let dbUser;
-  const encryptedJWT = await User.findById(userID)
+  const sessionJWT = await User.findById(userID)
     .populate({
       path: "sessionID",
     })
     .then((dbSession) => {
-      console.log(dbSession.sessionID.JWT);
       dbUser = dbSession;
-      return dbSession.sessionID.JWT;
+      return dbSession.sessionID?.JWT;
     })
     .catch((err) => {
       console.log(err);
       return null;
     });
-  if (!encryptedJWT) return false;
-  return bcrypt.compareSync(token, encryptedJWT) ? dbUser : false;
+  if (!sessionJWT) return false;
+  const isCorrect = token == sessionJWT;
+  return isCorrect ? dbUser : false;
 }
 
 /**
@@ -104,9 +103,8 @@ async function saveTokenTodbUser(token, dbUser) {
   if (!dbUser) return false;
 
   const user = new User(dbUser);
-  const encryptedJWT = bcrypt.hashSync(token, SALT);
   const newSession = new Session({
-    JWT: encryptedJWT,
+    JWT: token,
   });
   newSession.save();
 
