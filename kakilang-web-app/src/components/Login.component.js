@@ -38,6 +38,25 @@ function Login({ setAuth, setUser }) {
     }
   }
 
+  /** Unsplash react hooks i'll be honest ive no idea what im doing */
+  /*
+  function fetchImage() {
+    let clientID = "8GIT9jFlfgG8-0qZeeyVDCpAMZdQ7uxbzXSn3u2co5U";
+    let endPoint = `https://api.unsplash.com/photos/random/?client_id=${clientID}`;
+
+    let imageElement = document.querySelector("unsplashImage");
+
+    
+    fetch(endPoint)
+    .then(function (response) {
+      return response.json();
+    });
+    .then(function (jsonData){
+      imageElement.src = jsonData.urls.regular;  
+    })
+  }
+  */
+
   /** Handle input changes*/
   const emailChange = (event) => setEmail(event.target.value);
   const passwordChange = (event) => setPassword(event.target.value);
@@ -148,6 +167,10 @@ function Login({ setAuth, setUser }) {
               className="submit"
               type="submit"
               value="Log In"
+              sx={{
+                padding: 2,
+                margin: 1,
+              }}
             >
               Sign In!
             </Button>
@@ -157,7 +180,7 @@ function Login({ setAuth, setUser }) {
            */}
           <i>
             {" "}
-            Need an account? <a href="/register"> Sign up </a>{" "}
+            Need an account? <a href="/register"> Sign Up Here!</a>{" "}
           </i>
         </div>
       </div>

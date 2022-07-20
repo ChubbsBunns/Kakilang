@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Login.component.css";
-import "./RegistrationAdditionalStyling.component.css";
+import "./Registration.component.css";
 import { useNavigate } from "react-router-dom";
-import BigLogo from "./BigLogo.component";
+
 import Dropdown from "./Dropdown.component";
 import { majors, houses, floors, ccas } from "./staticVariables";
+import Logo from "./images/KakilangLogo.png";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -118,8 +118,10 @@ function Registration() {
 
   return (
     <>
-      <BigLogo />
       <div className="Login-window">
+        <div className="Kakilang-Registration-Logo">
+          <img src={Logo}></img>
+        </div>
         <FormControl onSubmit={handleSubmit} encType="multipart/form-data">
           <h1> Register an account </h1>
           <TextField
@@ -128,59 +130,76 @@ function Registration() {
             value={name}
             onChange={nameChange}
             label="Name"
+            sx={{}}
+            size="small"
           />
-          <br />
           <TextField
             type="email"
             name="Email"
             value={email}
             onChange={emailChange}
             label="Email Address"
+            sx={{
+              margin: 1,
+            }}
+            size="small"
           />
-          <br />
           <TextField
             type="password"
             name="Password"
             value={password}
             onChange={passwordChange}
             label="Password"
+            size="small"
           />
-          <br />
-
           <Dropdown
             label="Major"
             options={majors}
             value={major}
             onChange={majorSetting}
           />
-          <br />
           <Dropdown
             label="House"
             options={houses}
             value={house}
             onChange={houseSetting}
           />
-          <br />
           <Dropdown
             label="Floor"
             options={floors}
             value={floor}
             onChange={floorSetting}
           />
-          <br />
           <Dropdown
             label="CCAs"
             options={ccas}
             value={cca}
             onChange={ccaSetting}
           />
-          <br />
-          <input type="file" name="myImage" onChange={imgSetting} />
-          <br />
-          <img src={preview} alt="Unable to display image" />
-          <br />
+          <div className="File-Input">
+            <input type="file" name="myImage" onChange={imgSetting} />
+          </div>
+          <div>
+            <img
+              src={preview}
+              alt="Unable to display image"
+              width={"130px"}
+              height={"130px"}
+            />
+          </div>
+          <Button
+            className="submit"
+            variant="contained"
+            type="submit"
+            value="Register"
+            sx={{
+              padding: 0.4,
+              margin: 0.2,
+            }}
+          >
+            Register
+          </Button>{" "}
         </FormControl>
-        <Button className="submit" type="submit" value="Register" />
       </div>
     </>
   );

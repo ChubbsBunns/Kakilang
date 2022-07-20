@@ -74,7 +74,7 @@ body {
   border-radius: 3vh;
   min-height: 6vh;
   border: clamp(0.8vh, 5px, 1vh) double #000000;
-  background-color: rgba(251, 127, 75, 1);
+
   box-shadow: 0px 4px 6px #000000;
   width: clamp(fit-content, 10vw, 16.67vw);
 

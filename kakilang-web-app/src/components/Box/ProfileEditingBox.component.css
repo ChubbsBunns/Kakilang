@@ -1,0 +1,14 @@
+.editing-box-component {
+  display: grid;
+  grid-template-columns: 16.67fr 16.67fr 66.66fr;
+}
+
+.filler {
+  background-color: greenyellow;
+  height: 100vh;
+  width: 16.67vw;
+}
+
+.editing-box {
+  background-color: #fce9dc;
+}

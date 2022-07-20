@@ -1,17 +1,3 @@
-.Login-Entire-Component {
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  flex-direction: row;
-  height: 100vh;
-}
-
-.App-link {
-  height: 15vh;
-  margin: 0%;
-}
-
 @media (min-width: 0px) {
   .Login-Page {
     flex-basis: 100%;
@@ -36,8 +22,8 @@
     margin: 0;
     flex-direction: row;
     /*
-    background-image: {asdasd};
-    */
+      background-image: {asdasd};
+      */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -72,8 +58,8 @@
     margin: 0;
     flex-direction: row;
     /*
-    background-image: {asdasd};
-    */
+      background-image: {asdasd};
+      */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -110,8 +96,8 @@
     margin: 0;
     flex-direction: row;
     /*
-    background-image: {asdasd};
-    */
+      background-image: {asdasd};
+      */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -120,7 +106,7 @@
   .Kakilang-Login-Logo > img {
     border-radius: 0%;
     margin: 3vh;
-    zoom: 120%;
+    zoom: 130%;
   }
 }
 
@@ -129,19 +115,10 @@
   height: 100vh;
   color: #53012c;
   font-size: calc(2px + 4vmin);
-  overflow: auto;
 }
 
 .Kakilang-Login-Logo {
   height: 20vh;
-}
-
-.Kakilang-Registration-Logo > img {
-  border-radius: 0px;
-}
-
-.Kakilang-Registration-Logo {
-  height: 10vh;
 }
 
 .Login-window h1 {
@@ -186,28 +163,4 @@
   color: #53012c;
   outline: none;
   box-shadow: 0px 4px 20px 0px transparent;
-}
-
-.Login-window > i {
-  font-family: Roboto;
-}
-
-.Login-window > i > a {
-  text-decoration: none;
-  color: #fb7f4b;
-  font-weight: bolder;
-}
-
-.File-Input {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:focus {
-  transition: background-color 600000s 0s, color 600000s 0s;
 }
