@@ -3,19 +3,21 @@ import axios from "axios";
 import "./Registration.component.css";
 import { useNavigate } from "react-router-dom";
 
+/*
 import Dropdown from "./Dropdown.component";
+*/
 import { majors, houses, floors, ccas } from "./staticVariables";
 import Logo from "./images/KakilangLogo.png";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
-/*
-
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-*/
+
+/*
+ */
 
 /**
  * User Register component
@@ -152,6 +154,7 @@ function Registration() {
             label="Password"
             size="small"
           />
+          {/** 
           <Dropdown
             label="Major"
             options={majors}
@@ -170,12 +173,78 @@ function Registration() {
             value={floor}
             onChange={floorSetting}
           />
+          */}
+          <FormControl>
+            <InputLabel>Major</InputLabel>
+            <Select
+              labelId="Major"
+              id="Major"
+              label="Major"
+              onChange={majorSetting}
+            >
+              {majors.map((major) => {
+                return (
+                  <MenuItem value={major.value} key="major">
+                    {major.label}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel>House</InputLabel>
+            <Select
+              labelId="House"
+              id="House"
+              label="House"
+              onChange={houseSetting}
+            >
+              {houses.map((house) => {
+                return (
+                  <MenuItem value={house.value} key="house">
+                    {house.label}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel>Floor</InputLabel>
+            <Select
+              labelId="Floor"
+              id="Floor"
+              label="Floor"
+              onChange={floorSetting}
+            >
+              {floors.map((floor) => {
+                return (
+                  <MenuItem value={floor.value} key="floor">
+                    {floor.label}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel>CCAs</InputLabel>
+            <Select labelId="CCAs" id="CCAs" label="CCAs" onChange={ccaSetting}>
+              {ccas.map((ccas) => {
+                return (
+                  <MenuItem value={ccas.value} key="ccas">
+                    {ccas.label}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          {/**
           <Dropdown
             label="CCAs"
             options={ccas}
             value={cca}
             onChange={ccaSetting}
           />
+            */}
           <div className="File-Input">
             <input type="file" name="myImage" onChange={imgSetting} />
           </div>

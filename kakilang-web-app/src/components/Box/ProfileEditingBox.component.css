@@ -11,4 +11,5 @@
 
 .editing-box {
   background-color: #fce9dc;
+  display: flex;
 }

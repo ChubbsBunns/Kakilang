@@ -1,6 +1,10 @@
 import React from "react";
 import "./ProfileEditingBox.component.css";
 
+import imageTest from "./Dylan-img1.png";
+
+import Avatar from "@mui/material/Avatar";
+
 /**
  * Profile Editing Box
  *
@@ -15,7 +19,7 @@ function ProfileEdit() {
       <div className="filler"></div>
       <div className="filler"></div>
       <div className="editing-box">
-        <p>snadiosa</p>
+        <Avatar alt="Profile Image Failed to Load" src={imageTest}></Avatar>
       </div>
     </div>
   );

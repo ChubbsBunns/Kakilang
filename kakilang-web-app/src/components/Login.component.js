@@ -25,6 +25,9 @@ function Login({ setAuth, setUser }) {
   const server = process.env.REACT_APP_SERVER;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState(
+    `url(${FrontPageLogo})`
+  );
   const redirect = "/myProfile";
   const goTo = useNavigate();
 
@@ -37,25 +40,6 @@ function Login({ setAuth, setUser }) {
       return user;
     }
   }
-
-  /** Unsplash react hooks i'll be honest ive no idea what im doing */
-  /*
-  function fetchImage() {
-    let clientID = "8GIT9jFlfgG8-0qZeeyVDCpAMZdQ7uxbzXSn3u2co5U";
-    let endPoint = `https://api.unsplash.com/photos/random/?client_id=${clientID}`;
-
-    let imageElement = document.querySelector("unsplashImage");
-
-    
-    fetch(endPoint)
-    .then(function (response) {
-      return response.json();
-    });
-    .then(function (jsonData){
-      imageElement.src = jsonData.urls.regular;  
-    })
-  }
-  */
 
   /** Handle input changes*/
   const emailChange = (event) => setEmail(event.target.value);
@@ -104,19 +88,36 @@ function Login({ setAuth, setUser }) {
         console.log(err.response.data.message);
       });
   }, []);
-  {
-    /** 
-      <div
-        className="Login-Component"
-        style={{ backgroundImage: `url(${FrontPageLogo})` }}
-      ></div>
-      */
-  }
+
+  useEffect(() => {
+    axios
+      .get("https://api.unsplash.com/photos/random", {
+        headers: {
+          Authorization:
+            "Client-ID 8GIT9jFlfgG8-0qZeeyVDCpAMZdQ7uxbzXSn3u2co5U",
+        },
+        params: {
+          collections: ``,
+        },
+      })
+
+      .then((res) => {
+        const imageData = res.data;
+        const imageBody = res.body;
+        console.log(imageData);
+        console.log(imageBody);
+        setBackgroundImage(imageData.urls.full);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div className="Login-Entire-Component">
       <div
         className="Login-Image"
-        style={{ backgroundImage: `url(${FrontPageLogo})` }}
+        style={{ backgroundImage: backgroundImage }}
       ></div>
       <div className="Login-Page">
         {/**
@@ -131,7 +132,7 @@ function Login({ setAuth, setUser }) {
             <h1> Log In </h1>
             <TextField
               id="outlined-basic"
-              label="Username/Email"
+              label="Email"
               variant="outlined"
               type="email"
               name="Email"
@@ -175,9 +176,6 @@ function Login({ setAuth, setUser }) {
               Sign In!
             </Button>
           </form>
-          {/**
-          <Button variant="contained">I AM A BABY</Button>
-           */}
           <i>
             {" "}
             Need an account? <a href="/register"> Sign Up Here!</a>{" "}
