@@ -33,10 +33,10 @@ function Registration() {
   const [password, setPassword] = useState("");
   /** Profile Information */
   const [name, setName] = useState("");
-  const [major, setMajor] = useState();
-  const [cca, setCCA] = useState();
-  const [floor, setFloor] = useState();
-  const [house, setHouse] = useState();
+  const [major, setMajor] = useState("");
+  const [cca, setCCA] = useState("");
+  const [floor, setFloor] = useState("");
+  const [house, setHouse] = useState("");
   const [img, setIMG] = useState();
   const [preview, setPreview] = useState("/defaultProfile.png");
 
@@ -125,37 +125,45 @@ function Registration() {
         <div className="Kakilang-Registration-Logo">
           <img src={Logo}></img>
         </div>
-        <FormControl onSubmit={handleSubmit} encType="multipart/form-data">
-          <h1> Register an account </h1>
-          <TextField
-            type="string"
-            name="Name"
-            value={name}
-            onChange={nameChange}
-            label="Name"
-            sx={{}}
-            size="small"
-          />
-          <TextField
-            type="email"
-            name="Email"
-            value={email}
-            onChange={emailChange}
-            label="Email Address"
-            sx={{
-              margin: 1,
-            }}
-            size="small"
-          />
-          <TextField
-            type="password"
-            name="Password"
-            value={password}
-            onChange={passwordChange}
-            label="Password"
-            size="small"
-          />
-          {/** 
+        <form
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+          id="RegisterID"
+        >
+          <FormControl>
+            <h1> Register an account </h1>
+            <TextField
+              type="string"
+              name="Name"
+              value={name}
+              onChange={nameChange}
+              label="Name"
+              sx={{ margin: 0.4 }}
+              size="small"
+            />
+            <TextField
+              type="email"
+              name="Email"
+              value={email}
+              onChange={emailChange}
+              label="Email Address"
+              sx={{
+                margin: 0.4,
+              }}
+              size="small"
+            />
+            <TextField
+              type="password"
+              name="Password"
+              value={password}
+              onChange={passwordChange}
+              label="Password"
+              size="small"
+              sx={{
+                margin: 0.4,
+              }}
+            />
+            {/** 
           <Dropdown
             label="Major"
             options={majors}
@@ -175,86 +183,95 @@ function Registration() {
             onChange={floorSetting}
           />
           */}
-          <FormControl
-            sx={{
-              margin: 1,
-            }}
-          >
-            <InputLabel>Major</InputLabel>
-            <Select
-              labelId="Major"
-              id="Major"
-              label="Major"
-              onChange={majorSetting}
+            <FormControl
+              sx={{
+                margin: 1,
+              }}
             >
-              {majors.map((major) => {
-                return (
-                  <MenuItem value={major.value} key="major">
-                    {major.label}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <FormControl
-            sx={{
-              margin: 1,
-            }}
-          >
-            <InputLabel>House</InputLabel>
-            <Select
-              labelId="House"
-              id="House"
-              label="House"
-              onChange={houseSetting}
+              <InputLabel>Major</InputLabel>
+              <Select
+                value={major}
+                labelId="Major"
+                id="Major"
+                label="Major"
+                onChange={majorSetting}
+              >
+                {majors.map((major) => {
+                  return (
+                    <MenuItem value={major.value} key={major.value}>
+                      {major.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <FormControl
+              sx={{
+                margin: 1,
+              }}
             >
-              {houses.map((house) => {
-                return (
-                  <MenuItem value={house.value} key="house">
-                    {house.label}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <FormControl
-            sx={{
-              margin: 1,
-            }}
-          >
-            <InputLabel>Floor</InputLabel>
-            <Select
-              labelId="Floor"
-              id="Floor"
-              label="Floor"
-              onChange={floorSetting}
+              <InputLabel>House</InputLabel>
+              <Select
+                value={house}
+                labelId="House"
+                id="House"
+                label="House"
+                onChange={houseSetting}
+              >
+                {houses.map((house) => {
+                  return (
+                    <MenuItem value={house.value} key={house.value}>
+                      {house.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <FormControl
+              sx={{
+                margin: 1,
+              }}
             >
-              {floors.map((floor) => {
-                return (
-                  <MenuItem value={floor.value} key="floor">
-                    {floor.label}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          <FormControl
-            sx={{
-              margin: 1,
-            }}
-          >
-            <InputLabel>CCAs</InputLabel>
-            <Select labelId="CCAs" id="CCAs" label="CCAs" onChange={ccaSetting}>
-              {ccas.map((ccas) => {
-                return (
-                  <MenuItem value={ccas.value} key="ccas">
-                    {ccas.label}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          {/**
+              <InputLabel>Floor</InputLabel>
+              <Select
+                value={floor}
+                labelId="Floor"
+                id="Floor"
+                label="Floor"
+                onChange={floorSetting}
+              >
+                {floors.map((floor) => {
+                  return (
+                    <MenuItem value={floor.value} key={floor.value}>
+                      {floor.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <FormControl
+              sx={{
+                margin: 1,
+              }}
+            >
+              <InputLabel>CCAs</InputLabel>
+              <Select
+                value={cca}
+                labelId="CCAs"
+                id="CCAs"
+                label="CCAs"
+                onChange={ccaSetting}
+              >
+                {ccas.map((ccas) => {
+                  return (
+                    <MenuItem value={ccas.value} key={ccas.value}>
+                      {ccas.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            {/**
           <Dropdown
             label="CCAs"
             options={ccas}
@@ -262,30 +279,31 @@ function Registration() {
             onChange={ccaSetting}
           />
             */}
-          <div className="File-Input">
-            <input type="file" name="myImage" onChange={imgSetting} />
-          </div>
-          <div>
-            <img
-              src={preview}
-              alt="Unable to display image"
-              width={"130px"}
-              height={"130px"}
-            />
-          </div>
-          <Button
-            className="submit"
-            variant="contained"
-            type="submit"
-            value="Register"
-            sx={{
-              padding: 0.4,
-              margin: 0.2,
-            }}
-          >
-            Register
-          </Button>{" "}
-        </FormControl>
+            <div className="File-Input">
+              <input type="file" name="myImage" onChange={imgSetting} />
+            </div>
+            <div>
+              <img
+                src={preview}
+                alt="Unable to display image"
+                width={"130px"}
+                height={"130px"}
+              />
+            </div>
+            <Button
+              className="submit"
+              variant="contained"
+              type="submit"
+              value="Register"
+              sx={{
+                padding: 0.4,
+                margin: 0.2,
+              }}
+            >
+              Register
+            </Button>{" "}
+          </FormControl>
+        </form>
       </div>
     </>
   );

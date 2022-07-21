@@ -24,8 +24,7 @@ import MenuItem from "@mui/material/MenuItem";
 function ProfileEdit() {
   const registrationData = new FormData();
   /** Login Information */
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
   /** Profile Information */
   const [name, setName] = useState("");
   const [bio, setBio] = useState();
@@ -39,8 +38,6 @@ function ProfileEdit() {
 
   // FormData format requires appending with name
   registrationData.append("name", name);
-  registrationData.append("email", email);
-  registrationData.append("password", password);
   major ? registrationData.append("major", major) : null;
   house ? registrationData.append("house", house) : null;
   floor ? registrationData.append("floor", floor) : null;
@@ -50,8 +47,6 @@ function ProfileEdit() {
   registrationData.append("myImage", img);
 
   /** Handle inputs */
-  const emailChange = (event) => setEmail(event.target.value);
-  const passwordChange = (event) => setPassword(event.target.value);
   const nameChange = (event) => setName(event.target.value);
   const majorSetting = (event) => setMajor(event.target.value);
   const floorSetting = (event) => setFloor(event.target.value);
@@ -64,18 +59,15 @@ function ProfileEdit() {
   const imgSetting = (event) => {
     if (event.target.files.length == 0) {
       setPreview("/defaultProfile.png");
-      console.log("i did not set any image");
       return false;
     } else if (event.target.files.length > 1) {
       alert("Please upload only 1 image");
       event.target.value = null;
       setPreview("/defaultProfile.png");
-      console.log("Uploaded more that one image");
       return false;
     } else if (event.target.files[0].size > 9e6) {
       alert("Please upload an image smaller than 9 MB ");
       setPreview("/defaultProfile.png");
-      console.log("Image is too large");
       event.target.value = null;
       return false;
     } else {
@@ -84,7 +76,6 @@ function ProfileEdit() {
       reader.readAsDataURL(file);
       reader.onloadend = function () {
         setPreview(reader.result);
-        console.log("Successfully reads in image");
       };
       setIMG(file);
     }
@@ -119,34 +110,15 @@ function ProfileEdit() {
             label="Bio"
             sx={{ margin: 1 }}
             size="small"
-          />
-          <TextField
-            type="email"
-            name="Email"
-            value={email}
-            onChange={emailChange}
-            label="Email Address"
-            sx={{
-              margin: 1,
-            }}
-            size="small"
-          />
-          <TextField
-            type="password"
-            name="Password"
-            value={password}
-            onChange={passwordChange}
-            label="Password"
-            size="small"
+            multiline="true"
           />
           <TextField
             type="string"
             name="Interests!"
-            value={""}
-            onChange={""}
             label="Interests!"
             sx={{ margin: 1 }}
             size="small"
+            multiline="true"
           />
           {/** 
           <Dropdown

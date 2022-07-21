@@ -7,6 +7,12 @@ import { Outlet, useNavigate } from "react-router-dom";
 import "./ListOfPeople.component.css";
 import { staticGroup } from "../staticVariables";
 
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+
 /**
  * List-Of-People
  * Lists down the people inside a selected group from the sidebar
@@ -73,12 +79,34 @@ function ListOfPeople({ user, setTarget }) {
       <div className="UI" id="list_of_people">
         <div className="list-component">
           <div className="filter-component">
-            {" "}
-            <select className="filter-options">
-              <option value="filter-houses">Houses</option>
-              <option value="filter-floor">Floor</option>
-              <option value="filter-CCA">CCA/IGs</option>
-            </select>
+            <FormControl>
+              <FormLabel id="demo-row-radio-buttons-group-label">
+                Filter
+              </FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+              >
+                <FormControlLabel
+                  value="House"
+                  control={<Radio />}
+                  label="House"
+                />
+                <FormControlLabel
+                  value="Floor"
+                  control={<Radio />}
+                  label="Floor"
+                />
+                <FormControlLabel
+                  value="CCA"
+                  sx={{}}
+                  control={<Radio />}
+                  label="CCA"
+                />
+                <FormControlLabel value="All" control={<Radio />} label="All" />
+              </RadioGroup>
+            </FormControl>
           </div>
           <div className="list-of-people-component">
             <div className="list-of-people">

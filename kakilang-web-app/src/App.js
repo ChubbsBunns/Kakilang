@@ -68,6 +68,10 @@ function App() {
                     <Route path="editProfile" element={<ProfileEditingBox />} />
                   </Route>
                 </Route>
+                <Route
+                  path="/something"
+                  element={<ProfileEditingBox />}
+                ></Route>
 
                 <Route
                   path="/discover/events/*"
