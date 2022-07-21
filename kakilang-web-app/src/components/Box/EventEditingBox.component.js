@@ -114,56 +114,66 @@ function EventEditingBox({ owner, target }) {
   return (
     <div className="event-creation-component">
       <div className="event-details-title">Event Details:</div>
-      <form encType="multipart/form-data" onSubmit={handleSubmit}>
-        <input
-          className="input-name"
-          type="String"
-          name="name"
-          value={name}
-          onChange={nameChange}
-          placeholder="Name*"
-        />
-        <br />
-        <textarea
-          className="input-description"
-          type="String"
-          name="description"
-          value={description}
-          onChange={descChange}
-          placeholder="Description*"
-        ></textarea>
-        <br />
-        <div className="input-date-time">
-          <label>
-            Event begin date*: <span />
+      <div className="event-details-input">
+        <form encType="multipart/form-data" onSubmit={handleSubmit}>
+          <div className="event-input-field">
+            <p className="event-edit-title">Event Title:</p>
             <input
-              type="datetime-local"
-              name="eventDate"
-              value={eventDate}
-              onChange={dateChange}
-              min={today}
-              step="60"
+              className="input-name"
+              type="String"
+              name="name"
+              value={name}
+              onChange={nameChange}
+              placeholder="Name*"
             />
-          </label>
-        </div>
-        <br />
-        <div className="input-image">
-          <input type="file" name="eventImage" onChange={imgSetting} />
-        </div>
-        <br />
-        <div className="preview-image">
-          <img src={preview} alt="Unable to display image" />
-        </div>
-        <br />
-        <input
-          className="submit-button"
-          type="Submit"
-          name="Create new Event"
-        />
-      </form>
-      <button className="delete-button" onClick={handleDelete}>
-        Delete
-      </button>
+          </div>
+          <div className="event-input-field">
+            <p className="event-edit-title">Event Description:</p>
+            <textarea
+              className="input-description"
+              type="String"
+              name="description"
+              value={description}
+              onChange={descChange}
+              placeholder="Description*"
+            ></textarea>
+          </div>
+          <div className="event-input-field">
+            <div className="input-date-time">
+              <label>
+                Event begin date*: <span />
+                <input
+                  type="datetime-local"
+                  name="eventDate"
+                  value={eventDate}
+                  onChange={dateChange}
+                  min={today}
+                  step="60"
+                />
+              </label>
+            </div>
+          </div>
+          <div className="event-input-field">
+            <p className="event-edit-title">Event Image (Optional):</p>
+            <div className="input-image">
+              <input type="file" name="eventImage" onChange={imgSetting} />
+            </div>
+            <div className="preview-image">
+              <img src={preview} alt="Unable to display image" />
+            </div>
+          </div>
+          <div className="event-input-field">
+            <input
+              className="submit-button"
+              type="Submit"
+              name="Create new Event"
+            />
+          </div>
+        </form>
+        <button className="delete-button" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 }

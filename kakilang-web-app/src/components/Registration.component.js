@@ -48,6 +48,7 @@ function Registration() {
   const floorSetting = (event) => setFloor(event.target.value);
   const houseSetting = (event) => setHouse(event.target.value);
   const ccaSetting = (event) => setCCA(event.target.value);
+
   // setting the img also changes the preview
   const imgSetting = (event) => {
     if (event.target.files.length == 0) {
@@ -174,7 +175,11 @@ function Registration() {
             onChange={floorSetting}
           />
           */}
-          <FormControl>
+          <FormControl
+            sx={{
+              margin: 1,
+            }}
+          >
             <InputLabel>Major</InputLabel>
             <Select
               labelId="Major"
@@ -191,7 +196,11 @@ function Registration() {
               })}
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl
+            sx={{
+              margin: 1,
+            }}
+          >
             <InputLabel>House</InputLabel>
             <Select
               labelId="House"
@@ -208,7 +217,11 @@ function Registration() {
               })}
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl
+            sx={{
+              margin: 1,
+            }}
+          >
             <InputLabel>Floor</InputLabel>
             <Select
               labelId="Floor"
@@ -225,7 +238,11 @@ function Registration() {
               })}
             </Select>
           </FormControl>
-          <FormControl>
+          <FormControl
+            sx={{
+              margin: 1,
+            }}
+          >
             <InputLabel>CCAs</InputLabel>
             <Select labelId="CCAs" id="CCAs" label="CCAs" onChange={ccaSetting}>
               {ccas.map((ccas) => {

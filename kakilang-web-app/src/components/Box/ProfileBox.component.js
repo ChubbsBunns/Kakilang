@@ -37,7 +37,6 @@ function ProfileBox({ user, target }) {
             <br />
             {target.name}
             <br />
-
             {profile.year}
             <br />
             {profile.major}

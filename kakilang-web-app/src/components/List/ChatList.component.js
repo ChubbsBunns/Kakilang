@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { Outlet, useNavigate } from "react-router-dom";
 
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
 
@@ -50,14 +56,25 @@ function ChatList({ user, setTarget }) {
     <>
       <div className="UI" id="list_of_people">
         <div className="list-component">
-          <div className="filter-component">
-            {" "}
-            <select className="filter-options">
-              <option value="filter-houses">Houses</option>
-              <option value="filter-floor">Floor</option>
-              <option value="filter-CCA">CCA/IGs</option>
-            </select>
-          </div>
+          <FormControl>
+            <FormLabel id="demo-row-radio-buttons-group-label">
+              Filter
+            </FormLabel>
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+            >
+              <FormControlLabel value="All" control={<Radio />} label="All" />
+              <FormControlLabel value="DMs" control={<Radio />} label="DMs" />
+              <FormControlLabel
+                value="GroupChats"
+                control={<Radio />}
+                label="Group Chats"
+              />
+            </RadioGroup>
+          </FormControl>
+
           <div className="list-of-people-component">
             <div className="list-of-people">
               <ul>

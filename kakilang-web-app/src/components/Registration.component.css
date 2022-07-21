@@ -123,7 +123,7 @@
 
 .Login-window h1 {
   margin: 3vh;
-  font-size: calc(10px + 6vmin);
+  font-size: calc(10px + 3vmin);
 }
 
 .Login-window form {
@@ -148,19 +148,4 @@
   background-color: #fce9dc;
   font-family: roboto;
   overflow: hidden;
-}
-
-.Login-window input.submit {
-  width: 10vw;
-  height: 6vh;
-  position: relative;
-  padding: 0px 0px;
-  border: none;
-  border-radius: 4px;
-  font-size: calc(2px + 2vmin);
-  font-weight: 400;
-  line-height: normal;
-  color: #53012c;
-  outline: none;
-  box-shadow: 0px 4px 20px 0px transparent;
 }

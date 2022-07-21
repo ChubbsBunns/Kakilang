@@ -83,4 +83,12 @@ const majors = [
   { value: "Information Security", label: "Information Security" },
 ];
 
-export { staticGroup, houses, floors, ccas, majors };
+const years = [
+  { value: null, label: "I'll rather not say" },
+  { value: "Year 1", label: "Year 1" },
+  { value: "Year 2", label: "Year 2" },
+  { value: "Year 3", label: "Year 3" },
+  { value: "Year 4", label: "Year 4" },
+];
+
+export { staticGroup, houses, floors, ccas, majors, years };
