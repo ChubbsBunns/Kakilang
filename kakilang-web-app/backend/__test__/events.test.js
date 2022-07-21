@@ -38,7 +38,8 @@ const diffUser = {
 const correctPass = "mockPassword123";
 
 /** Events */
-const mockEvent = (ownerID) => {
+const mockOwnerID = "62d80cf2ee2b8752e24e49f9";
+const mockEvent = (ownerID = mockOwnerID) => {
   return {
     name: "Mock Event",
     description: "Hello",
@@ -47,11 +48,79 @@ const mockEvent = (ownerID) => {
   };
 };
 
+/** Helper */
+const removeAll = async () => {
+  await Events.deleteMany();
+  await User.deleteMany();
+  await Session.deleteMany();
+};
+const setHeaders = (token) => {
+  return { "x-access-token": token };
+};
+
 test("Initialised Correctly", () => {
   expect(true).toBeTruthy();
 });
 
-describe("Event Router Tests", () => {});
+describe("Event Router Tests", () => {
+  describe("Create Event", () => {
+    const createEvent = "/events/";
+
+    var dbUser, correctJWT;
+
+    beforeEach(async () => {
+      await removeAll();
+
+      const newUser = new User(mockUser);
+      newUser.save();
+      dbUser = newUser;
+      const login = await request(app).post("/auth").send({
+        email: mockUser.email,
+        password: correctPass,
+      });
+      correctJWT = login.body.token;
+    });
+
+    //Invalid JWT Tests
+    test("MissingJWT returns 400", async () => {
+      const response = await request(app).post(createEvent).send();
+      expect(response.statusCode).toBe(400);
+    });
+    test("InvalidJWT returns 403", async () => {
+      const response = await request(app)
+        .post(createEvent)
+        .set(setHeaders("BearerLmao"))
+        .send();
+      expect(response.statusCode).toBe(403);
+    });
+
+    //Valid test
+    test("ValidJWT and Event Params returns 201", async () => {
+      const response = await request(app)
+        .post(createEvent)
+        .set(setHeaders(correctJWT))
+        .send(mockEvent(dbUser._id));
+      expect(response.statusCode).toBe(201);
+    });
+  });
+
+  describe("Retrieve Events", () => {
+    const getEvents = "/events";
+    var dbEvent;
+    beforeEach(async () => {
+      await removeAll();
+
+      const newEvent = new Events(mockEvent());
+      newEvent.save();
+      dbEvent = newEvent;
+    });
+
+    test("Retrieve events successful", async () => {
+      const response = await request(app).get(getEvents).send();
+      expect(response.statusCode).toBe(200);
+    });
+  });
+});
 
 afterAll(() => {
   closeMongo();

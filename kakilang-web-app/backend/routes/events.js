@@ -202,7 +202,7 @@ router.route("/user/:id").get(verifyJWT, (req, res) => {
 /** Registering for an event
  * JWT authentication required
  */
-router.route("/:eventID/:userID").patch(verifyJWT, (req, res) => {
+router.route("/:eventID/:userID").post(verifyJWT, (req, res) => {
   if (req.jwtID !== res.params.userID) {
     return res.status(403).json({ message: "Registeration not allowed" });
   }

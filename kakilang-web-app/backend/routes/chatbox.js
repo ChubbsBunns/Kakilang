@@ -68,7 +68,7 @@ router.route("/convo/:convoID").post(verifyJWT, (req, res) => {
       return;
     }
     req.io.emit("message", { convoID: req.params.convoID });
-    res.status(201).json({ sent: "OK" });
+    res.status(201).json();
   });
 });
 

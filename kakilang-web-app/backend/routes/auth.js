@@ -1,5 +1,5 @@
 /**
- * Router for Authentication at /token
+ * Router for Authentication at /auth
  * API for authentication CRUD
  */
 
@@ -34,12 +34,11 @@ router.route("/").post((req, res) => {
         if (!correctPass) return res.status(403).json(badLogin());
 
         const token = generateToken(dbUser._id, userEmail);
-        const isSaved = saveTokenTodbUser(token, dbUser);
+        saveTokenTodbUser(token, dbUser);
 
         return res.status(200).json({
           token: "Bearer" + token,
           isLoggedIn: true,
-          debug: isSaved,
           user: dbUser.info(),
         });
       });
@@ -69,7 +68,6 @@ router.route("/").get(verifyJWT, async (req, res) => {
   });
 });
 
-//@TODO regenerate Token
 router.route("/").patch(verifyJWT, async (req, res) => {
   const dbUser = await isUserSessionToken(req.jwt, req.jwtID);
   if (!dbUser) {
@@ -94,9 +92,7 @@ router.route("/").delete(verifyJWT, async (req, res) => {
   const sessionID = dbUser.sessionID?._id;
   Session.findByIdAndDelete(sessionID);
   dbUser.sessionID = undefined;
-  console.log(dbUser.sessionID);
   await dbUser.save();
-  console.log(dbUser);
   return res.status(202).json();
 });
 

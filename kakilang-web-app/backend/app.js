@@ -37,8 +37,6 @@ io.on("error", (err) => {
 });
 
 //Setup Routers (Post & Get Requests) in specific webpages
-const registerRouter = require("./routes/register");
-const loginRouter = require("./routes/login");
 const chatboxRouter = require("./routes/chatbox");
 const usersRouter = require("./routes/users");
 const eventsRouter = require("./routes/events");
@@ -49,8 +47,6 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.use("/register", registerRouter);
-app.use("/", loginRouter);
 app.use("/auth", authRouter);
 app.use("/message", chatboxRouter);
 app.use("/users", usersRouter);

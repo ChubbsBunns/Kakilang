@@ -38,10 +38,37 @@ const diffUser = {
 const correctPass = "mockPassword123";
 
 test("Initialised Correctly", () => {
-  expect(true).toBeTruthy();
+  expect(mongoose.connection).toBeTruthy();
 });
 
 describe("User Router Tests", () => {
+  describe("Create User", () => {
+    const createUser = "/users";
+    const setHeaders = (token) => {
+      return { "x-access-token": token };
+    };
+    const correctUserform = {
+      email: mockUser.email,
+      password: correctPass,
+      name: mockUser.name,
+    };
+
+    beforeEach(async () => {
+      await User.deleteMany();
+      await Session.deleteMany();
+    });
+
+    // Valid user
+    test("Valid Userform returns 201", async () => {
+      const response = await request(app)
+        .post(createUser)
+        .send(correctUserform);
+      const dbUser = await User.findOne({ email: mockUser.email });
+      expect(response.statusCode).toBe(201);
+      expect(dbUser.name).toBe(mockUser.name);
+    });
+  });
+
   describe("Get All Users", () => {
     const allUsers = "/users";
     const setHeaders = (token) => {
