@@ -1,22 +1,42 @@
+<img 
+src=https://user-images.githubusercontent.com/60569243/174790428-353a87a6-3844-4ff9-8f43-82dea1767697.png height=300px 
+alt="Image of NodeJS Black" />
+
+NodeJS is used to create an asynchronous server environment that is able to handle multiple requests server-side.  
+As NodeJS is an active and popular open-source project, it is free and works with multiple other modules.
+This gives the server greater functionality and makes code more maintainable.
+  
+Currently, our project uses these modules to supplement NodeJS server functions:
+- Axios (Internal Access Verification)
+- Bcrypt (Server-side Password Hashing)
+- CORS (Access-Control-Allow-Origin)
+- ExpressJS (Manages Server Routes)
+- http (Low Latency Connection)
+- JsonWebToken (Server-side Token Verification)
+- Mongoose (Connection to MongoDB)
+- Multer (Image Storing for MongoDB)
+- Socket.IO (Web Socket Implementation)
+
+Generally, the server and the modules interact in this way (as of 17/06/2022):
+![Server Interactions](https://user-images.githubusercontent.com/55905659/174273680-7b7ce02a-3828-4947-ac6e-8c20c68d7bf3.png)
+
 # Server API
 
 ## Authentication
   
-### Login and create a valid Json Web Token 
-`POST /auth` 
-
 <details>
-  <summary>Parameters in Request Body</summary>
+<summary> <h3>Login and create a valid Json Web Token</h3> </summary>
   
+<h3><code>POST /auth</code></h3>  
+
+<u>Parameters in Request Body</u>
+
   |  param   | Description |
   | -------  | ----------- |
   |  ```email```   | The account's email  ```required``` |
   | ```password``` | The account's password ```required``` |
-</details>
-
-<details>
-<summary>Response</summary>
-
+  
+<u>Response</u>
 ```
 200 OK  
 {
@@ -27,20 +47,19 @@
 ```
 </details>
 
-### Get an existing login session
-`GET /auth` 
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3>Get an existing login session</h3> </summary>
+
+<h3><code>GET /auth</code></h3> 
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
-  |  ```x-access-token```   | A user's valid Json Web Token |
-</details>
+  |  ```x-access-token```   | A user's valid Json Web Token |  
 
-<details>
-<summary>Response</summary>
 
+<u>Response</u>
 ```
 200 OK  
 {
@@ -50,20 +69,17 @@
 ```
 </details>
 
-### Refresh a login session and the JWT token
-`PATCH /auth` 
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3> Refresh a login session and the JWT token </h3> </summary>
+<h3><code>PATCH /auth</code></h3> 
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | A user's valid Json Web Token |
-</details>
 
-<details>
-<summary>Response</summary>
-
+<u>Response</u>
 ```
 200 OK  
 {
@@ -73,32 +89,31 @@
 ```
 </details>
 
-### Delete an existing login session and JWT token
-`DELETE /auth` 
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3>Delete an existing login session and JWT token</h3> </summary>
+<h3><code>DELETE /auth</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | A user's valid Json Web Token |
-</details>
-
-<details>
-<summary>Response</summary>
+  
+<u>Response</u>
 
 ```202 Accepted```
 </details>
+
 
 ---
 
 ## Users
   
-### Create a user account  
-`POST /users` 
-
 <details>
-  <summary>Parameters in Request Body</summary>
+<summary> <h3>Create a user account </h3></summary>
+<h3><code>POST /users</code></h3>
+
+<u>Parameters in Request Body</u>
   
   |  param   | Description |
   | -------  | ----------- |
@@ -110,10 +125,8 @@
   |  ```house```   | The new account's house |
   |  ```floor```   | The new account's floor |
   |  ```cca``` | The new account's cca |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```
 201 Created  
@@ -123,19 +136,17 @@ isSuccessful: true
 </details>
   
 
-### Get all public users
-`GET /users`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3>Get all public users</h3> </summary>
+<h3><code>GET /users</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | A registered user's valid Json Web Token |
-</details>
-
-<details>
-<summary>Response</summary>
+  
+<u>Response</summary>
 
 ```
 200 OK
@@ -145,27 +156,23 @@ isSuccessful: true
 ```
 </details>
   
-### Get specific user
-`GET /users/:id`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3>Get specific user</h3></summary>
+<h3><code>GET /users/:id</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | A registered user's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+  
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```id```   | The specific user's ID |
-</details>
-
-<details>
-<summary>Response</summary>
-
+  
+<u>Response</u>
 ```
 200 OK
 {
@@ -192,18 +199,17 @@ isSuccessful: true
 
 ## Events
 
-### Create an event
-`POST /events`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3>Create an event</h3></summary>
+<h3><code>POST /events</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The event creator's valid Json Web Token |
-</details>
-<details>
-  <summary>Parameters in Body</summary>
+
+<u>Parameters in Body</u>
   
   |  param   | Description |
   | -------  | ----------- |
@@ -212,20 +218,17 @@ isSuccessful: true
   |   ```ownerID```   | The event creator's userID ```required``` |
   |  ```eventImage``` | The new event's banner image |
   |  ```description```   | The new event's description |
-</details>
 
-<details>
-<summary>Response</summary>
 
+<u>Response</u>
 ```201 Created```
 </details>
 
-### Retrieve all Events
-`GET /events`
-
 <details>
-<summary>Response</summary>
+<summary> <h3> Retrieve all Events </h3> </summary>
+<h3><code>GET /events</code></h3>
 
+<u>Response</u>
 ```
 200 OK
 {
@@ -234,25 +237,24 @@ isSuccessful: true
 ```
 </details>
 
-### Update an event
-`PATCH /events/:id`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3>Update an event</h3></summary>
+<h3><code>PATCH /events/:id</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The event owner's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```id```   | The event's ID |
-</details>
-<details>
-  <summary>Parameters in Body</summary>
+
+<u>Parameters in Body</u>
   
   |  param   | Description |
   | -------  | ----------- |
@@ -260,58 +262,51 @@ isSuccessful: true
   | ```eventDate``` | The new date of the event  |
   |  ```eventImage``` | The new event image of the event |
   |  ```description```   | The new event description of the event |
-</details>
 
-<details>
-<summary>Response</summary>
+
+<u>Response</u>
 
 ```200 OK```
 </details>
 
-### Delete an event
-`DELETE /events/:id`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3> Delete an event </h3> </summary>
+<h3><code>DELETE /events/:id</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The event owner's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```id```   | The event's ID |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```200 OK```
 </details>
 
-### Get a user's registered/owned events
-`GET /events/user/:id`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3>Get a user's registered/owned events</h3> </summary>
+<h3><code>GET /events/user/:id</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The query user's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```id```   | The user's ID |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```
 200 OK
@@ -321,52 +316,46 @@ isSuccessful: true
 ```
 </details>
 
-### Register a user for an event
-`POST /events/:eventID/:userID`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3> Register a user for an event </h3> </summary>
+<h3><code>POST /events/:eventID/:userID</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The registering user's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```eventID```   | The event's ID |
   |  ```userID```    | The user's ID  |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```200 OK```
 </details>
 
-### Unregistering a user for an event
-`DELETE /events/:eventID/:userID`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3> Unregistering a user for an event </h3></summary>
+<h3><code>DELETE /events/:eventID/:userID</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The unregistering user's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```eventID```   | The event's ID |
   |   ```userID```   | The user's ID |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```200 OK```
 </details>
@@ -375,28 +364,25 @@ isSuccessful: true
 
 ## Chatbox
 
-### Creates a new message in a new conversation
-`POST /chatbox/convo`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3> Creates a new message in a new conversation </h3> </summary>
+<h3><code>POST /chatbox/convo</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The message sending user's valid Json Web Token |
-</details>
-<details>
-  <summary>Parameters in Body</summary>
+
+<u>Parameters in Body</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```senderID```   | The user id of the message sender ```required``` |
   | ```targetID``` | The user id of the person receiving the message ```required``` |
   |  ```message``` | The message content ```required``` |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```
 201 Created
@@ -406,60 +392,53 @@ isSuccessful: true
 ```
 </details>
 
-### Creates a new message in an existing conversation
-`POST /chatbox/convo/:convoID`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3> Creates a new message in an existing conversation </h3></summary>
+<h3><code>POST /chatbox/convo/:convoID</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The message sending user's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```convoID```   | The convo's ID |
-</details>
-<details>
-  <summary>Parameters in Body</summary>
+
+<u>Parameters in Body</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```senderID```   | The user id of the message sender ```required``` |
   | ```targetID``` | The user id of the person receiving the message ```required``` |
   |  ```message``` | The message content ```required``` |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```201 Created```
 </details>
 
-### Get a user's convos
-`POST /chatbox/user/:userID`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3> Get a user's convos </h3> </summary>
+<h3><code>POST /chatbox/user/:userID</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The query user's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```userID```   | The query user's ID |
-</details>
 
-<details>
-<summary>Response</summary>
 
+<u>Response</u>
 ```
 200 OK
 {
@@ -468,27 +447,24 @@ isSuccessful: true
 ```
 </details>
 
-### Retrieve two user's convo
-`GET /chatbox/user/:user1ID/:user2ID`
-
 <details>
-  <summary>Authorization</summary>
+<summary> <h3> Retrieve two user's convo </h3></summary>
+<h3><code>GET /chatbox/user/:user1ID/:user2ID</code></h3>
+
+<u>Authorization</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```x-access-token```   | The one of the query user's valid Json Web Token |
-</details>
-<details>
-  <summary>Path Parameters</summary>
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```user1ID```   | The query user's ID |
   |  ```user2ID```   | The other query user's ID |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```
 200 OK
@@ -499,19 +475,17 @@ err: "No Convo found"
 ```
 </details>
 
-### Retrieve an event's convo
-`GET /chatbox/event/:eventID`
-
 <details>
-  <summary>Path Parameters</summary>
+<summary> <h3> Retrieve an event's convo </h3> </summary>
+<h3><code>GET /chatbox/event/:eventID</code></h3>
+
+<u>Path Parameters</u>
   
   |  param   | Description |
   | -------  | ----------- |
   |  ```eventID```   | The query event ID |
-</details>
 
-<details>
-<summary>Response</summary>
+<u>Response</u>
 
 ```
 200 OK
