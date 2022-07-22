@@ -1,0 +1,50 @@
+.editing-box-component {
+  display: grid;
+  grid-template-columns: 16.67fr 16.67fr 66.66fr;
+}
+
+.filler {
+  background-color: greenyellow;
+  height: 100vh;
+  width: 16.67vw;
+}
+
+.editing-box {
+  background-color: #fce9dc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid rgba(83, 1, 44, 1);
+}
+
+.imagePreview {
+  box-shadow: 10px 9px 15px black;
+  border-radius: 10%;
+  max-height: 15vh;
+  margin: auto;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+  max-width: 15vh;
+}
+
+.editing-box > h1 {
+  font-weight: bold;
+  color: #53012c;
+  margin: 0.5vh;
+  margin-top: 0vh;
+  background-color: rgba(249, 194, 164, 1);
+  padding: 1vh;
+  box-shadow: 2px 3px 10px black;
+  width: 100%;
+  height: 7vh;
+}
+
+.editing-box > FormControl > TextField {
+  max-width: 66vw;
+  height: 93vh;
+}
+
+.profile-info-input {
+  height: 91vh;
+  overflow: auto;
+}

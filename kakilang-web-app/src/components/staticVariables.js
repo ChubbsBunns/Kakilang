@@ -53,7 +53,7 @@ const staticGroup = [
 ];
 
 const houses = [
-  { label: "I'll rather not say", value: null },
+  { label: "I'll rather not say", value: false },
   { label: "Saren", value: "Saren" },
   { label: "Ianthe", value: "Ianthe" },
   { label: "Ursala", value: "Ursala" },
@@ -65,17 +65,17 @@ const houses = [
 const floors = Array.from({ length: 19 }, (_, i) => 3 + i * 1).map((num) => {
   return { value: num, label: "Cinnamon Wing Floor " + num };
 });
-floors[0] = { value: null, label: "I'll rather not say" };
+floors[0] = { value: false, label: "I'll rather not say" };
 
 const ccas = [
-  { value: null, label: "I'll rather not say" },
+  { value: false, label: "I'll rather not say" },
   { value: "Floorball", label: "Floorball" },
   { value: "USP Tabletop", label: "USP Tabletop" },
   { value: "UStetris", label: "UStetris" },
 ];
 
 const majors = [
-  { value: null, label: "I'll rather not say" },
+  { value: false, label: "I'll rather not say" },
   { value: "Computer Science", label: "Computer Science" },
   { value: "Information Systems", label: "Information Systems" },
   { value: "Computer Engineering", label: "Computer Engineering" },
@@ -83,4 +83,12 @@ const majors = [
   { value: "Information Security", label: "Information Security" },
 ];
 
-export { staticGroup, houses, floors, ccas, majors };
+const years = [
+  { value: false, label: "I'll rather not say" },
+  { value: "Year 1", label: "Year 1" },
+  { value: "Year 2", label: "Year 2" },
+  { value: "Year 3", label: "Year 3" },
+  { value: "Year 4", label: "Year 4" },
+];
+
+export { staticGroup, houses, floors, ccas, majors, years };

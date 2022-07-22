@@ -8,6 +8,23 @@
 .event-creation-component {
   background-color: rgba(252, 233, 220, 1);
   max-width: 66.67vw;
+  overflow: auto;
+}
+
+.event-edit-title {
+  margin: 0%;
+}
+
+.event-details-input {
+  overflow: auto;
+  max-height: 94vh;
+}
+
+.event-input-field {
+  margin: 1vh;
+  font-family: roboto;
+  font-weight: bold;
+  color: rgba(83, 1, 44, 1);
 }
 
 .event-details-title {
@@ -87,6 +104,7 @@
 
 .preview-image > img {
   border-radius: 0%;
+  margin: 1vh;
 }
 
 .submit-button {

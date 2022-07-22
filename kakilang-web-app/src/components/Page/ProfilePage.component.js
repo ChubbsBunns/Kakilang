@@ -16,21 +16,21 @@ function ProfilePage({ user }) {
             <img src={user.profileIMG} className="profile-picture" />
             <span className="name">
               <br />
-              {user.name}
+              {user?.name}
               <br />
 
-              {user.profile.year}
+              {user.profile?.year?.value}
               <br />
-              {user.profile.major}
+              {user.profile?.major?.value}
             </span>
           </div>
           <div className="information-box">
             <p className="interests-row">
-              {user.profile.interest ? "Interests:" : ""}
-              <span className="interests">{user.profile.interest}</span>
+              {user?.profile?.interest ? "Interests:" : ""}
+              <span className="interests">{user.profile?.interest}</span>
             </p>
-            {user.profile.house}
-            {user.profile.floor}
+            {user.profile?.house?.value}
+            {user.profile?.floor?.value}
           </div>
           <div className="edit-button-div">
             <button className="edit-button">Edit</button>

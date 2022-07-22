@@ -7,6 +7,8 @@ import Logout from "./Logout.component";
 import Kakilang_logo from "./images/Kakilang-log-just-the-word.png";
 import "./Sidebar.component.css";
 
+import Button from "@mui/material/Button";
+
 /**
  * Sidebar for navigation
  *
@@ -64,9 +66,13 @@ function Sidebar({ user }) {
           </div>
 
           <div className="create-event-component">
-            <button className="create-event-button" onClick={goTo("/myEvents")}>
+            <Button
+              className="create-event-button"
+              onClick={goTo("/myEvents")}
+              backgroundColor="secondary"
+            >
               <p>My Events</p>
-            </button>
+            </Button>
           </div>
 
           <div className="create-event-component">

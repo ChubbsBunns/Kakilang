@@ -11,7 +11,7 @@ import friend4 from "./images/friends4.png";
  *
  *
  * @component
- */
+ */     
 
 function Banner(){
     return (

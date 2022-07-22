@@ -7,6 +7,12 @@ import { Outlet, useNavigate } from "react-router-dom";
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
 
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+
 /**
  * Event List
  *
@@ -82,13 +88,28 @@ function EventList({ user, setTarget }) {
       <div className="UI" id="list_of_people">
         <div className="list-component">
           <div className="filter-component">
-            {" "}
-            <select className="filter-options">
-              <option value="filter-houses">All Events</option>
-              <option value="filter-houses">MyEvents</option>
-              <option value="filter-floor">Registered</option>
-              <option value="filter-CCA">New</option>
-            </select>
+            <FormControl>
+              <FormLabel id="demo-row-radio-buttons-group-label">
+                Filter
+              </FormLabel>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+              >
+                <FormControlLabel value="All" control={<Radio />} label="All" />
+                <FormControlLabel
+                  value="My Events"
+                  control={<Radio />}
+                  label="My Events"
+                />
+                <FormControlLabel
+                  value="Other Events"
+                  control={<Radio />}
+                  label="Other Events"
+                />
+              </RadioGroup>
+            </FormControl>
           </div>
           <div className="list-of-people-component">
             <div className="list-of-people">

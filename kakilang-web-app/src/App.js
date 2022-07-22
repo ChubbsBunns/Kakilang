@@ -21,6 +21,7 @@ import EmptyBox from "./components/Box/EmptyBox.component";
 import EventList from "./components/List/EventList.component";
 import EventEditingBox from "./components/Box/EventEditingBox.component";
 import MyEventList from "./components/List/MyEventList.component";
+import ProfileEditingBox from "./components/Box/ProfileEditingBox.component";
 
 function App() {
   const errorProfile = {
@@ -64,8 +65,13 @@ function App() {
                       path="chat"
                       element={<ChatBox user={user} target={target} />}
                     />
+                    <Route path="editProfile" element={<ProfileEditingBox />} />
                   </Route>
                 </Route>
+                <Route
+                  path="/something"
+                  element={<ProfileEditingBox />}
+                ></Route>
 
                 <Route
                   path="/discover/events/*"

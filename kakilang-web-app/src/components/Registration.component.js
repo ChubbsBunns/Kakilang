@@ -1,10 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Login.component.css";
+import "./Registration.component.css";
 import { useNavigate } from "react-router-dom";
-import BigLogo from "./BigLogo.component";
+
+/*
 import Dropdown from "./Dropdown.component";
+*/
 import { majors, houses, floors, ccas } from "./staticVariables";
+import Logo from "./images/KakilangLogo.png";
+
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+
+/*
+ */
 
 /**
  * User Register component
@@ -20,10 +33,10 @@ function Registration() {
   const [password, setPassword] = useState("");
   /** Profile Information */
   const [name, setName] = useState("");
-  const [major, setMajor] = useState();
-  const [cca, setCCA] = useState();
-  const [floor, setFloor] = useState();
-  const [house, setHouse] = useState();
+  const [major, setMajor] = useState("");
+  const [cca, setCCA] = useState("");
+  const [floor, setFloor] = useState("");
+  const [house, setHouse] = useState("");
   const [img, setIMG] = useState();
   const [preview, setPreview] = useState("/defaultProfile.png");
 
@@ -35,6 +48,7 @@ function Registration() {
   const floorSetting = (event) => setFloor(event.target.value);
   const houseSetting = (event) => setHouse(event.target.value);
   const ccaSetting = (event) => setCCA(event.target.value);
+
   // setting the img also changes the preview
   const imgSetting = (event) => {
     if (event.target.files.length == 0) {
@@ -107,67 +121,188 @@ function Registration() {
 
   return (
     <>
-      <BigLogo />
       <div className="Login-window">
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <h1> Register an account </h1>
-          <input
-            type="string"
-            name="Name"
-            value={name}
-            onChange={nameChange}
-            placeholder="Name"
-          />
-          <br />
-          <input
-            type="email"
-            name="Email"
-            value={email}
-            placeholder="Email address"
-            onChange={emailChange}
-          />
-          <br />
-          <input
-            type="password"
-            name="Password"
-            value={password}
-            placeholder="Password"
-            onChange={passwordChange}
-          />
-          <br />
+        <div className="Kakilang-Registration-Logo">
+          <img src={Logo}></img>
+        </div>
+        <form
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+          id="RegisterID"
+        >
+          <FormControl>
+            <h1> Register an account </h1>
+            <TextField
+              type="string"
+              name="Name"
+              value={name}
+              onChange={nameChange}
+              label="Name"
+              sx={{ margin: 0.4 }}
+              size="small"
+            />
+            <TextField
+              type="email"
+              name="Email"
+              value={email}
+              onChange={emailChange}
+              label="Email Address"
+              sx={{
+                margin: 0.4,
+              }}
+              size="small"
+            />
+            <TextField
+              type="password"
+              name="Password"
+              value={password}
+              onChange={passwordChange}
+              label="Password"
+              size="small"
+              sx={{
+                margin: 0.4,
+              }}
+            />
+            {/** 
           <Dropdown
             label="Major"
             options={majors}
             value={major}
             onChange={majorSetting}
           />
-          <br />
           <Dropdown
             label="House"
             options={houses}
             value={house}
             onChange={houseSetting}
           />
-          <br />
           <Dropdown
             label="Floor"
             options={floors}
             value={floor}
             onChange={floorSetting}
           />
-          <br />
+          */}
+            <FormControl
+              sx={{
+                margin: 1,
+              }}
+            >
+              <InputLabel>Major</InputLabel>
+              <Select
+                value={major}
+                labelId="Major"
+                id="Major"
+                label="Major"
+                onChange={majorSetting}
+              >
+                {majors.map((major) => {
+                  return (
+                    <MenuItem value={major.value} key={major.value}>
+                      {major.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <FormControl
+              sx={{
+                margin: 1,
+              }}
+            >
+              <InputLabel>House</InputLabel>
+              <Select
+                value={house}
+                labelId="House"
+                id="House"
+                label="House"
+                onChange={houseSetting}
+              >
+                {houses.map((house) => {
+                  return (
+                    <MenuItem value={house.value} key={house.value}>
+                      {house.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <FormControl
+              sx={{
+                margin: 1,
+              }}
+            >
+              <InputLabel>Floor</InputLabel>
+              <Select
+                value={floor}
+                labelId="Floor"
+                id="Floor"
+                label="Floor"
+                onChange={floorSetting}
+              >
+                {floors.map((floor) => {
+                  return (
+                    <MenuItem value={floor.value} key={floor.value}>
+                      {floor.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <FormControl
+              sx={{
+                margin: 1,
+              }}
+            >
+              <InputLabel>CCAs</InputLabel>
+              <Select
+                value={cca}
+                labelId="CCAs"
+                id="CCAs"
+                label="CCAs"
+                onChange={ccaSetting}
+              >
+                {ccas.map((ccas) => {
+                  return (
+                    <MenuItem value={ccas.value} key={ccas.value}>
+                      {ccas.label}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            {/**
           <Dropdown
             label="CCAs"
             options={ccas}
             value={cca}
             onChange={ccaSetting}
           />
-          <br />
-          <input type="file" name="myImage" onChange={imgSetting} />
-          <br />
-          <img src={preview} alt="Unable to display image" />
-          <br />
-          <input className="submit" type="submit" value="Register" />
+            */}
+            <div className="File-Input">
+              <input type="file" name="myImage" onChange={imgSetting} />
+            </div>
+            <div>
+              <img
+                src={preview}
+                alt="Unable to display image"
+                width={"130px"}
+                height={"130px"}
+              />
+            </div>
+            <Button
+              className="submit"
+              variant="contained"
+              type="submit"
+              value="Register"
+              sx={{
+                padding: 0.4,
+                margin: 0.2,
+              }}
+            >
+              Register
+            </Button>{" "}
+          </FormControl>
         </form>
       </div>
     </>
