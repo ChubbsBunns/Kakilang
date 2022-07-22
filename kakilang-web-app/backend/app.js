@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/auth", authRouter);
-app.use("/message", chatboxRouter);
+app.use("/chatbox", chatboxRouter);
 app.use("/users", usersRouter);
 app.use("/events", eventsRouter);
 

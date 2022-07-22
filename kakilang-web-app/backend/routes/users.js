@@ -37,6 +37,8 @@ router.route("/").post(upload.single("myImage"), async (req, res) => {
   const file = req.file;
   const SALT = parseInt(process.env.BCRYPT_SALT);
 
+  console.log(user);
+
   // Check if email has already registered
   const takenEmail = await User.findOne({ email: user.email });
 

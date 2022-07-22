@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Registration.component.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 /*
 import Dropdown from "./Dropdown.component";
 */
-import { majors, houses, floors, ccas } from "./staticVariables";
+import { majors, houses, floors, ccas } from "../common/staticVariables";
 import Logo from "./images/KakilangLogo.png";
 
 import TextField from "@mui/material/TextField";
@@ -98,7 +98,7 @@ function Registration() {
 
     // Axios post with headers for Multer to work
     axios
-      .post(server + "/register/add", registrationData, {
+      .post(server + "/users", registrationData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -122,9 +122,11 @@ function Registration() {
   return (
     <>
       <div className="Login-window">
-        <div className="Kakilang-Registration-Logo">
-          <img src={Logo}></img>
-        </div>
+        <Link to="/">
+          <div className="Kakilang-Registration-Logo">
+            <img src={Logo} />
+          </div>
+        </Link>
         <form
           onSubmit={handleSubmit}
           encType="multipart/form-data"

@@ -86,8 +86,8 @@ router
   .route("/:id")
   .patch(
     verifyJWT,
-    verifyUserEvent,
     upload.single("eventImage"),
+    verifyUserEvent,
     (req, res) => {
       const file = req.file;
       const details = req.body;
@@ -133,7 +133,7 @@ router
 
 async function verifyUserEvent(req, res, next) {
   const ownerID = req.body.ownerID;
-  const dbUser = isUserSessionToken(req.jwtID, ownerID);
+  const dbUser = isUserSessionToken(req.jwt, ownerID);
   if (!dbUser) {
     return res.status(403).json({ message: "Edit not allowed" });
   }
@@ -187,7 +187,7 @@ router.route("/:id").delete(verifyJWT, verifyUserEvent, (req, res) => {
  */
 router.route("/user/:id").get(verifyJWT, (req, res) => {
   const queryID = req.params.id;
-  const dbUser = isUserSessionToken(req.jwtID, queryID);
+  const dbUser = isUserSessionToken(req.jwt, queryID);
   if (!dbUser) {
     return res.status(403).json({ message: "Read not allowed" });
   }
@@ -203,7 +203,7 @@ router.route("/user/:id").get(verifyJWT, (req, res) => {
  * JWT authentication required
  */
 router.route("/:eventID/:userID").post(verifyJWT, (req, res) => {
-  if (req.jwtID !== res.params.userID) {
+  if (req.jwtID !== req.params.userID) {
     return res.status(403).json({ message: "Registeration not allowed" });
   }
 

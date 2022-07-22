@@ -15,12 +15,12 @@ const router = require("express").Router();
  * JWT authentication and User Session authentication required for usage
  * Socket emits "message" with convoID
  */
-router.route("/convo").post(verifyJWT, (req, res) => {
+router.route("/convo").post(verifyJWT, async (req, res) => {
   const senderID = req.body.senderID;
-  const dbUser = isUserSessionToken(req.jwtID, senderID);
+  const dbUser = await isUserSessionToken(req.jwt, senderID);
 
-  if (!dbUser || dbUser._id !== senderID) {
-    return res.send(403).json({ message: "Usage not allowed" });
+  if (!dbUser || req.jwtID !== senderID) {
+    return res.status(403).json({ message: "Usage not allowed" });
   }
 
   const participants = [req.body.senderID, req.body.targetID];
@@ -51,7 +51,7 @@ router.route("/convo").post(verifyJWT, (req, res) => {
  */
 router.route("/convo/:convoID").post(verifyJWT, (req, res) => {
   const senderID = req.body.senderID;
-  const dbUser = isUserSessionToken(req.jwtID, senderID);
+  const dbUser = isUserSessionToken(req.jwt, senderID);
 
   if (!dbUser) {
     return res.status(403).json({ message: "Usage not allowed" });
@@ -89,8 +89,10 @@ router.route("/convo/:convoID").get(verifyJWT, async (req, res) => {
       console.log(err);
       return [];
     });
-
-  if (!convoParticipants.includes(req.jwtID)) {
+  const isParticipant = convoParticipants.some(
+    (id) => id.toString() == req.jwtID
+  );
+  if (!isParticipant) {
     return res.status(403).json({ message: "Read not allowed" });
   }
 
@@ -111,7 +113,7 @@ router.route("/convo/:convoID").get(verifyJWT, async (req, res) => {
  */
 router.route("/user/:userID").get(verifyJWT, (req, res) => {
   const queryID = req.params.userID;
-  const dbUser = isUserSessionToken(req.jwtID, queryID);
+  const dbUser = isUserSessionToken(req.jwt, queryID);
   if (!dbUser) {
     return res.status(403).json({ message: "Read not allowed" });
   }
@@ -161,8 +163,8 @@ router.route("/user/:user1ID/:user2ID").get(verifyJWT, (req, res) => {
   const user2ID = req.params.user2ID;
 
   const isAuth =
-    isUserSessionToken(req.jwtID, user1ID) ||
-    isUserSessionToken(req.jwtID, user2ID);
+    isUserSessionToken(req.jwt, user1ID) ||
+    isUserSessionToken(req.jwt, user2ID);
 
   if (!isAuth) {
     return res.status(403).json({ message: "Read not allowed" });

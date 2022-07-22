@@ -36,7 +36,7 @@ function EventList({ user, setTarget }) {
   /** Get Convo of the event **/
   const getConvoAsync = async (targetID) => {
     const response = await axios
-      .get(server + "/message/event/" + targetID)
+      .get(server + "/chatbox/event/" + targetID)
       .then((res) => {
         return res.data.convoID;
       })
@@ -65,7 +65,8 @@ function EventList({ user, setTarget }) {
     });
     setGroup(myEvent.concat(otherEvent));
   };
-  /** Run once for performance */
+
+  /** Run only once for performance */
   useEffect(() => {
     const newSocket = io(server);
     newSocket.on("connect", () => {
@@ -137,7 +138,6 @@ function EventList({ user, setTarget }) {
 EventList.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
   }),
   setTarget: PropTypes.func.isRequired,
 };

@@ -4,6 +4,7 @@ import axios from "axios";
 
 import "./EventCreationBox.component.css";
 import { useNavigate } from "react-router";
+import setAuthToken from "../../common/token";
 
 /**
  * This component is a creation page for events
@@ -68,11 +69,7 @@ function EventCreationBox({ owner }) {
     //Success
     const post = async () => {
       const success = await axios
-        .post(server + "/events", eventData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+        .post(server + "/events", eventData, setAuthToken())
         .then((res) => {
           console.log(res.statusText);
           return true;

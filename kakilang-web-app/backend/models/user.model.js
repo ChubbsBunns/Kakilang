@@ -21,7 +21,7 @@ const userSchema = new Schema(
 
     name: { type: String, required: true },
     profileIMG: { type: String, required: false },
-    Profile: {
+    profile: {
       major: {
         value: { type: String },
         display: { type: Boolean },
@@ -58,7 +58,7 @@ const userSchema = new Schema(
  * @returns user information without private credentials
  */
 userSchema.methods.info = function () {
-  const profile = this.Profile;
+  const profile = this.profile;
   const basic = {
     _id: this._id,
     name: this.name,

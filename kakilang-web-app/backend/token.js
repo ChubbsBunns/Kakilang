@@ -55,7 +55,7 @@ async function isUserSessionToken(token, userID) {
     })
     .then((dbSession) => {
       dbUser = dbSession;
-      return dbSession.sessionID?.JWT;
+      return dbSession?.sessionID?.JWT;
     })
     .catch((err) => {
       console.log(err);

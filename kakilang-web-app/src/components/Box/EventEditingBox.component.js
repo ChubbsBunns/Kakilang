@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { confirm } from "react-confirm-box";
 
 import "./EventCreationBox.component.css";
+import setAuthToken from "../../common/token";
 
 /**
  * This component is a editing page for a event
@@ -26,7 +27,7 @@ function EventEditingBox({ owner, target }) {
   const imgSetting = (event) => {
     const error = (message = null) => {
       message ? alert(message) : null;
-      setPreview(target.img || "/defaultEvent.jpg");
+      setPreview(target.img);
       event.target.value = null;
       return false;
     };
@@ -53,18 +54,20 @@ function EventEditingBox({ owner, target }) {
     }
 
     if (result) {
+      const paramsForDeletion = setAuthToken();
+      paramsForDeletion.data = {
+        oldIMG: oldIMG,
+        ownerID: owner._id,
+      };
       axios
-        .delete(server + "/events/" + target._id, {
-          data: {
-            oldIMG: oldIMG,
-          },
-        })
+        .delete(server + "/events/" + target._id, paramsForDeletion)
         .then((res) => {
-          console.log(res.data.update);
+          res;
           navigate("/myEvents");
         })
         .catch((err) => {
           console.log(err);
+          console.log(err.response.data.message);
         });
       return;
     } else {
@@ -88,6 +91,7 @@ function EventEditingBox({ owner, target }) {
 
     // Additional input
     oldIMG !== "/defaultEvent.jpg" ? eventData.append("oldIMG", oldIMG) : null;
+    eventData.append("ownerID", owner._id);
 
     // Prevent Bad input
     for (let [k, v] of eventData.entries()) {
@@ -97,9 +101,11 @@ function EventEditingBox({ owner, target }) {
         return;
       }
     }
+    const headers = setAuthToken();
+    headers.headers["Content-Type"] = "multipart/form-data";
     //Success
     axios
-      .patch(server + "/events/" + target._id, eventData)
+      .patch(server + "/events/" + target._id, eventData, headers)
       .then((res) => {
         console.log(res.data.update);
         navigate("/myEvents");

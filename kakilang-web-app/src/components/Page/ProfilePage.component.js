@@ -8,29 +8,31 @@ import "./ProfilePage.component.css";
  *
  */
 function ProfilePage({ user }) {
+  const profile = user.profile;
   return (
     <>
       <div className="container-profile-page">
         <div className="profile-box">
           <div className="image-name-box">
-            <img src={user.profileIMG} className="profile-picture" />
+            <img src={user.img} className="profile-picture" />
             <span className="name">
               <br />
               {user?.name}
               <br />
 
-              {user.profile?.year?.value}
+              {profile?.year}
               <br />
-              {user.profile?.major?.value}
+              {profile?.major}
             </span>
           </div>
           <div className="information-box">
             <p className="interests-row">
-              {user?.profile?.interest ? "Interests:" : ""}
-              <span className="interests">{user.profile?.interest}</span>
+              {profile?.interest ? "Interests:" : ""}
+              <span className="interests">{profile?.interest}</span>
             </p>
-            {user.profile?.house?.value}
-            {user.profile?.floor?.value}
+            {profile?.house}
+            <br />
+            {profile?.floor}
           </div>
           <div className="edit-button-div">
             <button className="edit-button">Edit</button>

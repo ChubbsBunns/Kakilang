@@ -6,6 +6,7 @@ import Login from "./components/Login.component";
 import Registration from "./components/Registration.component";
 import TestFunction from "./components/TestFunction.component";
 import ProtectedRoute from "./ProtectedRoute";
+import ResetRoute from "./ResetRoute";
 import NotMatch from "./components/NotMatch.component";
 import Sidebar from "./components/Sidebar.component";
 import ListOfPeople from "./components/List/ListOfPeople.component";
@@ -25,14 +26,21 @@ import ProfileEditingBox from "./components/Box/ProfileEditingBox.component";
 
 function App() {
   const errorProfile = {
+    _id: "error123151",
     name: "Error",
-    profileIMG: "/defaultProfile.png",
-    email: "Error@Erros.com",
+    img: "/defaultProfile.png",
   };
   const [isLogin, setLogin] = useState(false);
   const [isOwner, setOwnership] = useState(false);
   const [user, setUser] = useState(errorProfile);
   const [target, setTarget] = useState(errorProfile);
+  const reset = () => {
+    setLogin(false);
+    setOwnership(false);
+    setUser(errorProfile);
+    setTarget(errorProfile);
+    return true;
+  };
 
   return (
     <div className="App">
@@ -174,7 +182,8 @@ function App() {
               <Route path="*" element={<NotMatch />} />
             </Route>
 
-            <Route exact path="/SecretTesting" element={<TestFunction />} />
+            <Route path="/SecretTesting" element={<TestFunction />} />
+            <Route path="/logout" element={<ResetRoute reset={reset} />} />
             <Route path="*" element={<NotMatch />} />
           </Routes>
         </BrowserRouter>

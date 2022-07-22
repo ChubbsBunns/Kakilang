@@ -66,11 +66,7 @@ function Sidebar({ user }) {
           </div>
 
           <div className="create-event-component">
-            <Button
-              className="create-event-button"
-              onClick={goTo("/myEvents")}
-              backgroundColor="secondary"
-            >
+            <Button className="create-event-button" onClick={goTo("/myEvents")}>
               <p>My Events</p>
             </Button>
           </div>
@@ -129,7 +125,7 @@ function Sidebar({ user }) {
 
 Sidebar.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
 };
 

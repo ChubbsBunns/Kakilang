@@ -11,13 +11,13 @@ import { useNavigate } from "react-router";
  */
 function ProfileBox({ user, target }) {
   /** Constants */
-  const disabling = target._id == user._id;
+  const isUser = target._id == user._id;
   const navigate = useNavigate();
 
   /** Handle changes **/
   const goToChat = () => navigate("../chat");
-  const ChatButton = (disable) => {
-    return disable ? (
+  const ChatButton = (isUser) => {
+    return isUser ? (
       <></>
     ) : (
       <div className="message-button">
@@ -25,8 +25,18 @@ function ProfileBox({ user, target }) {
       </div>
     );
   };
-
   const profile = target.profile;
+  function EditButton(isAllowed) {
+    if (isAllowed) {
+      return (
+        <div className="edit-button-div">
+          <button className="edit-button">Edit</button>
+        </div>
+      );
+    } else {
+      return <></>;
+    }
+  }
 
   return (
     <div className="container-profile-page">
@@ -37,23 +47,22 @@ function ProfileBox({ user, target }) {
             <br />
             {target.name}
             <br />
-            {profile.year}
+            {profile?.year}
             <br />
-            {profile.major}
-            {ChatButton(disabling)}
+            {profile?.major}
+            {ChatButton(isUser)}
           </span>
         </div>
         <div className="information-box">
           <p className="interests-row">
-            {profile.interest ? "Interests:" : ""}
-            <span className="interests">{profile.interest}</span>
+            {profile?.interest ? "Interests:" : ""}
+            <span className="interests">{profile?.interest}</span>
           </p>
-          {profile.house}
-          {profile.floor ? "Floor: " + profile.floor : ""}
+          {profile?.house}
+          <br />
+          {profile?.floor ? "Floor: " + profile?.floor : ""}
         </div>
-        <div className="edit-button-div">
-          <button className="edit-button">Edit</button>
-        </div>
+        {EditButton(isUser)}
       </div>
     </div>
   );

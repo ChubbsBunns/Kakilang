@@ -5,13 +5,14 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
-import { staticGroup } from "../staticVariables";
+import { staticGroup } from "../../common/staticVariables";
 
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import setAuthToken from "../../common/token";
 
 /**
  * List-Of-People
@@ -36,14 +37,20 @@ function ListOfPeople({ user, setTarget }) {
     navigate(targetHandle + "/profile");
   };
 
-  /** Get Convo between two people **/
+  /** Get Convo between two people */
   const getConvoAsync = async (targetID) => {
     const response = await axios
-      .get(server + "/message/user/" + user._id + "/" + targetID)
+      .get(
+        server + "/chatbox/user/" + user._id + "/" + targetID,
+        setAuthToken()
+      )
       .then((res) => {
         return res.data.convoID;
       })
       .catch((err) => {
+        if (err.response.status == 404) {
+          return null;
+        }
         console.log(err);
         return null;
       });
@@ -53,7 +60,7 @@ function ListOfPeople({ user, setTarget }) {
   /** Get the list of people from server */
   const getGroupAsync = async () => {
     const response = await axios
-      .get(server + "/users")
+      .get(server + "/users", setAuthToken())
       .then((res) => {
         return res.data.users;
       })

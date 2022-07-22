@@ -11,6 +11,7 @@ import FormLabel from "@mui/material/FormLabel";
 
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
+import setAuthToken from "../../common/token";
 
 /**
  * Chat List of exising messages
@@ -31,10 +32,10 @@ function ChatList({ user, setTarget }) {
     navigate(targetHandle + "/chat");
   };
 
-  /** Get the list of people from server */
-  const getGroupAsync = async () => {
+  /** Get the list of existing convos */
+  const getConvoGroupAsync = async () => {
     const response = await axios
-      .get(server + "/message/user/" + user._id)
+      .get(server + "/chatbox/user/" + user._id, setAuthToken())
       .then((res) => {
         return res.data.convos;
       })
@@ -47,9 +48,10 @@ function ChatList({ user, setTarget }) {
     });
     setGroup(treated);
   };
-  /** Run once for performance */
+
+  /** Run only once for performance */
   useEffect(() => {
-    getGroupAsync();
+    getConvoGroupAsync();
   }, []);
 
   return (
