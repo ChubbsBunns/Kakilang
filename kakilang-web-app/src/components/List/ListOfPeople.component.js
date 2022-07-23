@@ -123,9 +123,6 @@ function ListOfPeople({ user, setTarget }) {
                 })}
               </ul>
             </div>
-            <div className="group-name">
-              <i>Group Name Placeholder</i>
-            </div>
           </div>
         </div>
       </div>
