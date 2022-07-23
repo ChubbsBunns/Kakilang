@@ -81,15 +81,7 @@ function MyEventList({ user, setTarget }) {
     <>
       <div className="UI" id="list_of_people">
         <div className="list-component">
-          <div className="filter-component">
-            {" "}
-            <select className="filter-options">
-              <option value="filter-houses">All Events</option>
-              <option value="filter-houses">MyEvents</option>
-              <option value="filter-floor">Registered</option>
-              <option value="filter-CCA">New</option>
-            </select>
-          </div>
+          <div className="filter-component"> </div>
           <div className="list-of-people-component">
             <div className="list-of-people">
               <ul>

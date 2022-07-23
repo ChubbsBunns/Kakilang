@@ -10,7 +10,7 @@
 
 .event-poster-image > img {
   max-height: 30vh;
-  border-radius: 70px;
+  border-radius: 0%;
 }
 
 .event-overview {

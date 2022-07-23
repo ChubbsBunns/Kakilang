@@ -1,10 +1,9 @@
 .Logout {
   font-size: 22px;
-  color: antiquewhite;
+
   text-align: left;
   line-height: 70px;
   margin: auto;
-  background-color: #a27d33;
   user-select: none;
   padding: 0.2vh;
 
@@ -19,9 +18,8 @@
 }
 
 .Logout:hover {
-  background-color: #6c5322;
   transition: 0.2s;
-  box-shadow: 0px 5px #a27d33;
+  box-shadow: 0px 5px 10px #a27d33;
   transform: translateY(-3px);
   padding: 0.3vh;
   border-radius: 40%;

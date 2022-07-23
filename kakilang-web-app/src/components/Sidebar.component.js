@@ -7,8 +7,6 @@ import Logout from "./Logout.component";
 import Kakilang_logo from "./images/Kakilang-log-just-the-word.png";
 import "./Sidebar.component.css";
 
-import Button from "@mui/material/Button";
-
 /**
  * Sidebar for navigation
  *
@@ -16,6 +14,7 @@ import Button from "@mui/material/Button";
  *
  * @component
  */
+
 function Sidebar({ user }) {
   user;
   const navigate = useNavigate();
@@ -66,13 +65,13 @@ function Sidebar({ user }) {
           </div>
 
           <div className="create-event-component">
-            <Button
+            <button
               className="create-event-button"
               onClick={goTo("/myEvents")}
               backgroundColor="secondary"
             >
               <p>My Events</p>
-            </Button>
+            </button>
           </div>
 
           <div className="create-event-component">
@@ -80,45 +79,10 @@ function Sidebar({ user }) {
               className="create-event-button"
               onClick={goTo("/myProfile")}
             >
-              <p>My Profile</p>
+              <p>
+                My Profile <i className="fa-solid fa-gear"></i>
+              </p>
             </button>
-            <i className="fa-solid fa-gear"></i>
-          </div>
-
-          <div className="impromptus">
-            <div>
-              <i className="fa-solid fa-clock"></i>
-              <p className="impromptus-title">Impromptus!</p>
-            </div>
-            <ul className="impromptus-events">
-              <li>
-                <button className="an-event" /*onClick={goToEvent} */>
-                  <i className="fa-solid fa-chess-king"></i> <br></br>
-                  <p className="impromptu-event-title">Chess Blitz!</p>
-                </button>
-              </li>
-              <li>
-                <button className="an-event">
-                  <i className="fa-solid fa-gamepad"></i> <br></br>
-                  <p className="impromptu-event-title">
-                    A really long and elaborate title even though we should
-                    advise people not to write them this long
-                  </p>
-                </button>
-              </li>
-              <li>
-                <button className="an-event">
-                  <i className="fa-solid fa-headset"></i> <br></br>
-                  <p className="impromptu-event-title">Chill and talk</p>
-                </button>
-              </li>
-              <li>
-                <button className="an-event">
-                  <i className="fa-brands fa-battle-net"></i> <br></br>
-                  <p className="impromptu-event-title">Overwatch</p>
-                </button>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

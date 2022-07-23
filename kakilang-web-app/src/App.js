@@ -68,10 +68,6 @@ function App() {
                     <Route path="editProfile" element={<ProfileEditingBox />} />
                   </Route>
                 </Route>
-                <Route
-                  path="/something"
-                  element={<ProfileEditingBox />}
-                ></Route>
 
                 <Route
                   path="/discover/events/*"
@@ -163,12 +159,13 @@ function App() {
                   path="/myProfile/*"
                   element={
                     <>
-                      <div></div>
+                      <EmptyBox />
+
                       <ProfilePage user={user} target={user} />
                     </>
                   }
                 >
-                  <Route path="edit" element={<Registration />} />
+                  <Route path="profileEdit" element={<ProfileEditingBox />} />
                 </Route>
               </Route>
               <Route path="*" element={<NotMatch />} />

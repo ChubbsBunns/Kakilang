@@ -15,6 +15,8 @@ function ProfileBox({ user, target }) {
   const navigate = useNavigate();
 
   /** Handle changes **/
+  const goToProfile = () => navigate("../profileEdit");
+
   const goToChat = () => navigate("../chat");
   const ChatButton = (disable) => {
     return disable ? (
@@ -52,7 +54,9 @@ function ProfileBox({ user, target }) {
           {profile.floor ? "Floor: " + profile.floor : ""}
         </div>
         <div className="edit-button-div">
-          <button className="edit-button">Edit</button>
+          <button className="edit-button" onClick={goToProfile}>
+            Edit
+          </button>
         </div>
       </div>
     </div>
