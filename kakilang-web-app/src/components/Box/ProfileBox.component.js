@@ -57,12 +57,16 @@ function ProfileBox({ user, target }) {
         </div>
         <div className="information-box">
           <p className="interests-row">
-            {profile?.interest ? "Interests:" : ""}
+            {profile.interest ? "Interests:" : ""}
             <span className="interests">{profile?.interest}</span>
           </p>
           {profile?.house}
-          <br />
-          {profile?.floor ? "Floor: " + profile?.floor : ""}
+          {profile.floor ? "Floor: " + profile.floor : ""}
+        </div>
+        <div className="edit-button-div">
+          <button className="edit-button" onClick={goToProfile}>
+            Edit
+          </button>
         </div>
         {EditButton(isUser)}
       </div>
