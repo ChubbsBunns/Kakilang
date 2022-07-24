@@ -9,11 +9,11 @@ import ProtectedRoute from "./ProtectedRoute";
 import NotMatch from "./components/NotMatch.component";
 import Sidebar from "./components/Sidebar.component";
 import ListOfPeople from "./components/List/ListOfPeople.component";
-import ProfilePage from "./components/Page/ProfilePage.component";
 import EventsBox from "./components/Box/EventsBox.component";
 import EventCreationBox from "./components/Box/EventCreationBox.component";
 import ChatBox from "./components/Box/ChatBox.component";
 import ProfileBox from "./components/Box/ProfileBox.component";
+import EmptyList from "./components/List/EmptyList.component";
 
 import "./App.css";
 import ChatList from "./components/List/ChatList.component";
@@ -155,17 +155,12 @@ function App() {
                   </Route>
                 </Route>
 
-                <Route
-                  path="/myProfile/*"
-                  element={
-                    <>
-                      <EmptyBox />
-
-                      <ProfilePage user={user} target={user} />
-                    </>
-                  }
-                >
-                  <Route path="profileEdit" element={<ProfileEditingBox />} />
+                <Route path="myProfile/*" element={<EmptyList />}>
+                  <Route
+                    path=""
+                    element={<ProfileBox user={user} target={user} />}
+                  ></Route>{" "}
+                  <Route path="Edit" element={<ProfileEditingBox />} />
                 </Route>
               </Route>
               <Route path="*" element={<NotMatch />} />

@@ -42,7 +42,7 @@ body {
 
 .list-of-people > ul > li > a > img {
   max-width: 25%;
-  padding-right: 3px;
+  padding-right: 0.3vw;
   margin-right: 5px;
 }
 
@@ -78,7 +78,7 @@ body {
   color: rgb(83 1 44);
   box-sizing: border-box;
   transition: 0.2s;
-  margin: 5px 12px 5px;
+  margin: 0.3vh 0.3vw 0.3vh;
   border-top: 4px solid rgba(255, 255, 255, 0.3);
   border-bottom: 3px solid black;
 }

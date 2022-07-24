@@ -15,7 +15,7 @@ function ProfileBox({ user, target }) {
   const navigate = useNavigate();
 
   /** Handle changes **/
-  const goToProfile = () => navigate("../profileEdit");
+  const goToProfile = () => navigate("/myProfile/Edit");
 
   const goToChat = () => navigate("../chat");
   const ChatButton = (disable) => {
