@@ -37,20 +37,20 @@ function ProfileBox({ user, target }) {
           <img src={target.img} className="profile-picture" />
           <span className="name">
             <br />
-            {target.name}
+            {target?.name}
             <br />
-            {profile.year}
+            {profile?.year}
             <br />
-            {profile.major}
+            {profile?.major}
             {ChatButton(disabling)}
           </span>
         </div>
         <div className="information-box">
           <p className="interests-row">
             {profile.interest ? "Interests:" : ""}
-            <span className="interests">{profile.interest}</span>
+            <span className="interests">{profile?.interest}</span>
           </p>
-          {profile.house}
+          {profile?.house}
           {profile.floor ? "Floor: " + profile.floor : ""}
         </div>
         <div className="edit-button-div">
