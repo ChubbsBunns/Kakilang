@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./ProfileEditingBox.component.css";
 
-import { majors, houses, floors, ccas, years } from "../staticVariables";
+import {
+  majors,
+  houses,
+  floors,
+  ccas,
+  years,
+} from "../../common/staticVariables";
 
 import imageTest from "./Dylan-img1.png";
 import TextField from "@mui/material/TextField";

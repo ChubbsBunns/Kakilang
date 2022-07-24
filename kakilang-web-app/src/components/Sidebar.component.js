@@ -93,7 +93,7 @@ function Sidebar({ user }) {
 
 Sidebar.propTypes = {
   user: PropTypes.shape({
-    email: PropTypes.string.isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
 };
 

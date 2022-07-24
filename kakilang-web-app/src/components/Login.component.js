@@ -4,16 +4,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 /**Import Components & CSS */
-/*
-import Button from "@mui/material/Button";
-import BigLogo from "./BigLogo.component";
-*/
 import FrontPageLogo from "./images/Kakilang_Frontpage.JPG";
 import Logo from "./images/KakilangLogo.png";
-
-const defaultProfile = "/defaultProfile.png";
+import setAuthToken from "../common/token";
 import "./Login.component.css";
 
 /**
@@ -28,18 +25,9 @@ function Login({ setAuth, setUser }) {
   const [backgroundImage, setBackgroundImage] = useState(
     `url(${FrontPageLogo})`
   );
+  const [isLoading, setisLoading] = useState(false);
   const redirect = "/myProfile";
   const goTo = useNavigate();
-
-  /** Helper functions */
-  function setDefaultIMG(user) {
-    if (!user.profileIMG) {
-      user.profileIMG = defaultProfile;
-      return user;
-    } else {
-      return user;
-    }
-  }
 
   /** Handle input changes*/
   const emailChange = (event) => setEmail(event.target.value);
@@ -49,81 +37,84 @@ function Login({ setAuth, setUser }) {
     event.preventDefault();
 
     const user = { email: email.toLowerCase(), password: password };
-
-    //@TODO setup USER details
-    axios.post(server + "/login", user).then((res) => {
-      localStorage.setItem("token", res.data.token);
-      if (res.data.login) {
-        setAuth(true);
-        setUser(setDefaultIMG(res.data.user));
-        goTo(redirect);
-      } else {
-        setAuth(false);
-        setUser({});
-        alert(res.data.message);
-      }
-    });
+    setisLoading(true);
+    axios
+      .post(server + "/auth", user)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        setisLoading(false);
+        if (res.data.isLoggedIn) {
+          setAuth(true);
+          setUser(res.data.user);
+          goTo(redirect);
+        } else {
+          setAuth(false);
+          alert(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setisLoading(false);
+      });
   };
 
   /**
    * Checks for JsonWebToken to autologin on web refreshed
    */
   useEffect(() => {
-    axios
-      .get(server + "/getUser", {
-        headers: { "x-access-token": localStorage.getItem("token") },
-      })
-      .then((res) => {
-        const user = res.data.user;
-        if (res.data.isLoggedIn) {
-          setAuth(true);
-          setUser(setDefaultIMG(user));
-          goTo(redirect);
-        } else {
-          setAuth(false);
-          setUser({});
-        }
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-      });
+    if (localStorage.getItem("token")) {
+      setisLoading(true);
+      axios
+        .get(server + "/auth", setAuthToken())
+        .then((res) => {
+          if (res.data.isLoggedIn) {
+            setAuth(true);
+            setUser(res.data.user);
+            setisLoading(false);
+            goTo(redirect);
+          } else {
+            setAuth(false);
+          }
+        })
+        .catch((err) => {
+          setisLoading(false);
+          console.log(err.response.data.message);
+        });
+    }
+    if (!process.env.REACT_APP_DEVELOPMENT) {
+      axios
+        .get("https://api.unsplash.com/photos/random", {
+          headers: {
+            Authorization: "Client-ID" + process.env.REACT_APP_UNSPLASH,
+          },
+        })
+        .then((res) => {
+          const imageData = res.data;
+          const imageBody = res.body;
+          console.log(imageData);
+          console.log(imageBody);
+          setBackgroundImage(imageData.urls.full);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, []);
 
   useEffect(() => {
-    axios
-      .get("https://api.unsplash.com/photos/random", {
-        headers: {
-          Authorization:
-            "Client-ID 8GIT9jFlfgG8-0qZeeyVDCpAMZdQ7uxbzXSn3u2co5U",
-        },
-        params: {
-          collections: ``,
-        },
-      })
-
-      .then((res) => {
-        const imageData = res.data;
-        const imageBody = res.body;
-        console.log(imageData);
-        console.log(imageBody);
-        setBackgroundImage(imageData.urls.full);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    console.log(isLoading);
+  }, [isLoading]);
 
   return (
     <div className="Login-Entire-Component">
+      <Backdrop open={isLoading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div
         className="Login-Image"
         style={{ backgroundImage: backgroundImage }}
       ></div>
       <div className="Login-Page">
-        {/**
-        <BigLogo />
-         */}
-
         <div className="Login-window">
           <div className="Kakilang-Login-Logo">
             <img src={Logo}></img>

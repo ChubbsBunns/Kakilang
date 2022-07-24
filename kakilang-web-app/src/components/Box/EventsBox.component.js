@@ -5,6 +5,7 @@ import axios from "axios";
 /** import Components & CSS **/
 import "./EventsBox.component.css";
 import { useNavigate } from "react-router";
+import setAuthToken from "../../common/token";
 
 function EventsBox({ user, target, setOwnership }) {
   /** Constants **/
@@ -27,29 +28,38 @@ function EventsBox({ user, target, setOwnership }) {
 
   /** Access event chat */
   const goToChat = () => navigate("chat");
-  const updateRegister = (isReg) => () => {
+  const updateRegisterAs = (isReg) => () => {
     if (isReg) {
       axios
-        .patch(server + "/events/" + target._id + "/" + user._id)
+        .post(
+          server + "/events/" + target._id + "/" + user._id,
+          {},
+          setAuthToken()
+        )
         .then((res) => {
-          console.log(res);
+          if (!res.status == 200) {
+            console.log(res);
+            return;
+          }
+          setRegistration(isReg);
         })
         .catch((err) => {
           console.log(err);
-          console.log(err.data.message);
         });
-      setRegistration(isReg);
     } else {
       axios
-        .delete(server + "/events/" + target._id + "/" + user._id)
+        .delete(
+          server + "/events/" + target._id + "/" + user._id,
+          setAuthToken()
+        )
         .then((res) => {
           console.log(res);
+          setRegistration(isReg);
         })
         .catch((err) => {
           console.log(err);
           console.log(err.data.message);
         });
-      setRegistration(isReg);
     }
   };
 
@@ -63,7 +73,7 @@ function EventsBox({ user, target, setOwnership }) {
             </div>
             <button
               className="event-edit-button"
-              onClick={updateRegister(false)}
+              onClick={updateRegisterAs(false)}
             >
               Unregister
             </button>
@@ -80,7 +90,7 @@ function EventsBox({ user, target, setOwnership }) {
       }
     } else {
       return (
-        <button className="event-edit-button" onClick={updateRegister(true)}>
+        <button className="event-edit-button" onClick={updateRegisterAs(true)}>
           Register
         </button>
       );

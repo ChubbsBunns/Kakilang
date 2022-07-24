@@ -1,11 +1,11 @@
 /** Static Group import */
-import dylan1 from "./images/Dylan-img1.png";
-import marcus_dp from "./images/marcus.jpg";
-import sherwin_dp from "./images/sherwin.jpg";
-import xuanyi_dp from "./images/xy.jpg";
-import stephen_dp from "./images/stephen.jpg";
-import yongjie_dp from "./images/yong jie.jpg";
-import william_dp from "./images/william.jpg";
+import dylan1 from "../components/images/Dylan-img1.png";
+import marcus_dp from "../components/images/marcus.jpg";
+import sherwin_dp from "../components/images/sherwin.jpg";
+import xuanyi_dp from "../components/images/xy.jpg";
+import stephen_dp from "../components/images/stephen.jpg";
+import yongjie_dp from "../components/images/yong jie.jpg";
+import william_dp from "../components/images/william.jpg";
 
 const staticGroup = [
   {

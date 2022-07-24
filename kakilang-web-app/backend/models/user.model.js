@@ -1,15 +1,24 @@
+/**
+ * User Schema
+ * Stores user login credentials, login session and displayed profile
+ *
+ * @param email
+ * @param password
+ * @param sessionID
+ * @param name
+ * @param profileIMG
+ * @param Profile
+ */
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
-/**
- * Schema of the User
- * For MongoDB and mongoose operations
- *
- */
 const userSchema = new Schema(
   {
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true, lowercase: true, unique: true },
     password: { type: String, required: true },
+
+    sessionID: { type: mongoose.Types.ObjectId, ref: "Session" },
+
     name: { type: String, required: true },
     profileIMG: { type: String, required: false },
     profile: {
@@ -45,6 +54,9 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
+/**
+ * @returns user information without private credentials
+ */
 userSchema.methods.info = function () {
   const profile = this.profile;
   const basic = {
@@ -65,5 +77,4 @@ userSchema.methods.info = function () {
 };
 
 const User = mongoose.model("User", userSchema);
-
 module.exports = User;

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import MessageBox from "./MessageBox.component";
 import "./MessageBox.component.css";
+import setAuthToken from "../../common/token";
 
 /**
  * Chat Box
@@ -31,7 +32,7 @@ function ChatBox({ user, target }) {
   /** Get different Messages from different people */
   const getMessageAsync = async (convoID) => {
     const response = await axios
-      .get(server + "/message/convo/" + convoID)
+      .get(server + "/chatbox/convo/" + convoID, setAuthToken())
       .then((res) => {
         return res.data.messages;
       })
@@ -75,7 +76,7 @@ function ChatBox({ user, target }) {
       message: message,
     };
     const convoID = await axios
-      .post(server + "/message/convo", messageData)
+      .post(server + "/chatbox/convo", messageData, setAuthToken())
       .then((res) => {
         console.log(res.data);
         target.convoID = res.data.convoID;
@@ -90,9 +91,8 @@ function ChatBox({ user, target }) {
       senderID: user._id,
       message: message,
     };
-    console.log("old");
     axios
-      .post(server + "/message/convo/" + convoID, messageData)
+      .post(server + "/chatbox/convo/" + convoID, messageData, setAuthToken())
       .then((res) => {
         console.log(res.data);
       });
@@ -167,7 +167,7 @@ function ChatBox({ user, target }) {
 
 ChatBox.propTypes = {
   user: PropTypes.shape({
-    profileIMG: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     _id: PropTypes.string.isRequired,
   }).isRequired,

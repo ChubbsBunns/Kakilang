@@ -6,6 +6,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 /** Import Components & CSS **/
 import "./ListOfPeople.component.css";
+import setAuthToken from "../../common/token";
 
 /**
  * Event List
@@ -30,7 +31,7 @@ function MyEventList({ user, setTarget }) {
   /** Get Convo of the event **/
   const getConvoAsync = async (targetID) => {
     const response = await axios
-      .get(server + "/message/event/" + targetID)
+      .get(server + "/chatbox/event/" + targetID, setAuthToken())
       .then((res) => {
         return res.data.convoID;
       })
@@ -44,7 +45,7 @@ function MyEventList({ user, setTarget }) {
   /** Get the list of events from server */
   const getGroupAsync = async () => {
     const response = await axios
-      .get(server + "/events/user/" + user._id)
+      .get(server + "/events/user/" + user._id, setAuthToken())
       .then((res) => {
         return res.data.events;
       })
@@ -108,7 +109,6 @@ function MyEventList({ user, setTarget }) {
 MyEventList.propTypes = {
   user: PropTypes.shape({
     _id: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
   }),
   setTarget: PropTypes.func.isRequired,
 };

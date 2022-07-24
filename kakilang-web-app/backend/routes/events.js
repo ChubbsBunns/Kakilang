@@ -1,7 +1,10 @@
-//Setup .env file to be handled
+/**
+ * Router for Events at /events
+ * API for event CRUD and registering
+ */
+
 require("dotenv").config();
 
-//Setup Route and dependencies
 const Events = require("../models/events.model");
 const Convo = require("../models/conversation.model");
 const router = require("express").Router();
@@ -25,14 +28,25 @@ const upload = multer({ storage: storage });
 
 /** Routing for Events **/
 
-// Create Events
-router.route("/").post(upload.single("eventImage"), (req, res) => {
+const { verifyJWT, isUserSessionToken } = require("../token");
+
+/**
+ * Create Events
+ * JWT authentication required
+ */
+router.route("/").post(verifyJWT, upload.single("eventImage"), (req, res) => {
   const file = req.file;
   const details = req.body;
+  if (req.jwtID !== details.ownerID) {
+    return res.status(403).json({});
+  }
 
   const newEvents = new Events({
     eventIMG: file?.path,
-    ...details,
+    name: details.name,
+    description: details.description,
+    eventDate: details.eventDate,
+    ownerID: details.ownerID,
   });
 
   newEvents.save((err) => {
@@ -53,7 +67,7 @@ router.route("/").post(upload.single("eventImage"), (req, res) => {
     });
 
     req.io.emit("updateEvent");
-    res.sendStatus(201);
+    res.status(201).json();
   });
 });
 
@@ -65,42 +79,86 @@ router.route("/").get((req, res) => {
   });
 });
 
-// Update Events
-router.route("/:id").patch(upload.single("eventImage"), (req, res) => {
-  const file = req.file;
-  const details = req.body;
-  const oldFile = req.body.oldIMG;
-  const update = {
-    eventIMG: file?.path,
-    ...details,
-  };
-  delete update.oldIMG;
+/** Update Events
+ * JWT and User's Event Authentication required
+ */
+router
+  .route("/:id")
+  .patch(
+    verifyJWT,
+    upload.single("eventImage"),
+    verifyUserEvent,
+    (req, res) => {
+      const file = req.file;
+      const details = req.body;
+      const oldFile = req.body.oldIMG;
+      const update = {
+        eventIMG: file?.path,
+        ...details,
+      };
+      delete update.oldIMG;
 
-  const deleteOld = () => {
-    let isDeleted = { result: "no file change" };
-    if (update.eventIMG && update.eventIMG !== oldFile) {
-      const temp = oldFile.split("/");
-      const oldFileName = temp[temp.length - 1].split(".")[0];
-      isDeleted = cloudinary.uploader.destroy("Events/" + oldFileName);
+      const deleteOld = () => {
+        let isDeleted = { result: "no file change" };
+        if (update.eventIMG && update.eventIMG !== oldFile) {
+          const temp = oldFile.split("/");
+          const oldFileName = temp[temp.length - 1].split(".")[0];
+          isDeleted = cloudinary.uploader.destroy("Events/" + oldFileName);
+        }
+        return isDeleted;
+      };
+
+      //Update
+      const dbEvent = req.dbEvent;
+      const updateEvent = (key) => {
+        if (update[key]) {
+          dbEvent[key] = update[key];
+        }
+        return;
+      };
+      updateEvent("name");
+      updateEvent("eventIMG");
+      updateEvent("description");
+      updateEvent("eventDate");
+      dbEvent.save();
+
+      const deleteStatus = deleteOld();
+      console.log("Old Image deleted?:", deleteStatus.result);
+
+      req.io.emit("updateEvent");
+      console.log("Event Updated");
+      res.status(200).json({ message: "OK", update: dbEvent.info() });
     }
-    return isDeleted;
-  };
+  );
 
-  Events.findByIdAndUpdate(req.params.id, update, (err, dbEvent) => {
-    if (err) {
+async function verifyUserEvent(req, res, next) {
+  const ownerID = req.body.ownerID;
+  const dbUser = isUserSessionToken(req.jwt, ownerID);
+  if (!dbUser) {
+    return res.status(403).json({ message: "Edit not allowed" });
+  }
+
+  const dbEvent = await Events.findById(req.params.id)
+    .then((dbEvent) => {
+      return dbEvent.ownerID == ownerID ? dbEvent : false;
+    })
+    .catch((err) => {
       console.log(err);
-      res.status(500).json({ message: err });
-    }
-    const deleteStatus = deleteOld();
-    console.log("Old Image deleted?:", deleteStatus.result);
-    req.io.emit("updateEvent");
-    console.log("Event Updated");
-    res.status(200).json({ message: "OK", update: dbEvent });
-  });
-});
+      return "";
+    });
+  if (!dbEvent) {
+    return res.status(403).json({ message: "Edit not allowed" });
+  }
 
-// Delete Events
-router.route("/:id").delete((req, res) => {
+  req.dbEvent = dbEvent;
+
+  next();
+}
+
+/** Delete Events
+ * JWT and User's Event Authentication required
+ */
+router.route("/:id").delete(verifyJWT, verifyUserEvent, (req, res) => {
   const oldFile = req.body.oldIMG;
   const deleteIMG = async () => {
     let isDeleted = { result: "No event images" };
@@ -112,22 +170,28 @@ router.route("/:id").delete((req, res) => {
     return isDeleted;
   };
 
-  Events.findByIdAndDelete(req.params.id, async (err) => {
-    if (err) {
-      console.log(err);
-      res.status(502).json({ message: err });
-    }
-    const deleteStatus = await deleteIMG();
-    console.log("Image deleted?:", deleteStatus.result);
-    console.log("Event Deleted");
-    req.io.emit("updateEvent");
-    res.sendStatus(200);
-  });
+  //delete dbEvent
+  const dbEvent = req.dbEvent;
+  dbEvent.remove();
+
+  const deleteStatus = deleteIMG();
+  console.log("Image deleted?:", deleteStatus.result);
+  console.log("Event Deleted");
+  req.io.emit("updateEvent");
+  res.sendStatus(200);
 });
 
-// GET a User's Events
-router.route("/user/:id").get((req, res) => {
+/**
+ * Get a User's Events
+ * JWT and User Session authenticationr required
+ */
+router.route("/user/:id").get(verifyJWT, (req, res) => {
   const queryID = req.params.id;
+  const dbUser = isUserSessionToken(req.jwt, queryID);
+  if (!dbUser) {
+    return res.status(403).json({ message: "Read not allowed" });
+  }
+
   Events.find({
     $or: [{ ownerID: queryID }, { registeredIDs: queryID }],
   }).then((dbEvents) => {
@@ -135,8 +199,14 @@ router.route("/user/:id").get((req, res) => {
   });
 });
 
-// Registering for an event
-router.route("/:eventID/:userID").patch((req, res) => {
+/** Registering for an event
+ * JWT authentication required
+ */
+router.route("/:eventID/:userID").post(verifyJWT, (req, res) => {
+  if (req.jwtID !== req.params.userID) {
+    return res.status(403).json({ message: "Registeration not allowed" });
+  }
+
   const update = {
     $push: {
       registeredIDs: req.params.userID,
@@ -154,14 +224,20 @@ router.route("/:eventID/:userID").patch((req, res) => {
   });
 });
 
-// Unregistering for an event
-router.route("/:eventID/:userID").delete((req, res) => {
+/** Unregistering for an event
+ * JWT authentication required
+ */
+router.route("/:eventID/:userID").delete(verifyJWT, (req, res) => {
+  if (req.jwtID !== req.params.userID) {
+    return res.status(403).json({ message: "Unregistration not allowed" });
+  }
+
   const update = {
     $pull: {
       registeredIDs: req.params.userID,
     },
   };
-  console.log("deletus", req.params.eventID);
+
   Events.findByIdAndUpdate(req.params.eventID, update, async (err, dbEvent) => {
     if (err) {
       console.log(err);

@@ -1,6 +1,17 @@
+/**
+ * Event Schema
+ * Stores an event and users registered to the event.
+ *
+ * @param name
+ * @param eventIMG
+ * @param description Event description
+ * @param eventDate Event start date
+ * @param ownerID
+ * @param registeredIDs
+ */
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const EventsSchema = new Schema(
   {
     name: { type: String, required: true },
@@ -21,6 +32,10 @@ const EventsSchema = new Schema(
   { timestamps: true }
 );
 
+/**
+ * @returns Events without private information
+ * and with defaults set to missing values
+ */
 EventsSchema.methods.info = function () {
   const basic = {
     _id: this._id,
@@ -34,17 +49,5 @@ EventsSchema.methods.info = function () {
   return basic;
 };
 
-/**
- * Event Model
- *
- * @param {String} name Event name
- * @param {String} eventIMG Event banner image
- * @param {String} description Event description
- * @param {String} eventDate Event start date
- * @param {Object} owner Creator of the Event
- * @param {String} owner.name Name of the Creator
- * @param {String} owner.profileIMG Picture of the Creator
- */
 const Events = mongoose.model("Events", EventsSchema);
-
 module.exports = Events;
