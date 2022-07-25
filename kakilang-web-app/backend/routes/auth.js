@@ -35,7 +35,7 @@ router.route("/").post((req, res) => {
 
         const token = generateToken(dbUser._id, userEmail);
         saveTokenTodbUser(token, dbUser);
-
+        console.log(dbUser);
         return res.status(200).json({
           token: "Bearer" + token,
           isLoggedIn: true,

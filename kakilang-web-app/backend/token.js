@@ -61,6 +61,7 @@ async function isUserSessionToken(token, userID) {
       console.log(err);
       return null;
     });
+  console.log(dbUser);
   if (!sessionJWT) return false;
   const isCorrect = token == sessionJWT;
   return isCorrect ? dbUser : false;
@@ -110,7 +111,6 @@ async function saveTokenTodbUser(token, dbUser) {
 
   user.sessionID = newSession._id;
   user.save();
-
   return true;
 }
 
