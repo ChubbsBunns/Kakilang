@@ -28,6 +28,7 @@ function ProfileBox({ user, target }) {
     );
   };
   const profile = target.profile;
+  /*
   function EditButton(isAllowed) {
     if (isAllowed) {
       return (
@@ -39,6 +40,7 @@ function ProfileBox({ user, target }) {
       return <></>;
     }
   }
+  */
 
   return (
     <div className="container-profile-page">
@@ -60,7 +62,12 @@ function ProfileBox({ user, target }) {
             {profile.interest ? "Interests:" : ""}
             <span className="interests">{profile?.interest}</span>
           </p>
-          {profile?.house}
+
+          <p>
+            House:
+            {profile?.house}
+          </p>
+
           {profile.floor ? "Floor: " + profile.floor : ""}
         </div>
         <div className="edit-button-div">
@@ -68,7 +75,8 @@ function ProfileBox({ user, target }) {
             Edit
           </button>
         </div>
-        {EditButton(isUser)}
+        {/*
+        {EditButton(isUser)} */}
       </div>
     </div>
   );

@@ -16,7 +16,27 @@ body {
 }
 
 .filter-component {
-  max-height: 14vh;
+  max-height: 16vh;
+  max-width: fit-content;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.MuiTypography-root {
+  max-width: 3vw;
+  max-height: 3vh;
+  font-size: 1000px;
+  font-size: x-small;
+}
+
+.MuiFormGroup-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .filter-options {
@@ -37,7 +57,7 @@ body {
 
 .list-of-people {
   display: block;
-  max-height: 85vh;
+  max-height: 80vh;
 }
 
 .list-of-people > ul > li > a > img {
@@ -50,7 +70,7 @@ body {
   padding: 0px;
   list-style: none;
   overflow: auto;
-  max-height: 85vh;
+  max-height: 80vh;
 }
 
 .list-of-people > ul > li {
@@ -62,7 +82,7 @@ body {
 }
 
 .list-of-people > ul {
-  max-height: 85vh;
+  max-height: 80vh;
   margin: 0px;
 }
 
