@@ -159,6 +159,6 @@ Side Bar example
 <img src="Mockups%20and%20references/SideBar.png" style="width:1.5in;height:4in" />
 
 
-###Ending Thoughts and Reflection
+### Ending Thoughts and Reflection
 Kakilang was a project that helped William and I experience learning new technologies, with William implementing live texting functions, knowing the pros and cons between NoSQL and SQL databases, and Dylan having his first touch into Front-End Web Development. 
 With this we hope to be able to create more robust applications in the future that help us impact the world through tech :)
